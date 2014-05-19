@@ -31,7 +31,8 @@ Meteor.startup(function () {
 	}
 })
 
-function cleanUp() {	
+function cleanUp() {
+	console.log("lol")
 	slideshow.remove({expire: {$lt: new Date()}})
 }
 Meteor.setInterval(cleanUp, 10000)
@@ -41,28 +42,12 @@ Accounts.config({
 	restrictCreationByEmailDomain: "kth.se"
 })
 
-function ok(userId, doc) {
-	var user = Meteor.users.findOne({_id: userId})
-	return user && (user.admin || user.emails[0].address == doc.createdBy)
+function ok(userId) {
+	return Boolean(userId)
 }
 
 slideshow.allow({
 	insert: ok,
 	remove: ok,
 	update: ok
-})
-
-Meteor.publish(null, function() {
-	return Meteor.users.find({_id: this.userId}, {fields: {admin: true}})
-})
-
-// Make first 5 users admin
-Accounts.onCreateUser(function(options, user) {
-	if(Meteor.users.find().fetch().length < 5) {
-		user.admin = true
-	}
-	if (options.profile) {
-    	user.profile = options.profile
-    }
-	return user
 })
