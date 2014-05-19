@@ -20,3 +20,16 @@ body {
     right: 0;
     top: 0;
 }
+
+.slides {
+	margin: 4em;
+}
+
+.slides table {
+	margin-left: 2em;
+	display: inline-block;
+}
+
+.slides > article > img {
+	width: 10em;
+}

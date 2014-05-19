@@ -10,18 +10,22 @@ Router.map(function() {
 		}
 	}),
 	this.route('admin', {
-		path: '/admin'
+		path: '/admin',
+		data: function() {
+			return {
+				slides: slideshow.find({})
+			}
+		}
 	})
 })
 
 Template._loginButtonsMessages.infoMessage = "@kth.se mail required"
 
-var timeout = 1 // s
+var timeout = 5 // s
 
 Template.slideshow.current = function() {
 	return Session.get("current")
 }
-
 
 function update() {
 	if(cursor.length === 0) {
