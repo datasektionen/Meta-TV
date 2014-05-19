@@ -9,8 +9,8 @@ Router.map(function() {
 			update()
 		}
 	}),
-	this.route('admin', {
-		path: '/admin',
+	this.route('slides', {
+		path: '/slides',
 		data: function() {
 			return {
 				slides: slideshow.find({})
