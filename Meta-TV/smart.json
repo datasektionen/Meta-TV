@@ -1,6 +1,7 @@
 {
   "packages": {
     "router": {},
-    "iron-router": {}
+    "iron-router": {},
+    "normalize.css": {}
   }
 }

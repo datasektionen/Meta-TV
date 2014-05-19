@@ -1,0 +1,11 @@
+body {
+	background-color: black;
+}
+
+.content {
+	 
+}
+
+.content > img {
+	width: 100%;
+}
