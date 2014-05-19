@@ -3,6 +3,19 @@ body {
 	color: white;
 }
 
+button {
+	background: #7580ac;
+	padding: 4px 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 80%;
+	line-height: 1.5;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	border: 1px solid #464f75;
+	border-radius: 4px;
+	color: #fff;
+}
+
 .hoverinfo {
 	position: absolute;
 	margin: 1em;
@@ -41,5 +54,5 @@ body:hover > .hoverinfo {
 }
 
 .slides > article > img {
-	width: 10em;
+	width: 14em;
 }

@@ -27,6 +27,12 @@ Template.slideshow.current = function() {
 	return Session.get("current")
 }
 
+Template.slides.events({
+	"click .remove": function() {
+		slideshow.remove({_id: this._id})
+	}
+})
+
 function update() {
 	if(cursor.length === 0) {
 		cursor = slideshow.find().fetch()
