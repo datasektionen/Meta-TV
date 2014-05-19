@@ -8,6 +8,9 @@
 </template>
 
 <template name="slides">
+	{{#if currentUser.admin}}
+		Cool, you are ADMIN! With great power comes cute quotes.
+	{{/if}}
 	{{> loginButtons align="right"}}
 	<div class="slides">
 		{{#each slides}}
