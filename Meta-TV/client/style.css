@@ -3,6 +3,16 @@ body {
 	color: white;
 }
 
+.hoverinfo {
+	position: absolute;
+	margin: 1em;
+	opacity: 0;
+}
+
+body:hover > .hoverinfo {
+	opacity: 1;
+}
+
 #login-buttons {
 	position: absolute;
 	right: 2em;
