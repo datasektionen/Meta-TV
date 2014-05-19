@@ -14,7 +14,6 @@ Router.map(function() {
 	})
 })
 
-
 Template._loginButtonsMessages.infoMessage = "@kth.se mail required"
 
 var timeout = 1 // s
