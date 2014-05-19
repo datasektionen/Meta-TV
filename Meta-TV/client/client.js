@@ -1,5 +1,5 @@
 slideshow = new Meteor.Collection("slideshow")
-
+Meteor.subscribe("slideshow")
 var cursor = []
 
 Router.map(function() {
@@ -8,10 +8,16 @@ Router.map(function() {
 		data: function() {
 			update()
 		}
+	}),
+	this.route('admin', {
+		path: '/admin'
 	})
 })
 
-var timeout = 10 // s
+
+Template._loginButtonsMessages.infoMessage = "@kth.se mail required"
+
+var timeout = 1 // s
 
 Template.slideshow.current = function() {
 	return Session.get("current")

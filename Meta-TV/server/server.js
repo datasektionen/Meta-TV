@@ -1,5 +1,8 @@
 slideshow = new Meteor.Collection("slideshow")
 
+Meteor.publish("slideshow", function() {
+	return slideshow.find();
+})
 
 Meteor.startup(function () {
 	// Sample data
@@ -22,3 +25,18 @@ Meteor.startup(function () {
 	}
 })
 
+
+Accounts.config({
+	sendVerificationEmail: true,
+	restrictCreationByEmailDomain: "kth.se"
+})
+
+function ok(userId) {
+	return Boolean(userId)
+}
+
+slideshow.allow({
+	insert: ok,
+	remove: ok,
+	update: ok
+})

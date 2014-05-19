@@ -1,9 +1,12 @@
 body {
 	background-color: black;
+	color: white;
 }
 
-.content {
-	 
+#login-buttons {
+	position: absolute;
+	right: 10em;
+	top: 1em;
 }
 
 .content > img {
