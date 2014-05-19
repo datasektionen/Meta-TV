@@ -8,11 +8,9 @@
 </template>
 
 <template name="slides">
-	{{#if currentUser.admin}}
-		Cool, you are ADMIN! With great power comes cute quotes.
-	{{/if}}
 	{{> loginButtons align="right"}}
 	<div class="slides">
+		<h1>Slides</h1>
 		{{#each slides}}
 			<article>
 				<img src="{{link}}">
@@ -21,6 +19,10 @@
 						<td>
 							<h2>{{name}}</h2>
 						</td>
+					</tr>
+					<tr>
+						<td>id</td>
+						<td>{{_id}}</td>
 					</tr>
 					<tr>
 						<td>Type</td>
@@ -42,5 +44,9 @@
 			</article>
 			<hr>
 		{{/each}}
+		<div class="Policy">
+			<h1>Policy</h1>
+			<p>The security works like a physical bulletin board. All KTH students can post there own slides and or remove others. Everythings is logged. I SEE YOU.</p>
+		</div>
 	</div>
 </template>
