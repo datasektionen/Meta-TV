@@ -32,7 +32,6 @@ Meteor.startup(function () {
 })
 
 function cleanUp() {
-	console.log("lol")
 	slideshow.remove({expire: {$lt: new Date()}})
 }
 Meteor.setInterval(cleanUp, 10000)
@@ -42,12 +41,13 @@ Accounts.config({
 	restrictCreationByEmailDomain: "kth.se"
 })
 
-function ok(userId) {
-	return Boolean(userId)
+function ok(userId, doc) {
+	var user = Meteor.users.findOne({_id: userId})
+	return user && (user.emails[0].address == doc.createdBy)
 }
 
 slideshow.allow({
 	insert: ok,
-	remove: ok,
+	remove: function(usersId) { return Boolean(userId) },
 	update: ok
 })
