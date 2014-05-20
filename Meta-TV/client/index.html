@@ -12,42 +12,46 @@
 	<div class="slides">
 		<h1>Slides</h1>
 		{{#each slides}}
-			<article>
-				<img src="{{link}}">
-				<table>
-					<tr>
-						<td>id</td>
-						<td>{{_id}}</td>
-					</tr>
-					<tr>
-						<td>Type</td>
-						<td>{{type}}</td>
-					</tr>
-					<tr>
-						<td>Expire</td>
-						<td>
-							<date>{{expire}}</date>
-						</td>
-					</tr>
-					<tr>
-						<td>Created by</td>
-						<td>
-							<date>{{createdBy}}</date>
-						</td>
-					</tr>
-					<tr>
-						<td>Actions</td>
-						<td>
-							<button class="remove">Remove</button>
-						</td>
-					</tr>
-				</table>
-			</article>
-			<hr>
+			{{> slide}}
 		{{/each}}
 		<div class="Policy">
 			<h1>Policy</h1>
 			<p>All KTH students can post there own slides and or remove others. Everythings is logged. I SEE YOU.</p>
 		</div>
 	</div>
+</template>
+
+<template name="slide">
+	<article>
+		<img src="{{link}}">
+		<table>
+			<tr>
+				<td>id</td>
+				<td>{{_id}}</td>
+			</tr>
+			<tr>
+				<td>Type</td>
+				<td>{{type}}</td>
+			</tr>
+			<tr>
+				<td>Expire</td>
+				<td>
+					<date>{{expire}}</date>
+				</td>
+			</tr>
+			<tr>
+				<td>Created by</td>
+				<td>
+					<date>{{createdBy}}</date>
+				</td>
+			</tr>
+			<tr>
+				<td>Actions</td>
+				<td>
+					<button class="remove">Remove</button>
+				</td>
+			</tr>
+		</table>
+	</article>
+	<hr>
 </template>

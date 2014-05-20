@@ -45,6 +45,6 @@ function ok(userId, doc) {
 
 slideshow.allow({
 	insert: ok,
-	remove: function(usersId) { return Boolean(userId) },
+	remove: function(userId) { return Boolean(userId) },
 	update: ok
 })

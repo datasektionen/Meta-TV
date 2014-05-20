@@ -27,7 +27,7 @@ Template.slideshow.current = function() {
 	return Session.get("current")
 }
 
-Template.slides.events({
+Template.slide.events({
 	"click .remove": function() {
 		slideshow.remove({_id: this._id})
 	}
