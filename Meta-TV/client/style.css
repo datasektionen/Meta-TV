@@ -19,6 +19,7 @@ button {
 .hoverinfo {
 	position: absolute;
 	margin: 1em;
+	right: 0;
 	opacity: 0;
 }
 

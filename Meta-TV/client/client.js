@@ -27,6 +27,21 @@ Template.slideshow.current = function() {
 	return Session.get("current")
 }
 
+Template.slideshow.events({
+	"click .fullscreen": function() {
+		var elm = $(".content")[0]
+		if (elem.requestFullscreen) {
+			elem.requestFullscreen();
+		} else if (elem.msRequestFullscreen) {
+			elem.msRequestFullscreen();
+		} else if (elem.mozRequestFullScreen) {
+			elem.mozRequestFullScreen();
+		} else if (elem.webkitRequestFullscreen) {
+			elem.webkitRequestFullscreen();
+		}
+	}
+})
+
 Template.slides.events({
 	"click .send": function() {
 		var obj = {
