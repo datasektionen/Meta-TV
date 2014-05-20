@@ -22,15 +22,21 @@
 					<td>Type</td>
 					<td>
 						<select class="type">
-							<option value="external img">External img</option>
+							<option value="external img">external img</option>
+							<option value="local img">local img</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
+				{{#if internal}}
+					<td>File</td>
+					<input class="file" type="file"/>
+				{{else}}
 					<td>Link</td>
 					<td>
 						<input class="link" type="text">
 					</td>
+				{{/if}}
 				</tr>
 				<tr>
 					<td>Expire</td>
@@ -48,7 +54,7 @@
 		{{/if}}
 		<div class="Policy">
 			<h1>Policy</h1>
-			<p>All KTH students can post there own slides and or remove others. Everythings is logged. I SEE YOU.</p>
+			<p>All KTH students can post there own slides and or remove others. Please no NSFW. Everythings is logged. I SEE YOU.</p>
 		</div>
 		{{> footer}}
 	</div>

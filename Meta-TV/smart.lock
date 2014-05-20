@@ -4,7 +4,8 @@
     "basePackages": {
       "router": {},
       "iron-router": {},
-      "normalize.css": {}
+      "normalize.css": {},
+      "collection-hooks": {}
     },
     "packages": {
       "router": {
@@ -21,6 +22,11 @@
         "git": "https://github.com/rithis/meteor-normalize.css",
         "tag": "v2.0.1",
         "commit": "671aba13223dd7d7ec1d26a6b2461943d7c4fa18"
+      },
+      "collection-hooks": {
+        "git": "https://github.com/matb33/meteor-collection-hooks.git",
+        "tag": "v0.6.7",
+        "commit": "f1d2ac629864edda09df6c955fa5ff3df26f739c"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

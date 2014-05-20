@@ -1,7 +1,11 @@
+var fs = Npm.require('fs')
+
+
 slideshow = new Meteor.Collection("slideshow")
 
 Meteor.publish("slideshow", function() {
-	return slideshow.find();
+	var query = slideshow.find()
+	return query
 })
 
 Meteor.startup(function () {
@@ -25,6 +29,25 @@ Meteor.startup(function () {
 			expire: new Date(Date.parse("2015-05-12")),
 			createdBy: "anlinn@kth.se"
 		})
+	}
+})
+
+
+Meteor.methods({
+	"file-upload": function(info, data) {
+		var path = "../../../../../public/uploaded/" + info.name
+		if(info.type.split("/")[0] == "image") {
+			fs.writeFileSync(path, new Buffer(data, 'binary'))
+		} else {
+			console.err("What is this?")
+		}
+	}
+})
+
+slideshow.before.remove(function(userId, doc) {
+	if(doc.type == "local img") {
+		var path = "../../../../../public" + doc.link
+		fs.unlinkSync(path)
 	}
 })
 

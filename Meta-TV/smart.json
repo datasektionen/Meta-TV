@@ -2,6 +2,7 @@
   "packages": {
     "router": {},
     "iron-router": {},
-    "normalize.css": {}
+    "normalize.css": {},
+    "collection-hooks": {}
   }
 }

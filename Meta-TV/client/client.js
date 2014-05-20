@@ -12,6 +12,7 @@ Router.map(function() {
 	this.route('slides', {
 		path: '/slides',
 		data: function() {
+			Session.set("type", "external img")
 			return {
 				slides: slideshow.find({})
 			}
@@ -42,22 +43,41 @@ Template.slideshow.events({
 	}
 })
 
+Template.slides.internal = function() {
+	return Session.get("type") == "local img"
+}
+
 Template.slides.events({
+	"change .type": function() {
+		Session.set("type", $(".type").val())
+	},
 	"click .send": function() {
 		var obj = {
 			type: $(".type").val(),
-			link: $(".link").val(),
 			createdBy: Meteor.user().emails[0].address
 		}
 		var date = new Date(Date.parse($(".expire").val()))
 		if(date != "Invalid Date") {
 			obj.expire = date
 		}
-		if(obj.link) {
+		if(obj.type == "external img") {
+			obj.link = $(".link").val()
 			slideshow.insert(obj)
 			$(".link").val("")
-			$(".expire").val("")
+		} else {
+			var file = $(".file")[0].files[0]
+			var reader = new FileReader()
+			reader.onload = function(event) {
+				Meteor.call("file-upload", file, reader.result)
+				obj.link = "/uploaded/" + file.name
+				if(file.type.split("/")[0] == "image") {
+					slideshow.insert(obj)
+					$(".file").val("")
+				}
+			}
+			reader.readAsBinaryString(file)
 		}
+		$(".expire").val("")
 	}
 })
 
