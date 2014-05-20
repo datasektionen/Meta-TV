@@ -1,7 +1,7 @@
 META TV
 =======
 
-Bästa billboard programmet på den är sidan av stan!
+Hacky application for displaying news and stuff running on the monitors where we eat lunch. Using great strategies like if it crashes il just fix it and if someone cracks we all get a laugh.
 
 Setup
 
