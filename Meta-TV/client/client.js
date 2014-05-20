@@ -27,6 +27,25 @@ Template.slideshow.current = function() {
 	return Session.get("current")
 }
 
+Template.slides.events({
+	"click .send": function() {
+		var obj = {
+			type: $(".type").val(),
+			link: $(".link").val(),
+			createdBy: Meteor.user().emails[0].address
+		}
+		var date = new Date(Date.parse($(".expire").val()))
+		if(date != "Invalid Date") {
+			obj.expire = date
+		}
+		if(obj.link) {
+			slideshow.insert(obj)
+			$(".link").val("")
+			$(".expire").val("")
+		}
+	}
+})
+
 Template.slide.events({
 	"click .remove": function() {
 		slideshow.remove({_id: this._id})

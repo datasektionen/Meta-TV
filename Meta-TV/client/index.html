@@ -14,6 +14,37 @@
 		{{#each slides}}
 			{{> slide}}
 		{{/each}}
+		{{#if currentUser}}
+			<h1>Add</h1>
+			<table>
+				<tr>
+					<td>Type</td>
+					<td>
+						<select class="type">
+							<option value="external img">External img</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Link</td>
+					<td>
+						<input class="link" type="text">
+					</td>
+				</tr>
+				<tr>
+					<td>Expire</td>
+					<td>
+						<input class="expire" type="date">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button class="send">Send</button>
+					</td>
+				</tr>
+			</table>
+		{{/if}}
 		<div class="Policy">
 			<h1>Policy</h1>
 			<p>All KTH students can post there own slides and or remove others. Everythings is logged. I SEE YOU.</p>
@@ -36,7 +67,7 @@
 			<tr>
 				<td>Expire</td>
 				<td>
-					<date>{{expire}}</date>
+					<date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date>
 				</td>
 			</tr>
 			<tr>
