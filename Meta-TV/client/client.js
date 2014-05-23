@@ -31,14 +31,15 @@ Template.slideshow.current = function() {
 Template.slideshow.events({
 	"click .fullscreen": function() {
 		var elm = $(".content")[0]
-		if (elem.requestFullscreen) {
-			elem.requestFullscreen();
-		} else if (elem.msRequestFullscreen) {
-			elem.msRequestFullscreen();
-		} else if (elem.mozRequestFullScreen) {
-			elem.mozRequestFullScreen();
-		} else if (elem.webkitRequestFullscreen) {
-			elem.webkitRequestFullscreen();
+		console.log(elm)
+		if (elm.requestFullscreen) {
+			elm.requestFullscreen();
+		} else if (elm.msRequestFullscreen) {
+			elm.msRequestFullscreen();
+		} else if (elm.mozRequestFullScreen) {
+			elm.mozRequestFullScreen();
+		} else if (elm.webkitRequestFullscreen) {
+			elm.webkitRequestFullscreen();
 		}
 	}
 })
