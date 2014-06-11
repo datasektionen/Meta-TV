@@ -5,3 +5,10 @@ iron-router
 blaze-layout
 normalize.css
 collection-hooks
+/router
+/iron-router
+/normalize.css
+/collection-hooks
+/page-js-ie-support
+/HTML5-History-API
+/blaze-layout
