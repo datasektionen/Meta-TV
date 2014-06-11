@@ -22,7 +22,7 @@ Router.map(function() {
 
 Template._loginButtonsMessages.infoMessage = "@kth.se mail required"
 
-var timeout = 5 // s
+var timeout = 30 // s
 
 Template.slideshow.current = function() {
 	return Session.get("current")
