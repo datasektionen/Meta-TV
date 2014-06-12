@@ -29,6 +29,12 @@ Meteor.startup(function () {
 			expire: new Date(Date.parse("2015-05-12")),
 			createdBy: "anlinn@kth.se"
 		})
+		slideshow.insert({
+			type: "youtube",
+			link: "kxopViU98Xo",
+			expire: new Date(Date.parse("2015-05-12")),
+			createBy: "pintjuk@kth.se"
+		})
 	}
 })
 

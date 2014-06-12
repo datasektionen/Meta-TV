@@ -21,6 +21,13 @@ function testImage(url, callback, timeout) {
 		}, timeout);
 }
 
+Handlebars.registerHelper("equals", function ( a, b) {
+	console.log("is this work")
+	console.log(a)
+	console.log(b)
+  return (a==b);
+});
+
 slideshow = new Meteor.Collection("slideshow")
 Meteor.subscribe("slideshow")
 var cursor = []
@@ -67,8 +74,13 @@ Template.slideshow.events({
 	}
 })
 
+
 Template.slides.internal = function() {
 	return Session.get("type") == "local img"
+}
+
+Template.slides.isYoutube = function() {
+	return Session.get("type") == "youtube"
 }
 
 Template.slides.internal_filetype_error=function(){
@@ -98,6 +110,7 @@ Template.slides.events({
 		}
 
 		if(obj.type == "external img") {
+			console.log("external")
 			testImage($(".link").val(), function(url, result){
 				if(result=="success"){
 					obj.link = url
@@ -113,7 +126,7 @@ Template.slides.events({
 				}
 			})
 			return
-		} else {
+		} else if(obj.type=="local img") {
 			var file = $(".file")[0].files[0]
 			var reader = new FileReader()
 
@@ -142,6 +155,11 @@ Template.slides.events({
 				})
 			}
 			reader.readAsBinaryString(file)
+		} else if(obj.type=="youtube"){
+			// TODO: add video id validation, and error handling
+			obj.link=$(".link").val();
+			slideshow.insert(obj)
+			$(".link").val("")
 		}
 		$(".expire").val("")
 	}
