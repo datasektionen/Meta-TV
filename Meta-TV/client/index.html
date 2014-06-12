@@ -31,11 +31,13 @@
 				{{#if internal}}
 					<td>File</td>
 					<input class="file" type="file"/>
+					<td class="error"> {{internal_filetype_error}} </td>
 				{{else}}
 					<td>Link</td>
 					<td>
 						<input class="link" type="text">
 					</td>
+					<td class="error">{{link_input_error}}</td>
 				{{/if}}
 				</tr>
 				<tr>
