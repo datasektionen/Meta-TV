@@ -130,14 +130,20 @@ Template.slides.events({
 					size: file.size
 				}
 				Meteor.call("file-upload", sc_file, reader.result)
-				obj.link = "/uploaded/" + sc_file.name
-				slideshow.insert(obj)
-				$(".file").val("")
-				reader.readAsBinaryString(file)
+				testImage("/uploaded/" + sc_file.name, function(url, result){
+					if(result=="success"){
+						obj.link = url
+						slideshow.insert(obj)
+						$(".file").val("")
+					}else{
+						Session.set("internal_filetype_error", "Do not want!!")
+						// TODO: remove upleaded image from server
+					}
+				})
 			}
-			$(".expire").val("")
-			return
+			reader.readAsBinaryString(file)
 		}
+		$(".expire").val("")
 	}
 })
 
