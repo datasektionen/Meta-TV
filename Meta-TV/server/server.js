@@ -45,9 +45,13 @@ Meteor.methods({
 })
 
 slideshow.before.remove(function(userId, doc) {
-	if(doc.type == "local img") {
-		var path = "../../../../../public" + doc.link
-		fs.unlinkSync(path)
+	try{
+		if(doc.type == "local img") {
+			var path = "../../../../../public" + doc.link
+			fs.unlinkSync(path)
+		}
+	}catch (err) {
+		console.log(err)
 	}
 })
 

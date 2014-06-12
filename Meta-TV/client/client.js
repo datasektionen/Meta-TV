@@ -58,6 +58,7 @@ Template.slides.events({
 			createdBy: Meteor.user().emails[0].address
 		}
 		var date = new Date(Date.parse($(".expire").val()))
+
 		if(date != "Invalid Date") {
 			obj.expire = date
 		}
@@ -68,10 +69,17 @@ Template.slides.events({
 		} else {
 			var file = $(".file")[0].files[0]
 			var reader = new FileReader()
+
 			reader.onload = function(event) {
-				Meteor.call("file-upload", file, reader.result)
-				obj.link = "/uploaded/" + file.name
-				if(file.type.split("/")[0] == "image") {
+				var sc_file = {
+					name: file.name,
+					path: file.path,
+					type: file.type,
+					size: file.size
+				}
+				Meteor.call("file-upload", sc_file, reader.result)
+				obj.link = "/uploaded/" + sc_file.name
+				if(sc_file.type.split("/")[0] == "image") {
 					slideshow.insert(obj)
 					$(".file").val("")
 				}
