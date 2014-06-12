@@ -38,6 +38,10 @@ footer {
 	text-align: center;
 }
 
+.error {
+	color:red;
+}
+
 .content > * {
 	max-width: 100%;
     max-height: 100%;

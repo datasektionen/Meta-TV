@@ -1,3 +1,26 @@
+function testImage(url, callback, timeout) {
+		timeout = timeout || 5000;
+		var timedOut = false, timer;
+		var img = new Image();
+		img.onerror = img.onabort = function() {
+				if (!timedOut) {
+						clearTimeout(timer);
+						callback(url, "error");
+				}
+		};
+		img.onload = function() {
+				if (!timedOut) {
+						clearTimeout(timer);
+						callback(url, "success");
+				}
+		};
+		img.src = url;
+		timer = setTimeout(function() {
+				timedOut = true;
+				callback(url, "timeout");
+		}, timeout);
+}
+
 slideshow = new Meteor.Collection("slideshow")
 Meteor.subscribe("slideshow")
 var cursor = []
@@ -48,11 +71,22 @@ Template.slides.internal = function() {
 	return Session.get("type") == "local img"
 }
 
+Template.slides.internal_filetype_error=function(){
+	return Session.get("internal_filetype_error") || ""
+}
+
+Template.slides.link_input_error=function(){
+	return Session.get("link_input_error") || ""
+}
+
 Template.slides.events({
 	"change .type": function() {
 		Session.set("type", $(".type").val())
 	},
 	"click .send": function() {
+		Session.set("internal_filetype_error", null)
+		Session.set("link_input_error", null)
+
 		var obj = {
 			type: $(".type").val(),
 			createdBy: Meteor.user().emails[0].address
@@ -62,13 +96,31 @@ Template.slides.events({
 		if(date != "Invalid Date") {
 			obj.expire = date
 		}
+
 		if(obj.type == "external img") {
-			obj.link = $(".link").val()
-			slideshow.insert(obj)
-			$(".link").val("")
+			testImage($(".link").val(), function(url, result){
+				if(result=="success"){
+					obj.link = url
+					slideshow.insert(obj)
+					$(".link").val("")
+					console.log("sucsess")
+				}else if (result=="error"){
+					Session.set("link_input_error", "(╯°Д°)╯ This is not an URL to a supported image format!!!")
+					console.log("not success")
+				}else if (result=="timeout"){
+					Session.set("internal_filetype_error", "ʕ๑◞◟๑ʔ Time out?!!")
+					console.log("time out")
+				}
+			})
+			return
 		} else {
 			var file = $(".file")[0].files[0]
 			var reader = new FileReader()
+
+			if(file.type.split("/")[0] != "image") {
+				Session.set("link_input_error", "(ಥ~ಥ)This file type is not suported!")
+				return
+			}
 
 			reader.onload = function(event) {
 				var sc_file = {
@@ -79,14 +131,13 @@ Template.slides.events({
 				}
 				Meteor.call("file-upload", sc_file, reader.result)
 				obj.link = "/uploaded/" + sc_file.name
-				if(sc_file.type.split("/")[0] == "image") {
-					slideshow.insert(obj)
-					$(".file").val("")
-				}
+				slideshow.insert(obj)
+				$(".file").val("")
+				reader.readAsBinaryString(file)
 			}
-			reader.readAsBinaryString(file)
+			$(".expire").val("")
+			return
 		}
-		$(".expire").val("")
 	}
 })
 
