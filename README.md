@@ -17,7 +17,7 @@ Setup
 Log
 ---
 To view log open http://localhost:3000/history.
-Every action can be reverted.(there is no authentication, so don't tell anyone)
+Every action can be reverted.(there is no authentication, so don't tell enyone)
 
 
 Tags
