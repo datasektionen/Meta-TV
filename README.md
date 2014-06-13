@@ -13,3 +13,14 @@ Setup
 	mrt install
 	mrt run
 	open http://localhost:3000
+	
+Log
+---
+To view log open http://localhost:3000/history.
+Every action can be reverted.(there is no authentication, so don't tell anyone)
+
+
+Tags
+----
+
+To view slideshow filterd by a tag go to http://localhost:3000/tag/{{tag}} where {{tag}} is the tag you want to use
