@@ -22,9 +22,6 @@ function testImage(url, callback, timeout) {
 }
 
 Handlebars.registerHelper("equals", function ( a, b) {
-	console.log("is this work")
-	console.log(a)
-	console.log(b)
   return (a==b);
 });
 
@@ -81,6 +78,10 @@ Template.slides.internal = function() {
 
 Template.slides.isYoutube = function() {
 	return Session.get("type") == "youtube"
+}
+
+Template.slides.isMarkdown= function(){
+	return Session.get("type")=="markdown"
 }
 
 Template.slides.internal_filetype_error=function(){
@@ -143,23 +144,29 @@ Template.slides.events({
 					size: file.size
 				}
 				Meteor.call("file-upload", sc_file, reader.result)
-				testImage("/uploaded/" + sc_file.name, function(url, result){
-					if(result=="success"){
-						obj.link = url
-						slideshow.insert(obj)
-						$(".file").val("")
-					}else{
-						Session.set("internal_filetype_error", "Do not want!!")
-						// TODO: remove upleaded image from server
-					}
-				})
+				setTimeout(function(){
+					testImage("/uploaded/" + sc_file.name, function(url, result){
+						if(result=="success"){
+							obj.link = url
+							slideshow.insert(obj)
+							$(".file").val("")
+						}else{
+							Session.set("internal_filetype_error", "Do not want!!")
+							// TODO: remove upleaded image from server
+						}
+					})
+				}, 100);
 			}
 			reader.readAsBinaryString(file)
 		} else if(obj.type=="youtube"){
 			// TODO: add video id validation, and error handling
-			obj.link=$(".link").val();
+			obj.link=$(".link").val()
 			slideshow.insert(obj)
 			$(".link").val("")
+		} else if(obj.type=="markdown"){
+			obj.body=$(".markdown").val()
+			obj.link=$(".link").val()
+			slideshow.insert(obj)
 		}
 		$(".expire").val("")
 	}
@@ -168,8 +175,23 @@ Template.slides.events({
 Template.slide.events({
 	"click .remove": function() {
 		slideshow.remove({_id: this._id})
+	},
+	"click .edit": function() {
+		if(Session.equals("hazEdit", this._id)){
+			Session.set("hazEdit", null)
+		}else{
+			Session.set("hazEdit", this._id)
+		}
+	},
+	"click .update": function(){
+		slideshow.update({_id:this._id}, {$set: {body: $(".update_markdown").val()}})
+		Session.set("hazEdit", null)
 	}
 })
+
+Template.slide.canhazedit=function(){
+	return Session.get("hazEdit") == this._id
+}
 
 function update() {
 	if(cursor.length === 0) {

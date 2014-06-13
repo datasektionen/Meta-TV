@@ -3,16 +3,25 @@
 		<a href="#" class="fullscreen">Fullscreen</a><br>
 		<a href="/slides">Add slides</a>
 	</div>
-	<div class="content">
-		{{#if equals current.type "youtube"}}
-			<iframe width=100% height=100%
-				src="//www.youtube.com/embed/{{current.link}}?autoplay=1&showinfo=0&controls=0"
-				frameborder="0" allowfullscreen>
-			</iframe>
-		{{else}}
-			<img src="{{current.link}}">
+	{{#if equals current.type "markdown"}}
+		<div class="down_marked_content">
+			{{#markdown}}{{{current.body}}}{{/markdown}}
+		</div>
+		{{#if current.link}}
+		<div class="content"> <img src="{{current.link}}"> </div>
 		{{/if}}
-	</div>
+	{{else}}
+		<div class="content">
+			{{#if equals current.type "youtube"}}
+				<iframe width=100% height=100%
+					src="//www.youtube.com/embed/{{current.link}}?autoplay=1&showinfo=0&controls=0"
+					frameborder="0" allowfullscreen>
+				</iframe>
+			{{else}}
+				<img src="{{current.link}}">
+			{{/if}}
+		</div>
+	{{/if}}
 </template>
 
 <template name="slides">
@@ -32,27 +41,43 @@
 							<option value="external img">external img</option>
 							<option value="local img">local img</option>
 							<option value="youtube">youtube</option>
+							<option value="markdown">Markdown</option>
 						</select>
 					</td>
 				</tr>
-				<tr>
-				{{#if isYoutube}}
-					<td>Video id</td>
-					<input class="link" type="text">
+
+				{{#if isMarkdown}}
+					<tr>
+						<td>Bg image url</td>
+						<input class="link" type="text">
+					</tr><tr>
+						<td>Markdown</td>
+						<textarea class="markdown" cols="80" rows="10" ></textarea>
+					</tr>
 				{{else}}
-					{{#if internal}}
-						<td>File</td>
-						<input class="file" type="file"/>
-						<td class="error"> {{internal_filetype_error}} </td>
-					{{else}}
-						<td>Link</td>
-						<td>
+					{{#if isYoutube}}
+						<tr>
+							<td>Video id</td>
 							<input class="link" type="text">
-						</td>
-						<td class="error">{{link_input_error}}</td>
+						</tr>
+					{{else}}
+						{{#if internal}}
+							<tr>
+								<td>File</td>
+								<input class="file" type="file"/>
+								<td class="error"> {{internal_filetype_error}} </td>
+							</tr>
+						{{else}}
+							<tr>
+								<td>Link</td>
+								<td>
+									<input class="link" type="text">
+								</td>
+								<td class="error">{{link_input_error}}</td>
+							</tr>
+						{{/if}}
 					{{/if}}
 				{{/if}}
-				</tr>
 				<tr>
 					<td>Expire</td>
 					<td>
@@ -113,9 +138,18 @@
 				<td>Actions</td>
 				<td>
 					<button class="remove">Remove</button>
+					{{#if equals type "markdown"}}
+						<button class="edit">Eddit</button>
+					{{/if}}
 				</td>
 			</tr>
 		</table>
+		<!-- {{#if equals type "markdown"}} -->
+			{{#if canhazedit}}
+				<textarea class="update_markdown" cols="30" rows="10" >{{body}}</textarea>
+				<button class="update">Update</button>
+			{{/if}}
+		<!-- {{/if}} -->
 	</article>
 	<hr>
 </template>

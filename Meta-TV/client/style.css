@@ -53,6 +53,27 @@ footer {
     position: fixed;
     right: 0;
     top: 0;
+		z-index:1;
+}
+.down_marked_content{
+	position:relative;
+	color:white;
+	max-width:800px;
+	margin:auto;
+	text-align:center;
+	z-index:2;
+}
+.down_marked_content p{
+	background-color:rgba(0, 0, 0, 0.7);
+}
+.down_marked_content h1{
+	background-color:rgba(0, 0, 0, 0.7);
+}
+.down_marked_content h2{
+	background-color:rgba(0, 0, 0, 0.7);
+}
+.down_marked_content h3{
+	background-color:rgba(0, 0, 0, 0.7);
 }
 
 .slides {
