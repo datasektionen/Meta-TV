@@ -36,6 +36,12 @@ Router.map(function() {
 			update()
 		}
 	}),
+	this.route('slideshow', {
+		path: '/tag/:tag',
+		data: function() {
+			update(this.params.tag)
+		}
+	}),
 	this.route('slides', {
 		path: '/slides',
 		data: function() {
@@ -93,7 +99,6 @@ Template.slides.link_input_error=function(){
 }
 
 var send_external_img = function(obj){
-	console.log("external")
 	testImage($(".link").val(), function(url, result){
 		if(result=="success"){
 			obj.link = url
@@ -153,6 +158,7 @@ Template.slides.events({
 
 		var obj = {
 			type: $(".type").val(),
+			tags:$(".tags").val().split(" "),
 			createdBy: Meteor.user().emails[0].address
 		}
 		var date = new Date(Date.parse($(".expire").val()))
@@ -205,9 +211,15 @@ Template.slide.canhazedit=function(){
 	return Session.get("hazEdit") == this._id
 }
 
-function update() {
+function update(tag) {
 	if(cursor.length === 0) {
-		cursor = slideshow.find().fetch()
+		if(tag){
+			console.log("haztags")
+			cursor = slideshow.find({tags:tag}).fetch()
+		}else{
+			console.log("notagz")
+			cursor = slideshow.find().fetch()
+		}
 	}
 	Session.set("current", cursor.pop())
 }
