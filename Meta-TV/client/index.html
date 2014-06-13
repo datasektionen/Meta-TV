@@ -5,7 +5,7 @@
 	</div>
 	{{#if equals current.type "markdown"}}
 		<div class="down_marked_content">
-			{{#markdown}}{{{current.body}}}{{/markdown}}
+			{{#markdown}}{{current.body}}{{/markdown}}
 		</div>
 		{{#if current.link}}
 		<div class="content"> <img src="{{current.link}}"> </div>
@@ -117,6 +117,18 @@
 			<tr>
 				<td>id</td>
 				<td>{{_id}}</td>
+				<td rowspan="10000000">
+					{{#if canhazedit}}
+						<textarea class="update_markdown" cols="30" rows="10" >{{body}}</textarea>
+						<button class="update">Update</button>
+					{{else}}
+						{{#if equals type "markdown"}}
+							<div style="max-width:300px;height:200px;overflow: hidden;">
+								{{#markdown}}{{body}}{{/markdown}}
+							</div>
+						{{/if}}
+					{{/if}}
+				</td>
 			</tr>
 			<tr>
 				<td>Type</td>
@@ -144,12 +156,6 @@
 				</td>
 			</tr>
 		</table>
-		<!-- {{#if equals type "markdown"}} -->
-			{{#if canhazedit}}
-				<textarea class="update_markdown" cols="30" rows="10" >{{body}}</textarea>
-				<button class="update">Update</button>
-			{{/if}}
-		<!-- {{/if}} -->
 	</article>
 	<hr>
 </template>

@@ -92,6 +92,57 @@ Template.slides.link_input_error=function(){
 	return Session.get("link_input_error") || ""
 }
 
+var send_external_img = function(obj){
+	console.log("external")
+	testImage($(".link").val(), function(url, result){
+		if(result=="success"){
+			obj.link = url
+			slideshow.insert(obj)
+			$(".link").val("")
+			console.log("sucsess")
+		}else if (result=="error"){
+			Session.set("link_input_error", "(╯°Д°)╯ This is not an URL to a supported image format!!!")
+			console.log("not success")
+		}else if (result=="timeout"){
+			Session.set("internal_filetype_error", "ʕ๑◞◟๑ʔ Time out?!!")
+			console.log("time out")
+		}
+	})
+}
+
+var send_local_img = function(obj){
+	var file = $(".file")[0].files[0]
+	var reader = new FileReader()
+
+	if(file.type.split("/")[0] != "image") {
+		Session.set("link_input_error", "(ಥ~ಥ)This file type is not suported!")
+		return
+	}
+
+	reader.onload = function(event) {
+		var sc_file = {
+			name: file.name,
+			path: file.path,
+			type: file.type,
+			size: file.size
+		}
+		Meteor.call("file-upload", sc_file, reader.result)
+		setTimeout(function(){
+			testImage("/uploaded/" + sc_file.name, function(url, result){
+				if(result=="success"){
+					obj.link = url
+					slideshow.insert(obj)
+					$(".file").val("")
+				}else{
+					Session.set("internal_filetype_error", "Do not want!!")
+					// TODO: remove upleaded image from server
+				}
+			})
+		}, 100);
+	}
+	reader.readAsBinaryString(file)
+}
+
 Template.slides.events({
 	"change .type": function() {
 		Session.set("type", $(".type").val())
@@ -110,63 +161,24 @@ Template.slides.events({
 			obj.expire = date
 		}
 
-		if(obj.type == "external img") {
-			console.log("external")
-			testImage($(".link").val(), function(url, result){
-				if(result=="success"){
-					obj.link = url
-					slideshow.insert(obj)
-					$(".link").val("")
-					console.log("sucsess")
-				}else if (result=="error"){
-					Session.set("link_input_error", "(╯°Д°)╯ This is not an URL to a supported image format!!!")
-					console.log("not success")
-				}else if (result=="timeout"){
-					Session.set("internal_filetype_error", "ʕ๑◞◟๑ʔ Time out?!!")
-					console.log("time out")
-				}
-			})
-			return
-		} else if(obj.type=="local img") {
-			var file = $(".file")[0].files[0]
-			var reader = new FileReader()
-
-			if(file.type.split("/")[0] != "image") {
-				Session.set("link_input_error", "(ಥ~ಥ)This file type is not suported!")
-				return
-			}
-
-			reader.onload = function(event) {
-				var sc_file = {
-					name: file.name,
-					path: file.path,
-					type: file.type,
-					size: file.size
-				}
-				Meteor.call("file-upload", sc_file, reader.result)
-				setTimeout(function(){
-					testImage("/uploaded/" + sc_file.name, function(url, result){
-						if(result=="success"){
-							obj.link = url
-							slideshow.insert(obj)
-							$(".file").val("")
-						}else{
-							Session.set("internal_filetype_error", "Do not want!!")
-							// TODO: remove upleaded image from server
-						}
-					})
-				}, 100);
-			}
-			reader.readAsBinaryString(file)
-		} else if(obj.type=="youtube"){
-			// TODO: add video id validation, and error handling
-			obj.link=$(".link").val()
-			slideshow.insert(obj)
-			$(".link").val("")
-		} else if(obj.type=="markdown"){
-			obj.body=$(".markdown").val()
-			obj.link=$(".link").val()
-			slideshow.insert(obj)
+		switch (obj.type) {
+			case "external img":
+				send_external_img(obj)
+				break
+			case "local img":
+				send_local_img(obj)
+				break
+			case "youtube":
+				// TODO: add video id validation, and error handling
+				obj.link=$(".link").val()
+				slideshow.insert(obj)
+				$(".link").val("")
+				break
+			case "markdown":
+				obj.body=$(".markdown").val()
+				obj.link=$(".link").val()
+				slideshow.insert(obj)
+				break
 		}
 		$(".expire").val("")
 	}
