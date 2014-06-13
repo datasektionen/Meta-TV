@@ -3,24 +3,28 @@
 		<a href="#" class="fullscreen">Fullscreen</a><br>
 		<a href="/slides">Add slides</a>
 	</div>
-	{{#if equals current.type "markdown"}}
-		<div class="down_marked_content">
-			{{#markdown}}{{current.body}}{{/markdown}}
-		</div>
-		{{#if current.link}}
-		<div class="content"> <img src="{{current.link}}"> </div>
-		{{/if}}
+	{{#if equals current.type "html"}}
+		{{{body}}}
 	{{else}}
-		<div class="content">
-			{{#if equals current.type "youtube"}}
-				<iframe width=100% height=100%
-					src="//www.youtube.com/embed/{{current.link}}?autoplay=1&showinfo=0&controls=0"
-					frameborder="0" allowfullscreen>
-				</iframe>
-			{{else}}
-				<img src="{{current.link}}">
+		{{#if equals current.type "markdown"}}
+			<div class="down_marked_content">
+				{{#markdown}}{{current.body}}{{/markdown}}
+			</div>
+			{{#if current.link}}
+			<div class="content"> <img src="{{current.link}}"> </div>
 			{{/if}}
-		</div>
+		{{else}}
+			<div class="content">
+				{{#if equals current.type "youtube"}}
+					<iframe width=100% height=100%
+						src="//www.youtube.com/embed/{{current.link}}?autoplay=1&showinfo=0&controls=0"
+						frameborder="0" allowfullscreen>
+					</iframe>
+				{{else}}
+					<img src="{{current.link}}">
+				{{/if}}
+			</div>
+		{{/if}}
 	{{/if}}
 </template>
 
@@ -38,43 +42,51 @@
 					<td>Type</td>
 					<td>
 						<select class="type">
-							<option value="external img">external img</option>
-							<option value="local img">local img</option>
-							<option value="youtube">youtube</option>
+							<option value="external img">Link image</option>
+							<option value="local img">Upload image</option>
+							<option value="youtube">Youtube</option>
 							<option value="markdown">Markdown</option>
+							<option value="html">HTML</option>
 						</select>
 					</td>
 				</tr>
 
-				{{#if isMarkdown}}
+				{{#if isHTML}}
 					<tr>
-						<td>Bg image url</td>
-						<input class="link" type="text">
-					</tr><tr>
-						<td>Markdown</td>
-						<textarea class="markdown" cols="80" rows="10" ></textarea>
+						<td>HTML</td>
+						<textarea class="html" cols="80" rows="10" ></textarea>
 					</tr>
 				{{else}}
-					{{#if isYoutube}}
+					{{#if isMarkdown}}
 						<tr>
-							<td>Video id</td>
+							<td>Bg image url</td>
 							<input class="link" type="text">
+						</tr><tr>
+							<td>Markdown</td>
+							<textarea class="markdown" cols="80" rows="10" ></textarea>
 						</tr>
 					{{else}}
-						{{#if internal}}
+						{{#if isYoutube}}
 							<tr>
-								<td>File</td>
-								<input class="file" type="file"/>
-								<td class="error"> {{internal_filetype_error}} </td>
+								<td>Video id</td>
+								<input class="link" type="text">
 							</tr>
 						{{else}}
-							<tr>
-								<td>Link</td>
-								<td>
-									<input class="link" type="text">
-								</td>
-								<td class="error">{{link_input_error}}</td>
-							</tr>
+							{{#if internal}}
+								<tr>
+									<td>File</td>
+									<input class="file" type="file"/>
+									<td class="error"> {{internal_filetype_error}} </td>
+								</tr>
+							{{else}}
+								<tr>
+									<td>Link</td>
+									<td>
+										<input class="link" type="text">
+									</td>
+									<td class="error">{{link_input_error}}</td>
+								</tr>
+							{{/if}}
 						{{/if}}
 					{{/if}}
 				{{/if}}
@@ -126,10 +138,16 @@
 						<textarea class="update_markdown" cols="30" rows="10" >{{body}}</textarea>
 						<button class="update">Update</button>
 					{{else}}
-						{{#if equals type "markdown"}}
+						{{#if equals type "html"}}
 							<div style="max-width:300px;height:200px;overflow: hidden;">
-								{{#markdown}}{{body}}{{/markdown}}
+								{{{body}}}
 							</div>
+						{{else}}
+							{{#if equals type "markdown"}}
+								<div style="max-width:300px;height:200px;overflow: hidden;">
+									{{#markdown}}{{body}}{{/markdown}}
+								</div>
+							{{/if}}
 						{{/if}}
 					{{/if}}
 				</td>
@@ -157,6 +175,9 @@
 					{{#if equals type "markdown"}}
 						<button class="edit">Eddit</button>
 					{{/if}}
+					{{#if equals type "html"}}
+						<button class="edit">Eddit</button>
+					{{/if}}
 				</td>
 			</tr>
 			<tr>
@@ -177,6 +198,7 @@
 
 <template name="history">
 <h1>History</h1>
+{{{test_html}}}
 {{#each log}}
 <article>
 	<table style="float:left;">

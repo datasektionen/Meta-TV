@@ -120,6 +120,10 @@ Template.slides.isMarkdown= function(){
 	return Session.get("type")=="markdown"
 }
 
+Template.slides.isHTML= function(){
+	return Session.get("type")=="html"
+}
+
 Template.slides.internal_filetype_error=function(){
 	return Session.get("internal_filetype_error") || ""
 }
@@ -229,6 +233,11 @@ Template.slides.events({
 				var _id = slideshow.insert(obj)
 				report(true, _id)
 				break
+			case "html":
+				obj.body=$(".html").val()
+				var _id = slideshow.insert(obj)
+				report(true, _id)
+				break
 		}
 		$(".expire").val("")
 	}
@@ -313,6 +322,10 @@ Template.history.events({
 		}
 	}
 })
+
+Template.history.test_html = function(){
+	return "<h1> This is html </h1>"
+}
 
 function update(tag) {
 	if(cursor.length === 0) {
