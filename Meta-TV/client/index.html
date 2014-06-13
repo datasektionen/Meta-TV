@@ -174,3 +174,34 @@
 	</article>
 	<hr>
 </template>
+
+<template name="history">
+<h1>History</h1>
+{{#each log}}
+<article>
+	<table style="float:left;">
+		<tr>
+			<b>{{action}}</b> by <i>{{by}}</i>
+		</tr>
+		<tr>
+			<td>
+				time:
+			</td>
+			<td>
+				{{time}}
+			</td>
+		</tr>
+	</table>
+	<table style="margin-left: 20em;">
+		{{#each members obj}}
+			<tr>
+				<td>{{key}}</td>
+				<td>{{value}}</td>
+			</tr>
+		{{/each}}
+	</table>
+	<button class="revert" style="align:right;">Revert</button>
+</article>
+<hr>
+{{/each}}
+</template>

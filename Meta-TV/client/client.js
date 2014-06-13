@@ -21,12 +21,36 @@ function testImage(url, callback, timeout) {
 		}, timeout);
 }
 
+function shallow_copy(to, from, ignore){
+
+	for(var key in from){
+		if(!ignore|| ignore.indexOf(key)==-1)
+      to[key] = from[key]
+	}
+}
+
 Handlebars.registerHelper("equals", function ( a, b) {
   return (a==b);
 });
 
+Handlebars.registerHelper("members", function (a) {
+	var res=[];
+	for(var key in a){
+		res.push({
+			"key":key,
+			"value": a[key]
+		})
+	}
+	return res
+});
+
+
 slideshow = new Meteor.Collection("slideshow")
 Meteor.subscribe("slideshow")
+
+history_log = new Meteor.Collection("history")
+Meteor.subscribe("history")
+
 var cursor = []
 
 Router.map(function() {
@@ -49,6 +73,12 @@ Router.map(function() {
 			return {
 				slides: slideshow.find({})
 			}
+		}
+	}),
+	this.route('history', {
+		path: '/history',
+		data: function() {
+
 		}
 	})
 })
@@ -98,19 +128,19 @@ Template.slides.link_input_error=function(){
 	return Session.get("link_input_error") || ""
 }
 
-var send_external_img = function(obj){
+var send_external_img = function(obj, report){
 	testImage($(".link").val(), function(url, result){
 		if(result=="success"){
 			obj.link = url
 			slideshow.insert(obj)
 			$(".link").val("")
-			console.log("sucsess")
+			report(true)
 		}else if (result=="error"){
-			Session.set("link_input_error", "(╯°Д°)╯ This is not an URL to a supported image format!!!")
-			console.log("not success")
+			var _id = Session.set("link_input_error", "(╯°Д°)╯ This is not an URL to a supported image format!!!")
+			report(false, _id)
 		}else if (result=="timeout"){
-			Session.set("internal_filetype_error", "ʕ๑◞◟๑ʔ Time out?!!")
-			console.log("time out")
+			var _id = Session.set("internal_filetype_error", "ʕ๑◞◟๑ʔ Time out?!!")
+			report(false, _id)
 		}
 	})
 }
@@ -167,23 +197,37 @@ Template.slides.events({
 			obj.expire = date
 		}
 
+		var report = function(success, identifier){
+			if(success){
+				var obj_cp = {_id:identifier}
+				shallow_copy(obj_cp, obj)
+				history_log.insert({
+					action:"Added slide",
+					by:obj_cp.createdBy,
+					time:Date.now(),
+					obj:obj_cp
+				})
+			}
+		}
 		switch (obj.type) {
 			case "external img":
-				send_external_img(obj)
+				send_external_img(obj, report)
 				break
 			case "local img":
-				send_local_img(obj)
+				send_local_img(obj, report)
 				break
 			case "youtube":
 				// TODO: add video id validation, and error handling
 				obj.link=$(".link").val()
-				slideshow.insert(obj)
+				var _id = slideshow.insert(obj)
 				$(".link").val("")
+				report(true, _id)
 				break
 			case "markdown":
 				obj.body=$(".markdown").val()
 				obj.link=$(".link").val()
-				slideshow.insert(obj)
+				var _id = slideshow.insert(obj)
+				report(true, _id)
 				break
 		}
 		$(".expire").val("")
@@ -192,6 +236,14 @@ Template.slides.events({
 
 Template.slide.events({
 	"click .remove": function() {
+		var obj_cp = {}
+		shallow_copy(obj_cp, this)
+		history_log.insert({
+			action:"Removed slide",
+			by:Meteor.user().emails[0].address,
+			time:Date.now(),
+			obj:obj_cp
+		})
 		slideshow.remove({_id: this._id})
 	},
 	"click .edit": function() {
@@ -202,6 +254,15 @@ Template.slide.events({
 		}
 	},
 	"click .update": function(){
+		var obj_cp = {}
+		shallow_copy(obj_cp, this)
+		history_log.insert({
+			action:"Updated slide",
+			by:Meteor.user().emails[0].address,
+			time:Date.now(),
+			note:"obj represents the state of the slide before update",
+			obj:obj_cp
+		})
 		slideshow.update({_id:this._id}, {$set: {body: $(".update_markdown").val()}})
 		Session.set("hazEdit", null)
 	}
@@ -210,6 +271,48 @@ Template.slide.events({
 Template.slide.canhazedit=function(){
 	return Session.get("hazEdit") == this._id
 }
+
+Template.history.log=function(){
+	return history_log.find({}, {sort: {time:-1}})
+}
+
+Template.history.events({
+	"click .revert": function(){
+		if(this.action=="Removed slide"){
+			slideshow.insert(this.obj)
+			history_log.insert({
+				action:"Added slide",
+				by:Meteor.user().emails[0].address,
+				time:Date.now(),
+				obj:this.obj
+			})
+		} else if(this.action=="Added slide"){
+			console.log("removing silde")
+			history_log.insert({
+				action:"Removed slide",
+				by:Meteor.user().emails[0].address,
+				time:Date.now(),
+				obj:this.obj
+			})
+			slideshow.remove({_id: this.obj._id})
+		} else if(this.action=="Updated slide"){
+			var curentObj=slideshow.find({_id:this.obj._id})
+			if(curentObj.count==0)
+				return
+			var obj_cp={}
+			shallow_copy(obj_cp, curentObj.fetch()[0])
+			history_log.insert({
+				action:"Updated slide",
+				by:Meteor.user().emails[0].address,
+				time:Date.now(),
+				obj:obj_cp
+			})
+			obj_cp={}
+			shallow_copy(obj_cp, this.obj, ["_id"])
+			slideshow.update({_id:this.obj._id}, {$set: obj_cp})
+		}
+	}
+})
 
 function update(tag) {
 	if(cursor.length === 0) {

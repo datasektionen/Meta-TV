@@ -2,9 +2,15 @@ var fs = Npm.require('fs')
 
 
 slideshow = new Meteor.Collection("slideshow")
+history = new Meteor.Collection("history")
 
 Meteor.publish("slideshow", function() {
 	var query = slideshow.find()
+	return query
+})
+
+Meteor.publish("history", function() {
+	var query = history.find()
 	return query
 })
 
@@ -84,4 +90,14 @@ slideshow.allow({
 	insert: ok,
 	remove: function(userId) { return Boolean(userId) },
 	update: ok
+})
+
+history.allow({
+	insert:function(userId) { return Boolean(userId) },
+	remove:function(){
+		return false
+	},
+	update:function(){
+		return false
+	}
 })
