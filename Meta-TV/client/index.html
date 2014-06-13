@@ -85,6 +85,10 @@
 					</td>
 				</tr>
 				<tr>
+					<td>Tags<br> (separated by white space)</td>
+					<input class="tags" type="text" value="random">
+				</tr>
+				<tr>
 					<td></td>
 					<td>
 						<button class="send">Send</button>
@@ -153,6 +157,14 @@
 					{{#if equals type "markdown"}}
 						<button class="edit">Eddit</button>
 					{{/if}}
+				</td>
+			</tr>
+			<tr>
+				<td>Tags:</td>
+				<td>
+					{{#each tags}}
+					{{this}},
+					{{/each}}
 				</td>
 			</tr>
 		</table>
