@@ -81,6 +81,12 @@ Router.map(function() {
 
 		}
 	})
+	this.route('dashbord', {
+		path: '/dashbord',
+		data: function() {
+
+		}
+	})
 })
 
 Template._loginButtonsMessages.infoMessage = "@kth.se mail required"

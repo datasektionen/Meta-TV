@@ -5,7 +5,7 @@
 		<a href="/history">History</a>
 	</div>
 	{{#if equals current.type "html"}}
-		{{{body}}}
+		{{{current.body}}}
 	{{else}}
 		{{#if equals current.type "markdown"}}
 			<div class="down_marked_content">
@@ -199,13 +199,16 @@
 </template>
 
 <template name="history">
+<div style="padding:0em;">
 <h1>History</h1>
 {{{test_html}}}
 {{#each log}}
 <article>
 	<table style="float:left;">
 		<tr>
-			<b>{{action}}</b> by <i>{{by}}</i>
+			<td colspan="2">
+				<b>{{action}}</b> by <i>{{by}}</i>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -216,11 +219,11 @@
 			</td>
 		</tr>
 	</table>
-	<table style="margin-left: 20em;">
+	<table style="margin-left:20em;">
 		{{#each members obj}}
 			<tr>
-				<td>{{key}}</td>
-				<td>{{value}}</td>
+				<td style="color:gray;">{{key}}</td>
+				<td style="padding-left:10px;">{{value}}</td>
 			</tr>
 		{{/each}}
 	</table>
@@ -228,4 +231,5 @@
 </article>
 <hr>
 {{/each}}
+</div>
 </template>
