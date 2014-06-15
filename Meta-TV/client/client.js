@@ -22,7 +22,6 @@ function testImage(url, callback, timeout) {
 }
 
 function shallow_copy(to, from, ignore){
-
 	for(var key in from){
 		if(!ignore|| ignore.indexOf(key)==-1)
       to[key] = from[key]
@@ -63,28 +62,35 @@ Router.map(function() {
 	this.route('slideshow', {
 		path: '/tag/:tag',
 		data: function() {
-			update(this.params.tag)
-		}
-	}),
-	this.route('slides', {
-		path: '/slides',
-		data: function() {
-			Session.set("type", "external img")
-			return {
-				slides: slideshow.find({})
-			}
+			console.log(this.params.tag.split("+"))
+			update(this.params.tag.split("+"))
 		}
 	}),
 	this.route('history', {
 		path: '/history',
 		data: function() {
-
+			return {
+				history: history_log.find({}, {sort: {time:-1}})
+			}
 		}
 	})
-	this.route('dashbord', {
-		path: '/dashbord',
+	this.route('dashboard', {
+		path: '/dashboard',
 		data: function() {
-
+			return {
+				slides: slideshow.find({}),
+				history: history_log.find({}, {sort: {time:-1}})
+			}
+		}
+	})
+	this.route('dashboard', {
+		path: '/dashboard/:tag',
+		data: function() {
+			return {
+				defoult_tag:this.params.tag,
+				slides: slideshow.find({tags:this.params.tag}),
+				history: history_log.find({tags:this.params.tag}, {sort: {time:-1}})
+			}
 		}
 	})
 })
@@ -114,27 +120,27 @@ Template.slideshow.events({
 })
 
 
-Template.slides.internal = function() {
+Template.uploader.internal = function() {
 	return Session.get("type") == "local img"
 }
 
-Template.slides.isYoutube = function() {
+Template.uploader.isYoutube = function() {
 	return Session.get("type") == "youtube"
 }
 
-Template.slides.isMarkdown= function(){
+Template.uploader.isMarkdown= function(){
 	return Session.get("type")=="markdown"
 }
 
-Template.slides.isHTML= function(){
+Template.uploader.isHTML= function(){
 	return Session.get("type")=="html"
 }
 
-Template.slides.internal_filetype_error=function(){
+Template.uploader.internal_filetype_error=function(){
 	return Session.get("internal_filetype_error") || ""
 }
 
-Template.slides.link_input_error=function(){
+Template.uploader.link_input_error=function(){
 	return Session.get("link_input_error") || ""
 }
 
@@ -188,7 +194,7 @@ var send_local_img = function(obj){
 	reader.readAsBinaryString(file)
 }
 
-Template.slides.events({
+Template.uploader.events({
 	"change .type": function() {
 		Session.set("type", $(".type").val())
 	},
@@ -215,7 +221,8 @@ Template.slides.events({
 					action:"Added slide",
 					by:obj_cp.createdBy,
 					time:Date.now(),
-					obj:obj_cp
+					obj:obj_cp,
+					tags:obj_cp.tags
 				})
 			}
 		}
@@ -257,7 +264,8 @@ Template.slide.events({
 			action:"Removed slide",
 			by:Meteor.user().emails[0].address,
 			time:Date.now(),
-			obj:obj_cp
+			obj:obj_cp,
+			tags:obj_cp.tags
 		})
 		slideshow.remove({_id: this._id})
 	},
@@ -287,10 +295,6 @@ Template.slide.canhazedit=function(){
 	return Session.get("hazEdit") == this._id
 }
 
-Template.history.log=function(){
-	return history_log.find({}, {sort: {time:-1}})
-}
-
 Template.history.events({
 	"click .revert": function(){
 		if(this.action=="Removed slide"){
@@ -299,7 +303,8 @@ Template.history.events({
 				action:"Added slide",
 				by:Meteor.user().emails[0].address,
 				time:Date.now(),
-				obj:this.obj
+				obj:this.obj,
+				tags:this.obj.tags
 			})
 		} else if(this.action=="Added slide"){
 			console.log("removing silde")
@@ -307,7 +312,8 @@ Template.history.events({
 				action:"Removed slide",
 				by:Meteor.user().emails[0].address,
 				time:Date.now(),
-				obj:this.obj
+				obj:this.obj,
+				tags:this.obj.tags
 			})
 			slideshow.remove({_id: this.obj._id})
 		} else if(this.action=="Updated slide"){
@@ -320,7 +326,8 @@ Template.history.events({
 				action:"Updated slide",
 				by:Meteor.user().emails[0].address,
 				time:Date.now(),
-				obj:obj_cp
+				obj:obj_cp,
+				tags:obj_cp.tags
 			})
 			obj_cp={}
 			shallow_copy(obj_cp, this.obj, ["_id"])
@@ -329,15 +336,11 @@ Template.history.events({
 	}
 })
 
-Template.history.test_html = function(){
-	return "<h1> This is html </h1>"
-}
-
 function update(tag) {
 	if(cursor.length === 0) {
 		if(tag){
 			console.log("haztags")
-			cursor = slideshow.find({tags:tag}).fetch()
+			cursor = slideshow.find({tags:{$in:tag}}).fetch()
 		}else{
 			console.log("notagz")
 			cursor = slideshow.find().fetch()

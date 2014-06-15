@@ -1,7 +1,7 @@
 <template name="slideshow">
 	<div class="hoverinfo">
 		<a href="#" class="fullscreen">Fullscreen</a><br>
-		<a href="/slides">Add slides</a>
+		<a href="/dashboard">Add slides</a>
 		<a href="/history">History</a>
 	</div>
 	{{#if equals current.type "html"}}
@@ -29,87 +29,22 @@
 	{{/if}}
 </template>
 
-<template name="slides">
+<template name="dashboard">
 	{{> loginButtons align="right"}}
-	<div class="slides">
+	<div style="margin:4em;">
+		<div style="width:250px;
+								float:right;
+								overflow:hidden;
+								">
+			<a href="/history"><h1>History</h1></a>
+			{{> history}}
+		</div>
 		<h1>Slides</h1>
-		{{#each slides}}
-			{{> slide}}
-		{{/each}}
-		{{#if currentUser}}
-			<h1>Add</h1>
-			<table>
-				<tr>
-					<td>Type</td>
-					<td>
-						<select class="type">
-							<option value="external img">Link image</option>
-							<option value="local img">Upload image</option>
-							<option value="youtube">Youtube</option>
-							<option value="markdown">Markdown</option>
-							<option value="html">HTML</option>
-						</select>
-					</td>
-				</tr>
-
-				{{#if isHTML}}
-					<tr>
-						<td>HTML</td>
-						<textarea class="html" cols="80" rows="10" ></textarea>
-					</tr>
-				{{else}}
-					{{#if isMarkdown}}
-						<tr>
-							<td>Bg image url</td>
-							<input class="link" type="text">
-						</tr><tr>
-							<td>Markdown</td>
-							<textarea class="markdown" cols="80" rows="10" ></textarea>
-						</tr>
-					{{else}}
-						{{#if isYoutube}}
-							<tr>
-								<td>Video id</td>
-								<input class="link" type="text">
-							</tr>
-						{{else}}
-							{{#if internal}}
-								<tr>
-									<td>File</td>
-									<input class="file" type="file"/>
-									<td class="error"> {{internal_filetype_error}} </td>
-								</tr>
-							{{else}}
-								<tr>
-									<td>Link</td>
-									<td>
-										<input class="link" type="text">
-									</td>
-									<td class="error">{{link_input_error}}</td>
-								</tr>
-							{{/if}}
-						{{/if}}
-					{{/if}}
-				{{/if}}
-				<tr>
-					<td>Expire</td>
-					<td>
-						<input class="expire" type="date">
-					</td>
-				</tr>
-				<tr>
-					<td>Tags<br> (separated by white space)</td>
-					<input class="tags" type="text" value="random">
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<button class="send">Send</button>
-					</td>
-				</tr>
-			</table>
-		{{/if}}
-		<a href="/history">History</a>
+		<div style="padding-right:20px;width:auto;position:relative;overflow:hidden;">
+			{{> slides}}
+		</div>
+		<h1>Add</h1>
+		{{> uploader}}
 		<div class="Policy">
 			<h1>Policy</h1>
 			<p>All KTH students can post there own slides and or remove others. Please no NSFW. Everythings is logged. I SEE YOU.</p>
@@ -117,6 +52,94 @@
 		{{> footer}}
 	</div>
 </template>
+
+<template name="slides">
+	<div class="slides">
+		{{#each slides}}
+			{{> slide}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="uploader">
+	{{#if currentUser}}
+		<table>
+			<tr>
+				<td>Type</td>
+				<td>
+					<select class="type">
+						<option value="external img">Link image</option>
+						<option value="local img">Upload image</option>
+						<option value="youtube">Youtube</option>
+						<option value="markdown">Markdown</option>
+						<option value="html">HTML</option>
+					</select>
+				</td>
+			</tr>
+
+			{{#if isHTML}}
+				<tr>
+					<td>HTML</td>
+					<textarea class="html" cols="80" rows="10" ></textarea>
+				</tr>
+			{{else}}
+				{{#if isMarkdown}}
+					<tr>
+						<td>Bg image url</td>
+						<input class="link" type="text">
+					</tr><tr>
+						<td>Markdown</td>
+						<textarea class="markdown" cols="80" rows="10" ></textarea>
+					</tr>
+				{{else}}
+					{{#if isYoutube}}
+						<tr>
+							<td>Video id</td>
+							<input class="link" type="text">
+						</tr>
+					{{else}}
+						{{#if internal}}
+							<tr>
+								<td>File</td>
+								<input class="file" type="file"/>
+								<td class="error"> {{internal_filetype_error}} </td>
+							</tr>
+						{{else}}
+							<tr>
+								<td>Link</td>
+								<td>
+									<input class="link" type="text">
+								</td>
+								<td class="error">{{link_input_error}}</td>
+							</tr>
+						{{/if}}
+					{{/if}}
+				{{/if}}
+			{{/if}}
+			<tr>
+				<td>Expire</td>
+				<td>
+					<input class="expire" type="date">
+				</td>
+			</tr>
+			<tr>
+				<td>Tags<br> (separated by white space)</td>
+				{{#if defoult_tag}}
+					<input class="tags" type="text" value="{{defoult_tag}}">
+				{{else}}
+					<input class="tags" type="text" value="random">
+				{{/if}}
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="send">Send</button>
+				</td>
+			</tr>
+		</table>
+	{{/if}}
+</template>
+
 
 <template name="footer">
 	<footer>
@@ -199,15 +222,20 @@
 </template>
 
 <template name="history">
-<div style="padding:0em;">
-<h1>History</h1>
-{{{test_html}}}
-{{#each log}}
+{{#each history}}
 <article>
 	<table style="float:left;">
 		<tr>
 			<td colspan="2">
 				<b>{{action}}</b> by <i>{{by}}</i>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				id:
+			</td>
+			<td>
+				{{obj._id}}
 			</td>
 		</tr>
 		<tr>
@@ -219,7 +247,7 @@
 			</td>
 		</tr>
 	</table>
-	<table style="margin-left:20em;">
+	<table>
 		{{#each members obj}}
 			<tr>
 				<td style="color:gray;">{{key}}</td>
@@ -227,9 +255,8 @@
 			</tr>
 		{{/each}}
 	</table>
-	<button class="revert" style="align:right;">Revert</button>
+	<button class="revert" >Revert</button>
 </article>
 <hr>
 {{/each}}
-</div>
 </template>
