@@ -1,0 +1,78 @@
+<template name="uploader">
+	{{#if currentUser}}
+		<table>
+			<tr>
+				<td>Type</td>
+				<td>
+					<select class="type">
+						<option value="external img">Link image</option>
+						<option value="local img">Upload image</option>
+						<option value="youtube">Youtube</option>
+						<option value="markdown">Markdown</option>
+						<option value="html">HTML</option>
+					</select>
+				</td>
+			</tr>
+
+			{{#if isHTML}}
+				<tr>
+					<td>HTML</td>
+					<textarea class="html" cols="80" rows="10" ></textarea>
+				</tr>
+			{{else}}
+				{{#if isMarkdown}}
+					<tr>
+						<td>Bg image url</td>
+						<input class="link" type="text">
+					</tr><tr>
+						<td>Markdown</td>
+						<textarea class="markdown" cols="80" rows="10" ></textarea>
+					</tr>
+				{{else}}
+					{{#if isYoutube}}
+						<tr>
+							<td>Video id</td>
+							<input class="link" type="text">
+						</tr>
+					{{else}}
+						{{#if internal}}
+							<tr>
+								<td>File</td>
+								<input class="file" type="file"/>
+								<td class="error"> {{internal_filetype_error}} </td>
+							</tr>
+						{{else}}
+							<tr>
+								<td>Link</td>
+								<td>
+									<input class="link" type="text">
+								</td>
+								<td class="error">{{link_input_error}}</td>
+							</tr>
+						{{/if}}
+					{{/if}}
+				{{/if}}
+			{{/if}}
+			<tr>
+				<td>Expire</td>
+				<td>
+					<input class="expire" type="date">
+				</td>
+			</tr>
+			<tr>
+				<td>Tags<br> (separated by white space)</td>
+				{{#if defoult_tag}}
+					<input class="tags" type="text" value="{{defoult_tag}}">
+				{{else}}
+					<input class="tags" type="text" value="random">
+				{{/if}}
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="send">Send</button>
+				</td>
+			</tr>
+		</table>
+	{{/if}}
+</template>

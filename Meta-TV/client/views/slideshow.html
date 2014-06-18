@@ -1,0 +1,30 @@
+<template name="slideshow">
+	<div class="hoverinfo">
+		<a href="#" class="fullscreen">Fullscreen</a><br>
+		<a href="/dashboard">Add slides</a>
+		<a href="/history">History</a>
+	</div>
+	{{#if equals current.type "html"}}
+		{{{current.body}}}
+	{{else}}
+		{{#if equals current.type "markdown"}}
+			<div class="down_marked_content">
+				{{#markdown}}{{current.body}}{{/markdown}}
+			</div>
+			{{#if current.link}}
+			<div class="content"> <img src="{{current.link}}"> </div>
+			{{/if}}
+		{{else}}
+			<div class="content">
+				{{#if equals current.type "youtube"}}
+					<iframe width=100% height=100%
+						src="//www.youtube.com/embed/{{current.link}}?autoplay=1&showinfo=0&controls=0"
+						frameborder="0" allowfullscreen>
+					</iframe>
+				{{else}}
+					<img src="{{current.link}}">
+				{{/if}}
+			</div>
+		{{/if}}
+	{{/if}}
+</template>

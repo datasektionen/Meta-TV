@@ -1,0 +1,39 @@
+<template name="history">
+	{{#each history}}
+	<article>
+		<table style="float:left;">
+			<tr>
+				<td colspan="2">
+					<b>{{action}}</b> by <i>{{by}}</i>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					id:
+				</td>
+				<td>
+					{{obj._id}}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					time:
+				</td>
+				<td>
+					{{time}}
+				</td>
+			</tr>
+		</table>
+		<table>
+			{{#each members obj}}
+			<tr>
+				<td style="color:gray;">{{key}}</td>
+				<td style="padding-left:10px;">{{value}}</td>
+			</tr>
+			{{/each}}
+		</table>
+		<button class="revert" >Revert</button>
+	</article>
+	<hr>
+	{{/each}}
+</template>

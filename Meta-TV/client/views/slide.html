@@ -1,0 +1,73 @@
+<template name="slide">
+	<article>
+		{{#if equals type "youtube"}}
+			<img src="http://img.youtube.com/vi/{{link}}/0.jpg">
+		{{else}}
+			<img src="{{link}}">
+		{{/if}}
+		<table>
+			<tr>
+				<td>id</td>
+				<td>{{_id}}</td>
+				<td rowspan="10000000">
+					{{#if canhazedit}}
+						<textarea class="update_markdown" cols="30" rows="10" >{{body}}</textarea>
+						<button class="update">Update</button>
+					{{else}}
+						{{#if equals type "html"}}
+							<div style="max-width:300px;height:200px;overflow: hidden;">
+								{{{body}}}
+							</div>
+						{{else}}
+							{{#if equals type "markdown"}}
+								<div style="max-width:300px;height:200px;overflow: hidden;">
+									{{#markdown}}{{body}}{{/markdown}}
+								</div>
+							{{/if}}
+						{{/if}}
+					{{/if}}
+				</td>
+			</tr>
+			<tr>
+				<td>Type</td>
+				<td>{{type}}</td>
+			</tr>
+			<tr>
+				<td>Expire</td>
+				<td>
+					<date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date>
+				</td>
+			</tr>
+			<tr>
+				<td>Created by</td>
+				<td>
+					<date>{{createdBy}}</date>
+				</td>
+			</tr>
+			<tr>
+				<td>Actions</td>
+				<td>
+					<button class="remove">Remove</button>
+					{{#if equals type "markdown"}}
+						<button class="edit">Eddit</button>
+					{{/if}}
+					{{#if equals type "html"}}
+						<button class="edit">Eddit</button>
+					{{/if}}
+				</td>
+			</tr>
+			<tr>
+				<td>Tags:</td>
+				<td>
+					<!-- this is cousing some kind of error,
+							Exception in queued task: badSequenceError
+							see console.log -->
+					{{#each tags}}
+					{{this}},
+					{{/each}}
+				</td>
+			</tr>
+		</table>
+	</article>
+	<hr>
+</template>
