@@ -1,8 +1,0 @@
-{
-  "packages": {
-    "router": {},
-    "iron-router": {},
-    "normalize.css": {},
-    "collection-hooks": {}
-  }
-}

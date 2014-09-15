@@ -4,9 +4,9 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-iron-router
-normalize.css
+cmather:iron-router@0.8.2
+mrt:normalize.css@2.0.1
 accounts-password
 accounts-ui
-collection-hooks
+mrt:collection-hooks@0.7.2
 showdown
