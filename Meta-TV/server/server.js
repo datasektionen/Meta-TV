@@ -25,25 +25,10 @@ Meteor.startup(function () {
 			tags: ["2"]
 		})
 		slideshow.insert({
-			type: "external img",
-			link: "http://placecage.com/1920/1080",
-			expire: new Date(Date.parse("2015-05-12")),
-			createdBy: "anlinn@kth.se",
-			tags: ["2"]
-		})
-		slideshow.insert({
-			type: "external img",
-			link: "https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/77b54f57528c86f6c05ec55d1ce948f1/tumblr_n0zx7rXYk71r8lg7to1_1280.jpg",
-			expire: new Date(Date.parse("2015-05-12")),
-			createdBy: "anlinn@kth.se",
-			tags: ["2", "1"]
-		})
-		slideshow.insert({
-			type: "youtube",
-			link: "kxopViU98Xo",
-			expire: new Date(Date.parse("2015-05-12")),
-			createBy: "pintjuk@kth.se",
-			tags: ["1"]
+			"type":"html",
+			"tags":["random"],
+			"createdBy":"blu@kth.se",
+			"body":"<iframe src=\"http://limbero.com/projects/metasl/\" style=\"width: 100%; height: 100vh; border: none;\"></iframe>"
 		})
 	}
 })
