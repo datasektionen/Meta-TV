@@ -32,7 +32,9 @@
 			</tr>
 			{{/each}}
 		</table>
-		<button class="revert" >Revert</button>
+		{{#if currentUser}}
+			<button class="revert" >Revert</button>
+		{{/if}}
 	</article>
 	<hr>
 	{{/each}}

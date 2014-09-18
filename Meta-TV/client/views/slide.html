@@ -44,18 +44,20 @@
 					<date>{{createdBy}}</date>
 				</td>
 			</tr>
-			<tr>
-				<td>Actions</td>
-				<td>
-					<button class="remove">Remove</button>
-					{{#if equals type "markdown"}}
-						<button class="edit">Eddit</button>
-					{{/if}}
-					{{#if equals type "html"}}
-						<button class="edit">Eddit</button>
-					{{/if}}
-				</td>
-			</tr>
+			{{#if currentUser}}
+				<tr>
+					<td>Actions</td>
+					<td>
+						<button class="remove">Remove</button>
+						{{#if equals type "markdown"}}
+							<button class="edit">Edit</button>
+						{{/if}}
+						{{#if equals type "html"}}
+							<button class="edit">Edit</button>
+						{{/if}}
+					</td>
+				</tr>
+			{{/if}}
 			<tr>
 				<td>Tags:</td>
 				<td>
