@@ -34,3 +34,17 @@ Template.slide.events({
 		Session.set("hazEdit", null)
 	}
 })
+
+
+Template.tagfiltering.events({
+	"click .remover": function() {
+		tagmode.remove({_id: this._id})
+	},
+	"click button": function() {
+		tagmode.insert({
+			tag: $(".adders").val(),
+			createdBy: Meteor.user().emails[0].address // Yes it is checked on the server
+		})
+		$(".adders").val("")
+	}
+})

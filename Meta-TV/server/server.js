@@ -3,21 +3,24 @@ var fs = Npm.require('fs')
 
 slideshow = new Meteor.Collection("slideshow")
 history = new Meteor.Collection("history")
+tagmode = new Meteor.Collection("tagmode")
 
 Meteor.publish("slideshow", function() {
-	var query = slideshow.find()
-	return query
+	return slideshow.find()
 })
 
 Meteor.publish("history", function() {
-	var query = history.find()
-	return query
+	return history.find()
+})
+
+Meteor.publish("tagmode", function() {
+	return tagmode.find()
 })
 
 Meteor.startup(function () {
 	// Sample data
 	if (slideshow.find().count() == 0) {
-		slideshow.insert({
+		slideshow.insert({		// Should be removed on first cleanup
 			type: "external img",
 			link: "http://placekitten.com/1920/1080",
 			expire: new Date(Date.parse("2012-05-12")),
@@ -58,6 +61,17 @@ slideshow.before.remove(function(userId, doc) {
 
 function cleanUp() {
 	slideshow.remove({expire: {$lt: new Date()}})
+
+	// If between midnight and one clocn
+	var now = new Date()
+	var cleanuphour = new Date()
+	cleanuphour.setHours(5, 0, 0, 0)
+	var end = new Date()
+	end.setHours(6, 0, 0, 0)
+	if(cleanuphour < now && now < end) {
+		console.log("Resetting tags")
+		tagmode.remove({})
+	}
 }
 Meteor.setInterval(cleanUp, 10000)
 
@@ -72,6 +86,12 @@ function ok(userId, doc) {
 }
 
 slideshow.allow({
+	insert: ok,
+	remove: function(userId) { return Boolean(userId) },
+	update: ok
+})
+
+tagmode.allow({
 	insert: ok,
 	remove: function(userId) { return Boolean(userId) },
 	update: ok

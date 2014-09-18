@@ -14,12 +14,28 @@
 		</div>
 		<h1>Add</h1>
 		{{> uploader}}
+		<div class="tagfilteringstuff">
+			{{> tagfiltering}}
+		</div>
 		<div class="Policy">
 			<h1>Policy</h1>
 			<p>All KTH students can post there own slides and or remove others. Please no NSFW. Everythings is logged. I SEE YOU.</p>
 		</div>
 		{{> footer}}
 	</div>
+</template>
+
+<template name="tagfiltering">
+	<h1>Tag filtering</h1>
+	Will reset automagically at 05:00 every day.
+	{{#each tagmode}}
+		<div class="tag">
+			{{tag}}
+			<button class="remover">x</button>
+		</div>
+	{{/each}}
+	<input class="adders" type="text">
+	<button>Add</button>
 </template>
 
 <template name="slides">
