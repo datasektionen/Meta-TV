@@ -25,7 +25,11 @@ function update() {
 			cursor = slideshow.find({tags:{$in:tags}}).fetch()
 		} else {
 			console.log("notagz")
-			cursor = slideshow.find().fetch()
+			cursor = slideshow.find({
+				onlywhenfiltering: {
+					$ne: true
+				}
+			}).fetch()
 		}
 	}
 	Session.set("current", cursor.pop())

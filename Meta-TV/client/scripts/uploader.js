@@ -54,7 +54,8 @@ Template.uploader.events({
 		var obj = {
 			type: $(".type").val(),
 			tags:$(".tags").val().split(" "),
-			createdBy: Meteor.user().emails[0].address
+			createdBy: Meteor.user().emails[0].address,
+			onlywhenfiltering: $(".hashtagonlyfilter").is(":checked")
 		}
 		var date = new Date(Date.parse($(".expire").val()))
 
