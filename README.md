@@ -19,11 +19,3 @@ Log
 ---
 To view log open http://localhost:3000/history.
 Every action can be reverted.
-
-
-Tags
-----
-
-To view slideshow filterd by a tag go to http://localhost:3000/tag/{{tag}} where {{tag}} is the tag you want to use.
-
-Use '+' to separate multiple tags like so: http://localhost:3000/tag/{{tag1}}+{{tag2}}+{{tag3}}
