@@ -101,6 +101,8 @@ Template.uploader.events({
 				report(true, _id)
 				break
 		}
+		Session.set("type", "Link image")
+		$(".type").val("Link image")
 		$(".expire").val("")
 	}
 })
