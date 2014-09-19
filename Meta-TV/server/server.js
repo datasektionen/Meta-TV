@@ -49,14 +49,14 @@ Meteor.methods({
 })
 
 slideshow.before.remove(function(userId, doc) {
-	try{
+	/*try{   Not compatible with the revert function
 		if(doc.type == "local img") {
 			var path = "../../../../../public" + doc.link
 			fs.unlinkSync(path)
 		}
 	}catch (err) {
 		console.log(err)
-	}
+	}*/
 })
 
 function cleanUp() {
