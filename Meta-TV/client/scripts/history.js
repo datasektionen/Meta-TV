@@ -4,6 +4,7 @@ Meteor.subscribe("history")
 Template.history.events({
 	"click .revert": function(){
 		if(this.action=="Removed slide"){
+			this.obj.createdBy = Meteor.user().emails[0].address
 			slideshow.insert(this.obj)
 			history_log.insert({
 				action:"Added slide",
