@@ -8,9 +8,11 @@ var cursor = []
 
 var timeout = 30 // s
 
-Template.slideshow.current = function() {
-	return Session.get("current")
-}
+Template.slideshow.helpers({
+	current: function() {
+		return Session.get("current")
+	}
+})
 
 function update() {
 	if(cursor.length === 0) {

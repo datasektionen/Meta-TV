@@ -1,7 +1,3 @@
-Template.uploader.internal = function() {
-	return Session.get("type") == "local img"
-}
-
 var send_external_img = function(obj, report){
 	testImage($(".link").val(), function(url, result){
 		if(result=="success"){
@@ -19,29 +15,32 @@ var send_external_img = function(obj, report){
 	})
 }
 
-Template.uploader.isYoutube = function() {
-	return Session.get("type") == "youtube"
-}
+Template.uploader.helpers({
+	isYoutube: function() {
+		return Session.get("type") == "youtube"
+	},
+	isMarkdown: function() {
+		return Session.get("type") == "markdown"
+	},
+	isHTML: function(){
+		return Session.get("type") == "html"
+	},
+	internal_filetype_error: function() {
+		return Session.get("internal_filetype_error") || ""
+	},
+	link_input_error: function() {
+		return Session.get("link_input_error") || ""
+	},
+	internal: function() {
+		return Session.get("type") == "local img"
+	}
+})
 
-Template.uploader.isMarkdown= function(){
-	return Session.get("type")=="markdown"
-}
-
-Template.uploader.isHTML= function(){
-	return Session.get("type")=="html"
-}
-
-Template.uploader.internal_filetype_error=function(){
-	return Session.get("internal_filetype_error") || ""
-}
-
-Template.uploader.link_input_error=function(){
-	return Session.get("link_input_error") || ""
-}
-
-Template.slide.canhazedit=function(){
-	return Session.get("hazEdit") == this._id
-}
+Template.slide.helpers({
+	canhazedit: function() {
+		return Session.get("hazEdit") == this._id
+	}
+})
 
 Template.uploader.events({
 	"change .type": function() {
