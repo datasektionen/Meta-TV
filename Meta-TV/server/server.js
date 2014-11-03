@@ -43,17 +43,9 @@ Router.map(function() {
 		action: function() {
 				var path = this.params.path;
 				var basedir = "../../../../../../uploaded/";
-
 				console.log('will serve static content @ '+ path);
-
 				var file = fs.readFileSync(basedir + path);
-
-			/*var headers = {
-				'Content-type': 'image/png',
-				'Content-Disposition': "attachment; filename=" + path
-			};*/
-
-			this.response.writeHead(200/*, headers*/);
+			this.response.writeHead(200);
 			return this.response.end(file);
 		}
 	});
@@ -69,17 +61,6 @@ Meteor.methods({
 			console.err("What is this?")
 		}
 	}
-})
-
-slideshow.before.remove(function(userId, doc) {
-	/*try{   Not compatible with the revert function
-		if(doc.type == "local img") {
-			var path = "../../../../../public" + doc.link
-			fs.unlinkSync(path)
-		}
-	}catch (err) {
-		console.log(err)
-	}*/
 })
 
 function cleanUp() {
