@@ -64,14 +64,14 @@ Template.uploader.events({
 
 		var report = function(success, identifier){
 			if(success){
-				var obj_cp = {_id:identifier}
+				var obj_cp = {_id: identifier}
 				shallow_copy(obj_cp, obj)
 				history_log.insert({
-					action:"Added slide",
-					by:obj_cp.createdBy,
-					time:Date.now(),
-					obj:obj_cp,
-					tags:obj_cp.tags
+					action: "Added slide",
+					by: obj_cp.createdBy,
+					time: Date.now(),
+					obj: obj_cp,
+					tags: obj_cp.tags
 				})
 			}
 		}
@@ -104,7 +104,7 @@ Template.uploader.events({
 	}
 })
 
-var send_local_img = function(obj){
+var send_local_img = function(obj, report){
 	var file = $(".file")[0].files[0]
 	var reader = new FileReader()
 
@@ -124,8 +124,9 @@ var send_local_img = function(obj){
 			testImage("/uploaded/" + sc_file.name, function(url, result){
 				if(result == "success"){
 					obj.link = url
-					slideshow.insert(obj)
+					var _id = slideshow.insert(obj)
 					$(".file").val("")
+					report(true, _id)
 				} else {
 					Session.set("internal_filetype_error", "Do not want!!")
 				}
