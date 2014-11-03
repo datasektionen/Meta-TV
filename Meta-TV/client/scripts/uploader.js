@@ -101,9 +101,6 @@ Template.uploader.events({
 				report(true, _id)
 				break
 		}
-		Session.set("type", "Link image")
-		$(".type").val("Link image")
-		$(".expire").val("")
 	}
 })
 
@@ -123,42 +120,43 @@ var send_local_img = function(obj){
 			type: file.type,
 			size: file.size
 		}
-		Meteor.call("file-upload", sc_file, reader.result)
-		setTimeout(function(){
+		Meteor.call("file-upload", sc_file, reader.result, function() {
 			testImage("/uploaded/" + sc_file.name, function(url, result){
-				if(result=="success"){
+				if(result == "success"){
 					obj.link = url
 					slideshow.insert(obj)
 					$(".file").val("")
-				}else{
+				} else {
 					Session.set("internal_filetype_error", "Do not want!!")
-					// TODO: remove upleaded image from server
 				}
 			})
-		}, 100);
+		})
+	}
+	reader.onerror = function(e) {
+		Session.set("internal_filetype_error", "You file error!" + e)
 	}
 	reader.readAsBinaryString(file)
 }
 
 function testImage(url, callback, timeout) {
-		timeout = timeout || 5000;
-		var timedOut = false, timer;
-		var img = new Image();
+		timeout = timeout || 5000
+		var timedOut = false, timer
+		var img = new Image()
 		img.onerror = img.onabort = function() {
-				if (!timedOut) {
-						clearTimeout(timer);
-						callback(url, "error");
-				}
-		};
+			if (!timedOut) {
+				clearTimeout(timer)
+				callback(url, "error")
+			}
+		}
 		img.onload = function() {
-				if (!timedOut) {
-						clearTimeout(timer);
-						callback(url, "success");
-				}
-		};
-		img.src = url;
+			if (!timedOut) {
+				clearTimeout(timer)
+				callback(url, "success")
+			}
+		}
+		img.src = url
 		timer = setTimeout(function() {
-				timedOut = true;
-				callback(url, "timeout");
-		}, timeout);
+				timedOut = true
+				callback(url, "timeout")
+		}, timeout)
 }

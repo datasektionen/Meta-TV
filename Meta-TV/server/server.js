@@ -36,10 +36,33 @@ Meteor.startup(function () {
 	}
 })
 
+Router.map(function() {
+	this.route('files', {
+		path: '/uploaded/:path',
+		where: 'server',
+		action: function() {
+				var path = this.params.path;
+				var basedir = "../../../../../../uploaded/";
+
+				console.log('will serve static content @ '+ path);
+
+				var file = fs.readFileSync(basedir + path);
+
+			/*var headers = {
+				'Content-type': 'image/png',
+				'Content-Disposition': "attachment; filename=" + path
+			};*/
+
+			this.response.writeHead(200/*, headers*/);
+			return this.response.end(file);
+		}
+	});
+});
+
 
 Meteor.methods({
 	"file-upload": function(info, data) {
-		var path = "../../../../../public/uploaded/" + info.name
+		var path = "../../../../../../uploaded/" + info.name
 		if(info.type.split("/")[0] == "image") {
 			fs.writeFileSync(path, new Buffer(data, 'binary'))
 		} else {

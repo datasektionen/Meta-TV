@@ -6,6 +6,9 @@
 		{{#if equals type "external img"}}
 			<img src="{{link}}">
 		{{/if}}
+		{{#if equals type "local img"}}
+			<img src="{{link}}">
+		{{/if}}
 		{{#if canhazedit}}
 			<textarea class="update_markdown" cols="30" rows="10">{{body}}</textarea>
 			<button class="update">Update</button>
