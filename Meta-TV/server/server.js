@@ -31,7 +31,7 @@ Meteor.startup(function () {
 			"type":"html",
 			"tags":["random"],
 			"createdBy":"blu@kth.se",
-			"body":"<iframe src=\"http://limbero.com/projects/metasl/\" style=\"width: 100%; height: 100vh; border: none;\"></iframe>"
+			"body":"<iframe src=\"http://limbero.com/projects/metasl/\" style=\"width: 100vw; height: 100vh; border: none;\"></iframe>"
 		})
 	}
 })

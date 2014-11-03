@@ -90,3 +90,15 @@ footer {
 .slides > article > img {
 	width: 14em;
 }
+
+.box {
+	width: 14em;
+	overflow: hidden;
+	max-height: 14em;
+	display: inline-block;
+}
+
+.box > * {
+	transform: scale(0.3);
+	transform-origin: 0 0;
+}
