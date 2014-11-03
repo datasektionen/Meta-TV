@@ -31,11 +31,15 @@
 	{{#each tagmode}}
 		<div class="tag">
 			{{tag}}
+			{{#if currentUser}}
 			<button class="remover">x</button>
+			{{/if}}
 		</div>
 	{{/each}}
-	<input class="adders" type="text">
-	<button>Add</button>
+	{{#if currentUser}}
+		<input class="adders" type="text">
+		<button>Add</button>
+	{{/if}}
 </template>
 
 <template name="slides">
