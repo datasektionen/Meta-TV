@@ -103,29 +103,33 @@ Accounts.config({
 	restrictCreationByEmailDomain: "kth.se"
 })
 
-function ok(userId, doc) {
+function loggedinAndOwned(userId, doc) {
 	var user = Meteor.users.findOne({_id: userId})
 	return user && (user.emails[0].address == doc.createdBy)
 }
 
+function loggedin(userId) {
+	return Boolean(userId)
+}
+
 slideshow.allow({
-	insert: ok,
-	remove: function(userId) { return Boolean(userId) },
-	update: ok
+	insert: loggedinAndOwned,
+	remove: loggedin,
+	update: loggedin
 })
 
 tagmode.allow({
-	insert: ok,
-	remove: function(userId) { return Boolean(userId) },
-	update: ok
+	insert: loggedinAndOwned,
+	remove: loggedin,
+	update: loggedinAndOwned
 })
 
 history.allow({
-	insert:function(userId) { return Boolean(userId) },
-	remove:function(){
+	insert: loggedin,
+	remove: function(){
 		return false
 	},
-	update:function(){
+	update: function(){
 		return false
 	}
 })
