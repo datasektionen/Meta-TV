@@ -38,20 +38,3 @@ function update() {
 }
 window.update = update
 setInterval(update, timeout * 1000)
-
-
-Template.slideshow.events({
-	"click .fullscreen": function() {
-		var elm = $(".content")[0]
-		console.log(elm)
-		if (elm.requestFullscreen) {
-			elm.requestFullscreen();
-		} else if (elm.msRequestFullscreen) {
-			elm.msRequestFullscreen();
-		} else if (elm.mozRequestFullScreen) {
-			elm.mozRequestFullScreen();
-		} else if (elm.webkitRequestFullscreen) {
-			elm.webkitRequestFullscreen();
-		}
-	}
-})

@@ -1,9 +1,4 @@
 <template name="slideshow">
-	<div class="hoverinfo">
-		<a href="#" class="fullscreen">Fullscreen</a><br>
-		<a href="/dashboard">Add slides</a>
-		<a href="/history">History</a>
-	</div>
 	{{#if equals current.type "html"}}
 		{{{current.body}}}
 	{{else}}

@@ -1,10 +1,11 @@
 <template name="dashboard">
-	<div class="login">
+	<div class="links">
 		{{#if currentUser}}
 			<a class="logout" href="#">Logout {{currentUser.username}}</a>
 		{{else}}
 			<a href="{{loginurl}}">KTH Login</a>
 		{{/if}}
+		<a href="/slideshow">Slideshow</a>
 	</div>
 	<div style="margin:4em;">
 		<div style="width:250px;
