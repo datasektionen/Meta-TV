@@ -92,6 +92,12 @@ footer {
 	width: 14em;
 }
 
+.login {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+}
+
 .box {
 	width: 14em;
 	overflow: hidden;

@@ -1,5 +1,11 @@
 <template name="dashboard">
-	{{> loginButtons align="right"}}
+	<div class="login">
+		{{#if currentUser}}
+			<a class="logout" href="#">Logout {{currentUser.username}}</a>
+		{{else}}
+			<a href="{{loginurl}}">KTH Login</a>
+		{{/if}}
+	</div>
 	<div style="margin:4em;">
 		<div style="width:250px;
 								float:right;

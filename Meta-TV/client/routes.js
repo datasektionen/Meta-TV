@@ -1,20 +1,21 @@
-Router.map(function() {
-	this.route('slideshow', {
-		path: '/',
+Router.route('/', function() {
+	this.render('slideshow', {
 		data: function() {
 			update()
 		}
 	})
-	this.route('history', {
-		path: '/history',
+})
+Router.route('/history', function() {
+	this.render('history', {
 		data: function() {
 			return {
 				history: history_log.find({}, {sort: {time:-1}})
 			}
 		}
 	})
-	this.route('dashboard', {
-		path: '/dashboard',
+})
+Router.route('/dashboard', function() {
+	this.render('dashboard', {
 		data: function() {
 			return {
 				slides: slideshow.find({}),
@@ -22,5 +23,11 @@ Router.map(function() {
 				tagmode: tagmode.find({})
 			}
 		}
+	})
+})
+
+Router.route('/login/:token', function() {
+	Meteor.loginWithKth(this.params.token, function() {
+		Router.go("/dashboard")
 	})
 })

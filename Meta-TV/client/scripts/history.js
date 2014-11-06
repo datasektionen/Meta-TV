@@ -4,11 +4,11 @@ Meteor.subscribe("history")
 Template.history.events({
 	"click .revert": function(){
 		if(this.action=="Removed slide"){
-			this.obj.createdBy = Meteor.user().emails[0].address
+			this.obj.createdBy = Meteor.user().username
 			slideshow.insert(this.obj)
 			history_log.insert({
 				action:"Added slide",
-				by:Meteor.user().emails[0].address,
+				by:Meteor.user().username,
 				time:Date.now(),
 				obj:this.obj,
 				tags:this.obj.tags
@@ -17,7 +17,7 @@ Template.history.events({
 			console.log("removing silde")
 			history_log.insert({
 				action:"Removed slide",
-				by:Meteor.user().emails[0].address,
+				by:Meteor.user().username,
 				time:Date.now(),
 				obj:this.obj,
 				tags:this.obj.tags
@@ -31,7 +31,7 @@ Template.history.events({
 			shallow_copy(obj_cp, curentObj.fetch()[0])
 			history_log.insert({
 				action:"Updated slide",
-				by:Meteor.user().emails[0].address,
+				by:Meteor.user().username,
 				time:Date.now(),
 				obj:obj_cp,
 				tags:obj_cp.tags

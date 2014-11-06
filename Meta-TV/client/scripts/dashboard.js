@@ -1,15 +1,32 @@
-Template._loginButtonsMessages.infoMessage = "@kth.se mail required"
+Template.dashboard.helpers({
+	loginurl: function() {
+		var callback = ""
+		callback += location.protocol + "//"
+		callback += location.hostname
+		if(location.port) {
+			callback += ":" + location.port
+		}
+		callback += "/login/"
+		return "http://login.datasektionen.se/login?callback=" + callback
+	}
+})
+
+Template.dashboard.events({
+	"click .logout": function() {
+		Meteor.logout()
+	}
+})
 
 Template.slide.events({
 	"click .remove": function() {
 		var obj_cp = {}
 		shallow_copy(obj_cp, this)
 		history_log.insert({
-			action:"Removed slide",
-			by:Meteor.user().emails[0].address,
-			time:Date.now(),
-			obj:obj_cp,
-			tags:obj_cp.tags
+			action: "Removed slide",
+			by: Meteor.user().username,
+			time: Date.now(),
+			obj: obj_cp,
+			tags: obj_cp.tags
 		})
 		slideshow.remove({_id: this._id})
 	},
@@ -25,7 +42,7 @@ Template.slide.events({
 		shallow_copy(obj_cp, this)
 		history_log.insert({
 			action:"Updated slide",
-			by:Meteor.user().emails[0].address,
+			by:Meteor.user().username,
 			time:Date.now(),
 			note:"obj represents the state of the slide before update",
 			obj:obj_cp
@@ -43,7 +60,7 @@ Template.tagfiltering.events({
 	"click button": function() {
 		tagmode.insert({
 			tag: $(".adders").val(),
-			createdBy: Meteor.user().emails[0].address // Yes it is checked on the server
+			createdBy: Meteor.user().username // Yes it is checked on the server
 		})
 		$(".adders").val("")
 	}

@@ -16,7 +16,7 @@ Meteor.publish("tagmode", function() {
 
 function loggedinAndOwned(userId, doc) {
 	var user = Meteor.users.findOne({_id: userId})
-	return user && (user.emails[0].address == doc.createdBy)
+	return user && (user.username == doc.createdBy)
 }
 
 function loggedin(userId) {
