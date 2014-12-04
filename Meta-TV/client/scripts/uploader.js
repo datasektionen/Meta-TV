@@ -115,12 +115,12 @@ var send_local_img = function(obj, report){
 
 	reader.onload = function(event) {
 		var sc_file = {
-			name: file.name,
+			name: file.name + (new Date).getTime(),
 			path: file.path,
 			type: file.type,
 			size: file.size
 		}
-		Meteor.call("file-upload", sc_file, reader.result, function() {
+		Meteor.call("file-upload", sc_file, reader.result, function(a) {
 			testImage("/uploaded/" + sc_file.name, function(url, result){
 				if(result == "success"){
 					obj.link = url
