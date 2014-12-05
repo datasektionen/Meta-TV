@@ -5,12 +5,11 @@ Router.map(function() {
 		path: '/uploaded/:path',
 		where: 'server',
 		action: function() {
-				var path = this.params.path;
-				var basedir = "../../../../../../uploaded/";
-				console.log('will serve static content @ '+ path);
-				var file = fs.readFileSync(basedir + path);
-			this.response.writeHead(200);
-			return this.response.end(file);
+				var path = this.params.path
+				var basedir = "../../../../../../uploaded/"
+				var file = fs.readFileSync(basedir + path)
+			this.response.writeHead(200)
+			return this.response.end(file)
 		}
 	});
 });
