@@ -1,9 +1,9 @@
 <template name="uploader">
 	{{#if currentUser}}
 		<table>
-			<tr>
+			<tr class="spaceUnder">
 				<td>Type</td>
-				<td>
+				<td style="text-align: right">
 					<select class="type">
 						<option value="external img">Link image</option>
 						<option value="local img">Upload image</option>
@@ -15,13 +15,13 @@
 			</tr>
 
 			{{#if isHTML}}
-				<tr>
+				<tr class="spaceUnder">
 					<td>HTML</td>
 					<textarea class="html" cols="80" rows="10" ></textarea>
 				</tr>
 			{{else}}
 				{{#if isMarkdown}}
-					<tr>
+					<tr class="spaceUnder">
 						<td>Bg image url</td>
 						<input class="link" type="text">
 					</tr><tr>
@@ -30,19 +30,19 @@
 					</tr>
 				{{else}}
 					{{#if isYoutube}}
-						<tr>
-							<td>Video id</td>
+						<tr class="spaceUnder">
+							<td align="right">Video id</td>
 							<input class="link" type="text">
 						</tr>
 					{{else}}
 						{{#if internal}}
-							<tr>
+							<tr class="spaceUnder">
 								<td>File</td>
 								<input class="file" type="file"/>
 								<td class="error"> {{internal_filetype_error}} </td>
 							</tr>
 						{{else}}
-							<tr>
+							<tr class="spaceUnder">
 								<td>Link</td>
 								<td>
 									<input class="link" type="text">
@@ -53,21 +53,21 @@
 					{{/if}}
 				{{/if}}
 			{{/if}}
-			<tr>
+			<tr class="spaceUnder">
 				<td>Expire</td>
-				<td>
-					<input class="expire" type="date">
+				<td style="text-align: right">
+					<input class="expire" style="width:175px" type="date">
 				</td>
 			</tr>
-			<tr>
+			<tr class="spaceUnder">
 				<td>Tags<br> (separated by white space)</td>
 				{{#if defoult_tag}}
-					<input class="tags" type="text" value="{{defoult_tag}}">
+					<input class="tags" style="vertical-align: right" type="text" value="{{defoult_tag}}">
 				{{else}}
-					<input class="tags" type="text" value="random">
+					<input class="tags" style="vertical-align: right" type="text" value="random">
 				{{/if}}
 			</tr>
-			<tr>
+			<tr class="spaceUnder">
 				<td>Only show when filter by tags<br> (Good for recurring event slides)</td>
 				<td><input class="hashtagonlyfilter" type="checkbox"></td>
 			</tr>

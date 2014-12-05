@@ -4,7 +4,6 @@
     min-height: 50%;
     bottom: 0;
     left: 0;
-    margin: auto;
     overflow: auto;
     position: fixed;
     right: 0;
@@ -31,11 +30,29 @@
 	background-color:rgba(0, 0, 0, 0.7);
 }
 
-.slides article table {
+.slides article {
 	margin-left: 2em;
+	width: 100%;
 	display: inline-block;
 }
 
-.slides > article > img {
+.box {
+	float:left;
+	width: 20%;
+}
+
+
+.slides imagehandler {
+
+	float: left;
+}
+
+.slides table {
+	margin-left: 35%;
+	text-align: left;
+	width: 60%;	
+}
+
+.slides > article > imagehandler > img {
 	width: 14em;
 }

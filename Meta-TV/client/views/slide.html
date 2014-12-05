@@ -1,5 +1,6 @@
 <template name="slide">
 	<article>
+		<imagehandler>
 		{{#if equals type "youtube"}}
 			<img src="http://img.youtube.com/vi/{{link}}/0.jpg">
 		{{/if}}
@@ -25,6 +26,7 @@
 				{{/if}}
 			{{/if}}
 		{{/if}}
+		</imagehandler>
 		<table>
 			<tr>
 				<td>id</td>

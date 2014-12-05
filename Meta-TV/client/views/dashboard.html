@@ -1,64 +1,76 @@
+
 <template name="dashboard">
-	<div class="links">
-		{{#if currentUser}}
-			<a class="logout" href="#">Logout {{currentUser.username}}</a>
-		{{else}}
+	<div class="main">
+		<div class="links">
+			{{#if currentUser}}
+			Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
+			{{else}}
 			<a href="{{loginurl}}">KTH Login</a>
-		{{/if}}
-		<a href="/slideshow">Slideshow</a>
-	</div>
-	<div style="margin:4em;">
-		<div style="width:250px;
-								float:right;
-								overflow:hidden;
-								">
-			<a href="/history"><h1>History</h1></a>
-			{{> history}}
+			{{/if}}
+			<a href="/slideshow">Slideshow</a>
+			<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
 		</div>
-		<h1>Slides</h1>
-		<div style="padding-right:20px;width:auto;position:relative;overflow:hidden;">
+
+		<div class="main_header">
+			<h1>META-TV</h1>
+		</div>
+
+		<div class="infotext">
+			Bacon ipsum dolor amet tri-tip cupim capicola, pork belly meatloaf kevin shoulder chicken t-bone filet mignon bacon pig cow pork loin. Kevin pork pig ball tip, t-bone salami turducken tail frankfurter pastrami. Pastrami short loin short ribs pork loin prosciutto brisket capicola sirloin. Meatloaf tongue pancetta andouille beef porchetta hamburger spare ribs. Tri-tip pork belly pastrami spare ribs cow ground round meatloaf leberkas. Prosciutto picanha t-bone alcatra tongue.
+			<br> <br>
+			Filet mignon kevin landjaeger ham hock, drumstick prosciutto chuck capicola pork belly cupim meatball. Sirloin salami corned beef pork belly, jerky prosciutto ground round pancetta brisket bacon short ribs cupim. Kevin shankle fatback kielbasa boudin chuck ball tip, chicken venison landjaeger pork loin short ribs leberkas pork corned beef. Meatloaf boudin beef, sausage biltong pork chop filet mignon flank prosciutto cupim frankfurter bacon. Jowl sirloin rump, tongue hamburger pork belly ground round frankfurter. Chuck kevin ham hock alcatra drumstick swine fatback prosciutto turkey. Brisket fatback shankle, sausage pork porchetta pork loin leberkas turducken.
+		</div>
+
+		<div class="slide_handler">
+			<h2 id="h2_slides">Slides</h2>
+			<h2 id="h2_history"><a href="/history">History</a></h2>
+			<br>
 			{{> slides}}
 		</div>
-		<h1>Add</h1>
-		{{> uploader}}
-		<div class="tagfilteringstuff">
+
+		<div class="adder">
+			<h2 id="h2_add">Add</h2>
+			{{> uploader}}
+		</div>
+
+
+		<div class="tagfilter">
+			<h2>Filter by tags</h2>
 			{{> tagfiltering}}
 		</div>
-		<div class="Policy">
-			<h1>Policy</h1>
-			<p>All KTH students can post their own slides and or remove others. Please no NSFW. Everythings is logged. I SEE YOU and will PERMA BAN anyone who misuses this service. Please do not spread the link everywhere. And BTW when we are at it, I take no responsibility bla bla very legal binding...</p>
+
+		<div class="fot">
+			{{> footer}}
 		</div>
-		{{> footer}}
 	</div>
 </template>
 
 <template name="tagfiltering">
-	<h1>Tag filtering</h1>
 	Will reset automagically at 05:00 every day.
 	{{#each tagmode}}
-		<div class="tag">
-			{{tag}}
-			{{#if currentUser}}
-			<button class="remover">x</button>
-			{{/if}}
-		</div>
+	<div class="tag">
+		{{tag}}
+		{{#if currentUser}}
+		<button class="remover">x</button>
+		{{/if}}
+	</div>
 	{{/each}}
 	{{#if currentUser}}
-		<input class="adders" type="text">
-		<button>Add</button>
+	<input class="adders" type="text">
+	<button>Add</button>
 	{{/if}}
 </template>
 
 <template name="slides">
 	<div class="slides">
 		{{#each slides}}
-			{{> slide}}
+		{{> slide}}
 		{{/each}}
 	</div>
 </template>
 
 <template name="footer">
 	<footer>
-		Created by <a href="mailto:anlinn@kth.se">Andreas Linn</a> and Daniil Pintjuk in like 2 hours, so don't complain. If you want to complain do so here: https://github.com/sootn/Meta-TV/issues. Contributions in form of pull requests are welcome.
+		Created by Andreas Linn and Daniil Pintjuk. Modified by Marcus Heine. Maintained by Ior. (2014)
 	</footer>
 </template>
