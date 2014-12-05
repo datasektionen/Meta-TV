@@ -3,7 +3,7 @@
 		<table>
 			<tr class="spaceUnder">
 				<td>Type</td>
-				<td style="text-align: right">
+				<td style="text-align: center">
 					<select class="type">
 						<option value="external img">Link image</option>
 						<option value="local img">Upload image</option>
@@ -17,7 +17,7 @@
 			{{#if isHTML}}
 				<tr class="spaceUnder">
 					<td>HTML</td>
-					<textarea class="html" cols="80" rows="10" ></textarea>
+					<textarea class="html" cols="23" rows="4" ></textarea>
 				</tr>
 			{{else}}
 				{{#if isMarkdown}}
@@ -26,19 +26,21 @@
 						<input class="link" type="text">
 					</tr><tr>
 						<td>Markdown</td>
-						<textarea class="markdown" cols="80" rows="10" ></textarea>
+						<textarea class="markdown" cols="23" rows="4" ></textarea>
 					</tr>
 				{{else}}
 					{{#if isYoutube}}
 						<tr class="spaceUnder">
-							<td align="right">Video id</td>
+							<td>Video id</td>
+							<td>
 							<input class="link" type="text">
+							</td>
 						</tr>
 					{{else}}
 						{{#if internal}}
 							<tr class="spaceUnder">
 								<td>File</td>
-								<input class="file" type="file"/>
+								<td style="text-align: right"> <input class="file" type="file"/> </td>
 								<td class="error"> {{internal_filetype_error}} </td>
 							</tr>
 						{{else}}
@@ -61,11 +63,13 @@
 			</tr>
 			<tr class="spaceUnder">
 				<td>Tags<br> (separated by white space)</td>
+				<td style="text-align: right">
 				{{#if defoult_tag}}
 					<input class="tags" style="vertical-align: right" type="text" value="{{defoult_tag}}">
 				{{else}}
 					<input class="tags" style="vertical-align: right" type="text" value="random">
 				{{/if}}
+				</td>
 			</tr>
 			<tr class="spaceUnder">
 				<td>Only show when filter by tags<br> (Good for recurring event slides)</td>
