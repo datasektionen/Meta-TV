@@ -42,8 +42,19 @@
 }
 
 
-.slides imagehandler {
+.content {
+	margin-left: auto;
+	margin-right: auto;
+}
 
+.down_marked_content {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.html_body {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .slides table {
