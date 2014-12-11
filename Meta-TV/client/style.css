@@ -1,3 +1,9 @@
+
+a:link {color:#3b5998;}
+a:visited {color:#3b5998;} 
+a:hover {color:#888888;} 
+a:active {color:#3b5998;}
+
 body {
 	background-color: black;
 	color: white;
@@ -124,9 +130,9 @@ tr.spaceUnder > td
 }
 
 .fot {
+	clear: both;
 	text-align: center;
-	padding-top: 30%;
-	margin-top: 80px;
+	padding-top: 20px;
 	color: #444444;
 	font-size: 65%;
 }
