@@ -1,0 +1,12 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+standard-app-packages
+mrt:normalize.css@2.0.1
+mrt:collection-hooks@0.7.2
+showdown
+iron:router
+http
+accounts-base

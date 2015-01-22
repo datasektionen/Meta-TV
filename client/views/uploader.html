@@ -1,0 +1,86 @@
+<template name="uploader">
+	{{#if currentUser}}
+		<table>
+			<tr class="spaceUnder">
+				<td>Type</td>
+				<td style="text-align: left">
+					<select class="type">
+						<option value="external img">Link to image</option>
+						<option value="local img">Upload image</option>
+						<option value="youtube">Youtube</option>
+						<option value="markdown">Markdown</option>
+						<option value="html">HTML</option>
+					</select>
+				</td>
+			</tr>
+
+			{{#if isHTML}}
+				<tr class="spaceUnder">
+					<td>HTML</td>
+					<textarea class="html" cols="23" rows="4" ></textarea>
+				</tr>
+			{{else}}
+				{{#if isMarkdown}}
+					<tr class="spaceUnder">
+						<td>Bg image url</td>
+						<input class="link" type="text">
+					</tr><tr>
+						<td>Markdown</td>
+						<textarea class="markdown" cols="23" rows="4" ></textarea>
+					</tr>
+				{{else}}
+					{{#if isYoutube}}
+						<tr class="spaceUnder">
+							<td>Video id</td>
+							<td>
+							<input class="link" type="text">
+							</td>
+						</tr>
+					{{else}}
+						{{#if internal}}
+							<tr class="spaceUnder">
+								<td>File</td>
+								<td> <input class="file" type="file"/> </td>
+								<td class="error"> {{internal_filetype_error}} </td>
+							</tr>
+						{{else}}
+							<tr class="spaceUnder">
+								<td>Link</td>
+								<td style="vertical-align: left">
+									<input class="link" type="text">
+								</td>
+								<td class="error">{{link_input_error}}</td>
+							</tr>
+						{{/if}}
+					{{/if}}
+				{{/if}}
+			{{/if}}
+			<tr class="spaceUnder">
+				<td>Expire</td>
+				<td style="text-align: left">
+					<input class="expire" style="width:175px" type="date">
+				</td>
+			</tr>
+			<tr class="spaceUnder">
+				<td>Tags<br> (separated by white space)</td>
+				<td style="text-align: left">
+				{{#if defoult_tag}}
+					<input class="tags" style="vertical-align: left" type="text" value="{{defoult_tag}}">
+				{{else}}
+					<input class="tags" style="vertical-align: left" type="text" value="random">
+				{{/if}}
+				</td>
+			</tr>
+			<tr class="spaceUnder">
+				<td>Only show when filter by tags<br> (Good for recurring event slides)</td>
+				<td><input class="hashtagonlyfilter" type="checkbox"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="send">Send</button>
+				</td>
+			</tr>
+		</table>
+	{{/if}}
+</template>
