@@ -8,8 +8,6 @@ syncStream = new Meteor.Stream('sync');
 
 var cursor = []
 
-var timeout = 30 // s
-
 Template.slideshow.helpers({
 	current: function() {
 		return Session.get("current")
