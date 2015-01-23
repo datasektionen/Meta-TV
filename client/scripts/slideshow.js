@@ -4,6 +4,8 @@ Meteor.subscribe("slideshow")
 tagmode = new Meteor.Collection("tagmode")
 Meteor.subscribe("tagmode")
 
+syncStream = new Meteor.Stream('sync');
+
 var cursor = []
 
 var timeout = 30 // s
@@ -14,27 +16,15 @@ Template.slideshow.helpers({
 	}
 })
 
-function update() {
-	if(cursor.length === 0) {
-		var tags = []
-		var tagsobjs = tagmode.find({}).fetch()
-		tagsobjs.forEach(function(tag) {
-			tags.push(tag.tag)
-		})
-		console.log(tags)
-		if(tags.length != 0) {
-			console.log("haztags")
-			cursor = slideshow.find({tags:{$in:tags}}).fetch()
-		} else {
-			console.log("notagz")
-			cursor = slideshow.find({
-				onlywhenfiltering: {
-					$ne: true
-				}
-			}).fetch()
-		}
+
+/* On space, flip slide for all listeners */
+$( window ).bind("keypress", function(evt) {
+	if(evt.keyCode == 32) {
+		syncStream.emit("flip", "");
 	}
-	Session.set("current", cursor.pop())
-}
-window.update = update
-setInterval(update, timeout * 1000)
+})
+
+
+syncStream.on('tick', function(message) {
+	Session.set("current", message)
+});
