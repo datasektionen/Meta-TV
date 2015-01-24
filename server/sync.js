@@ -51,7 +51,7 @@ function next() {
 			}).fetch()
 		}
 	}
-	return cursor.pop()._id
+	return [cursor.pop()._id, new Date().getTime() + 1500]
 }
 
 

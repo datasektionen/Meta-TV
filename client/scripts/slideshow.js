@@ -27,6 +27,7 @@ $( window ).bind("keypress", function(evt) {
 function update(newId) {
 	if( (counter++) % num_flips_without_refresh == 0) {
 		cursor = slideshow.find({}).fetch()
+		TimeSync.resync()
 	}
 
 	var next;
@@ -48,5 +49,12 @@ function update(newId) {
 window.update = update
 
 syncStream.on('tick', function(message) {
-	update(message)
+
+	var syncedTime = Tracker.nonreactive(TimeSync.serverTime);
+	var timeToSwitch = message[1] - syncedTime
+	timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime)();
+
+	setTimeout(function() {
+		update(message[0])
+	}, timeToSwitch);
 });
