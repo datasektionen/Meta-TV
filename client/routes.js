@@ -23,7 +23,7 @@ Router.route("/history", function() {
 Router.route("/slideshow", function() {
 	this.render("slideshow", {
 		data: function() {
-			//update()
+			update()
 		}
 	})
 })

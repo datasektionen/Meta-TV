@@ -51,7 +51,7 @@ function next() {
 			}).fetch()
 		}
 	}
-	return cursor.pop()
+	return cursor.pop()._id
 }
 
 
