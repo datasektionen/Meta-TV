@@ -52,7 +52,7 @@ syncStream.on('tick', function(message) {
 
 	var syncedTime = Tracker.nonreactive(TimeSync.serverTime);
 	var timeToSwitch = message[1] - syncedTime
-	timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime)();
+	timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime) / 2;
 
 	setTimeout(function() {
 		update(message[0])
