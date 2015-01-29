@@ -4,9 +4,10 @@ Meteor.subscribe("slideshow")
 tagmode = new Meteor.Collection("tagmode")
 Meteor.subscribe("tagmode")
 
-var cursor = []
+syncStream = new Meteor.Stream('sync');
 
-var timeout = 30 // s
+var cursor = [], counter = 0;
+var num_flips_without_refresh = 5;
 
 Template.slideshow.helpers({
 	current: function() {
@@ -14,27 +15,46 @@ Template.slideshow.helpers({
 	}
 })
 
-function update() {
-	if(cursor.length === 0) {
-		var tags = []
-		var tagsobjs = tagmode.find({}).fetch()
-		tagsobjs.forEach(function(tag) {
-			tags.push(tag.tag)
-		})
-		console.log(tags)
-		if(tags.length != 0) {
-			console.log("haztags")
-			cursor = slideshow.find({tags:{$in:tags}}).fetch()
-		} else {
-			console.log("notagz")
-			cursor = slideshow.find({
-				onlywhenfiltering: {
-					$ne: true
-				}
-			}).fetch()
-		}
+
+/* On space, flip slide for all listeners */
+$( window ).bind("keypress", function(evt) {
+	if(evt.keyCode == 32) {
+		syncStream.emit("flip", "");
 	}
-	Session.set("current", cursor.pop())
+})
+
+
+function update(newId) {
+	if( (counter++) % num_flips_without_refresh == 0) {
+		cursor = slideshow.find({}).fetch()
+		TimeSync.resync()
+	}
+
+	var next;
+	if (newId) {
+		next = _.where(cursor, {_id: newId})
+	} else {
+		next = [cursor[counter % cursor.length]] 
+	}
+
+	if(next.length == 0) {
+		// retry once
+		cursor = slideshow.find({}).fetch()
+		next = _.where(cursor, {_id: newId})
+	}
+
+	Session.set("current", next[0])
 }
+
 window.update = update
-setInterval(update, timeout * 1000)
+
+syncStream.on('tick', function(message) {
+
+	var syncedTime = Tracker.nonreactive(TimeSync.serverTime);
+	var timeToSwitch = message[1] - syncedTime
+	timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime) / 2;
+
+	setTimeout(function() {
+		update(message[0])
+	}, timeToSwitch);
+});
