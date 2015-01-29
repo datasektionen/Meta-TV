@@ -3,8 +3,6 @@ META TV
 
 Hacky application for displaying news and stuff running on the monitors where we eat lunch.
 
-Created by: Daniil Pinjuk and Andreas Linn
-
 Setup
 
 	http://nodejs.org/
