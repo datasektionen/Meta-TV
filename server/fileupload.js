@@ -6,7 +6,7 @@ Router.map(function() {
 		where: 'server',
 		action: function() {
 				var path = this.params.path
-				var basedir = "../../../../../../uploaded/"
+				var basedir = "../../../../../uploaded/"
 				var file = fs.readFileSync(basedir + path)
 			this.response.writeHead(200)
 			return this.response.end(file)
@@ -17,7 +17,7 @@ Router.map(function() {
 
 Meteor.methods({
 	"file-upload": function(info, data) {
-		var path = "../../../../../../uploaded/" + info.name
+		var path = "../../../../../uploaded/" + info.name
 		if(info.type.split("/")[0] == "image") {
 			fs.writeFileSync(path, new Buffer(data, 'binary'))
 		} else {
