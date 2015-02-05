@@ -5,12 +5,11 @@ Hacky application for displaying news and stuff running on the monitors where we
 
 Setup
 
-	http://nodejs.org/
-	install meteor https://www.meteor.com/
+	installera meteor (https://www.meteor.com/)
+
 	git clone https://github.com/sootn/Meta-TV.git
 	cd Meta-TV/
-	meteor install
-	meteor run
+	meteor
 	open http://localhost:3000
 	
 Log
