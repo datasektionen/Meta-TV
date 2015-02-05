@@ -17,7 +17,7 @@ Template.slideshow.helpers({
 
 
 /* On space, flip slide for all listeners */
-$( window ).bind("keypress", function(evt) {
+$( window ).bind("keyup", function(evt) {
 	if(evt.keyCode == 32) {
 		syncStream.emit("flip", "");
 	}
