@@ -9,10 +9,10 @@ Meteor.startup(function () {
 			tags: ["2"]
 		})
 		slideshow.insert({
-			"type":"html",
-			"tags":["random"],
+			"type":"website",
+			"tags":["sl", "random"],
 			"createdBy":"blu@kth.se",
-			"body":"<iframe src=\"http://limbero.com/projects/metasl/\" style=\"width: 100vw; height: 100vh; border: none;\"></iframe>"
+			"link":"http://limbero.com/projects/metasl/"
 		})
 	}
 })

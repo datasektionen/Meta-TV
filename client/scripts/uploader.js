@@ -25,6 +25,9 @@ Template.uploader.helpers({
 	isHTML: function(){
 		return Session.get("type") == "html"
 	},
+	isWebsite: function() {
+		return Session.get("type") == "website"
+	},
 	internal_filetype_error: function() {
 		return Session.get("internal_filetype_error") || ""
 	},
@@ -100,6 +103,11 @@ Template.uploader.events({
 				var _id = slideshow.insert(obj)
 				report(true, _id)
 				break
+			case "website":
+				obj.link=$(".link").val()
+				var _id = slideshow.insert(obj)
+				report(true, _id)
+			break
 		}
 	}
 })
