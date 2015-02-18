@@ -9,6 +9,8 @@ syncStream = new Meteor.Stream('sync');
 var cursor = [], counter = 0;
 var num_flips_without_refresh = 5;
 
+var current;
+
 Template.slideshow.helpers({
 	current: function() {
 		return Session.get("current")
@@ -25,25 +27,12 @@ $( window ).bind("keyup", function(evt) {
 
 
 function update(newId) {
-	if( (counter++) % num_flips_without_refresh == 0) {
-		cursor = slideshow.find({}).fetch()
-		TimeSync.resync()
+	if (current) {
+		current.fadeOut()
 	}
 
-	var next;
-	if (newId) {
-		next = _.where(cursor, {_id: newId})
-	} else {
-		next = [cursor[counter % cursor.length]] 
-	}
-
-	if(next.length == 0) {
-		// retry once
-		cursor = slideshow.find({}).fetch()
-		next = _.where(cursor, {_id: newId})
-	}
-
-	Session.set("current", next[0])
+	current = $("[data-id=" + newId + "]")
+	current.fadeIn()
 }
 
 window.update = update
@@ -51,10 +40,10 @@ window.update = update
 syncStream.on('tick', function(message) {
 
 	var syncedTime = Tracker.nonreactive(TimeSync.serverTime);
-	var timeToSwitch = message[1] - syncedTime
+	var timeToSwitch = message.switchtime - syncedTime
 	timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime) / 2;
 
 	setTimeout(function() {
-		update(message[0])
+		update(message[channel])
 	}, timeToSwitch);
 });
