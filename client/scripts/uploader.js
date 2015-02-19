@@ -57,7 +57,8 @@ Template.uploader.events({
 			type: $(".type").val(),
 			tags:$(".tags").val().split(" "),
 			createdBy: Meteor.user().username,
-			onlywhenfiltering: $(".hashtagonlyfilter").is(":checked")
+			onlywhenfiltering: $(".hashtagonlyfilter").is(":checked"),
+			channel: $(".channel").val()
 		}
 		var date = new Date(Date.parse($(".expire").val()))
 

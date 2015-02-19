@@ -28,6 +28,18 @@ Router.route("/slideshow", function() {
 	})
 })
 
+Router.route("/slideshow/:channel", function() {
+	this.render("slideshow", {
+		data: function() {
+
+			channel = this.params.channel
+			return {
+				slides: slideshow.find({channel:this.params.channel})
+			}
+		}
+	})
+})
+
 // Old way
 Router.route("/dashboard", function() {
 	Router.go("/")
