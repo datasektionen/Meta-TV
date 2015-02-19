@@ -23,7 +23,10 @@ Router.route("/history", function() {
 Router.route("/slideshow", function() {
 	this.render("slideshow", {
 		data: function() {
-			update()
+			channel = 0;
+			return {
+				slides: slideshow.find({})
+			}
 		}
 	})
 })
