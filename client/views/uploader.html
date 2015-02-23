@@ -11,6 +11,7 @@
 						<option value="markdown">Markdown</option>
 						<option value="html">HTML</option>
 						<option value="website">Website</option>
+						<option value="video">HTML5 Video</option>
 					</select>
 				</td>
 			</tr>
@@ -70,13 +71,24 @@
 								<td class="error"> {{internal_filetype_error}} </td>
 							</tr>
 						{{else}}
-							<tr class="spaceUnder">
-								<td>Link</td>
-								<td style="vertical-align: left">
+
+							{{#if isVideo}}
+								<tr class="spaceUnder">
+									<td>Video-file link</td>
+									<td>
 									<input class="link" type="text">
-								</td>
-								<td class="error">{{link_input_error}}</td>
-							</tr>
+									</td>
+								</tr>
+							{{else}}
+									
+								<tr class="spaceUnder">
+									<td>Link</td>
+									<td style="vertical-align: left">
+										<input class="link" type="text">
+									</td>
+									<td class="error">{{link_input_error}}</td>
+								</tr>
+							{{/if}}
 						{{/if}}
 					{{/if}}
 				{{/if}}
