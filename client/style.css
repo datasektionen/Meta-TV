@@ -166,3 +166,9 @@ tr.spaceUnder > td
 	transform: scale(0.3);
 	transform-origin: 0 0;
 }
+
+.overview-bg {
+	height: 100%;
+	width:100%;
+	background-color: #FFF;
+}
