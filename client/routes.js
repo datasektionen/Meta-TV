@@ -43,6 +43,10 @@ Router.route("/slideshow/:channel", function() {
 	})
 })
 
+Router.route("/overview", function() {
+	this.render("overview")
+})
+
 // Old way
 Router.route("/dashboard", function() {
 	Router.go("/")
