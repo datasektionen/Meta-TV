@@ -28,6 +28,9 @@ Template.uploader.helpers({
 	isWebsite: function() {
 		return Session.get("type") == "website"
 	},
+	isVideo: function() {
+		return Session.get("type") == "video"
+	},
 	internal_filetype_error: function() {
 		return Session.get("internal_filetype_error") || ""
 	},
@@ -86,6 +89,7 @@ Template.uploader.events({
 			case "local img":
 				send_local_img(obj, report)
 				break
+			case "video":
 			case "youtube":
 				// TODO: add video id validation, and error handling
 				obj.link=$(".link").val()

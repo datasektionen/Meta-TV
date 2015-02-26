@@ -28,11 +28,25 @@ $( window ).bind("keyup", function(evt) {
 
 function update(newId) {
 	if (current) {
-		current.fadeOut()
+		current.hide()
+		try {
+			var v = $("video", current).get(0)
+			v.pause()
+		} catch(e) {}
 	}
 
 	current = $("[data-id=" + newId + "]")
-	current.fadeIn()
+	current.show()
+
+	try {
+		var v = $("video", current).get(0)
+		v.load()
+		setTimeout(function() {
+			v.play()
+		}, 400);
+
+	} catch(e) {}
+
 }
 
 window.update = update

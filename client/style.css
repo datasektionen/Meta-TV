@@ -4,9 +4,14 @@ a:visited {color:#3b5998;}
 a:hover {color:#888888;} 
 a:active {color:#3b5998;}
 
+html{
+	height: 100%;
+}
+
 body {
 	background-color: black;
 	color: white;
+	height: 100%;
 }
 
 button {
@@ -24,9 +29,7 @@ button {
 
 body:hover > .hoverinfo {
 	opacity: 1;
-
 }
-
 
 .main {
 	color: #FFFFFF;
@@ -88,7 +91,10 @@ body:hover > .hoverinfo {
 	float:right;
 }
 
-
+iframe {
+	overflow: hidden;
+	border: none;
+}
 
 .tagfilter {
 	text-align: center;
@@ -157,4 +163,10 @@ tr.spaceUnder > td
 .box > * {
 	transform: scale(0.3);
 	transform-origin: 0 0;
+}
+
+.overview-bg {
+	height: 100%;
+	width:100%;
+	background-color: #333;
 }

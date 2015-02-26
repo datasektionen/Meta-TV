@@ -18,17 +18,24 @@
 				<div class="content">
 				{{#if equals type "youtube"}}
 					<iframe width="100%" height="100%"
-					src="//www.youtube.com/embed/{{link}}?autoplay=1&showinfo=0&controls=0"
-					frameborder="0" allowfullscreen>
+					src="//www.youtube.com/embed/{{link}}?autoplay=1&showinfo=0&controls=0&loop=1&modestbranding=1"
+					frameborder="0" allowfullscreen seamless="seamless" scrolling="no">
 					</iframe>
 				{{else}}
 					{{#if equals type "website"}}
-						<iframe src="{{link}}" style="width: 100vw; height: 100vh; border: none;">
+						<iframe src="{{link}}" style="width: 100vw; height: 100vh;" seamless="seamless" scrolling="no">
 				
 						</iframe>
 
 					{{else}}
-						<img src="{{link}}">
+						{{#if equals type "video"}}
+							<video style="width: 100vw; height: 100vh;" loop>
+								<source src="{{link}}" />
+							</video>
+
+						{{else}}
+							<img src="{{link}}">
+						{{/if}}
 					{{/if}}
 				{{/if}}
 				</div>
