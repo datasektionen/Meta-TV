@@ -9,9 +9,12 @@ html{
 }
 
 body {
-	background-color: black;
-	color: white;
+	background-image: url("http://www.datasektionen.se/images/background.png");
+	/*background-color: black;*/
+	color: black;
 	height: 100%;
+	width: 960px;
+	margin: auto;
 }
 
 button {
@@ -32,7 +35,7 @@ body:hover > .hoverinfo {
 }
 
 .main {
-	color: #FFFFFF;
+	color: #000000;
 
 	padding-top: 5px;
     padding-right: 20px;
@@ -43,13 +46,13 @@ body:hover > .hoverinfo {
 }
 
 .main_header {
-	background-color: #111111;
+
 	
 	text-align: center;
 	margin-top: 40px;
 
-	border: 2px solid;
-    border-radius: 25px;
+	
+
 }
 
 .infotext {
@@ -59,13 +62,14 @@ body:hover > .hoverinfo {
 	text-align: left;
 	margin-top: 15px;
 
-	padding-top: 5px;
+	padding-top: 30px;
     padding-right: 20px;
     padding-bottom: 5px;
     padding-left: 20px;
 
-	border: 2px solid;
-    border-radius: 25px;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+
 }
 
 .infotext .important {
@@ -74,7 +78,7 @@ body:hover > .hoverinfo {
 
 .slide_handler {
 
-	background-color: #111111;
+	
 
 	margin-top: 15px;
 
@@ -83,8 +87,6 @@ body:hover > .hoverinfo {
     padding-bottom: 5px;
     padding-left: 20px;
 
-    border: 2px solid;
-    border-radius: 25px;
 
 }
 
@@ -103,7 +105,7 @@ iframe {
 
 .tagfilter {
 	text-align: center;
-	background-color: #111111;
+	
 	float: right;
 	width: 43%;
 	height: 30%;
@@ -114,13 +116,11 @@ iframe {
     padding-bottom: 55px;
     padding-left: 20px;
 
-   	border: 2px solid;
-    border-radius: 25px;
 }
 
 .adder {
 	float: left;
-	background-color: #111111;
+	
 	width: 43%;
 	height: 60%;
 
@@ -130,8 +130,7 @@ iframe {
     padding-left: 20px;
 
 	margin-top: 15px;
-    border: 2px solid;
-    border-radius: 25px;
+
 }
 
 
