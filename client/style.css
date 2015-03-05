@@ -1,7 +1,7 @@
 
-a:link {color:#3b5998;}
-a:visited {color:#3b5998;} 
-a:hover {color:#888888;} 
+a:link {color:#e2007f; text-decoration: none;}
+a:visited {color:#e2007f;} 
+a:hover {text-decoration: underline;} 
 a:active {color:#3b5998;}
 
 html{
@@ -10,10 +10,10 @@ html{
 
 body {
 	background-image: url("http://www.datasektionen.se/images/background.png");
-	/*background-color: black;*/
 	color: black;
 	height: 100%;
 	width: 960px;
+	font-family: Georgia, Times, 'Times New Roman', serif;
 	margin: auto;
 }
 
@@ -24,7 +24,6 @@ button {
 	padding-right: 10px;
 	font-size: 80%;
 	line-height: 1.5;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	border: 1px solid #464f75;
 	border-radius: 4px;
 	color: #fff;
@@ -34,6 +33,13 @@ body:hover > .hoverinfo {
 	opacity: 1;
 }
 
+h3 {
+	margin-bottom: 0.1em;
+}
+p {
+margin-top: 0.5em;
+
+}
 .main {
 	color: #000000;
 
@@ -56,8 +62,6 @@ body:hover > .hoverinfo {
 }
 
 .infotext {
-	background-color: #111111;
-	font-family: Georgia, Times, 'Times New Roman', serif;
 
 	text-align: left;
 	margin-top: 15px;
@@ -104,12 +108,13 @@ iframe {
 }
 
 .tagfilter {
-	text-align: center;
+	text-align: left;
 	
 	float: right;
 	width: 43%;
 	height: 30%;
 	margin-top: 15px;
+
 
 	padding-top: 5px;
     padding-right: 20px;
@@ -120,7 +125,7 @@ iframe {
 
 .adder {
 	float: left;
-	
+
 	width: 43%;
 	height: 60%;
 
