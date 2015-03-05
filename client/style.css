@@ -56,9 +56,10 @@ body:hover > .hoverinfo {
 }
 
 .infotext {
-	
+	background-color: #111111;
+	font-family: Georgia, Times, 'Times New Roman', serif;
 
-	text-align: center;
+	text-align: left;
 	margin-top: 15px;
 
 	padding-top: 30px;
