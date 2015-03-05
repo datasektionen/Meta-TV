@@ -76,8 +76,13 @@ margin-top: 0.5em;
 
 }
 
+h3.important {
+	text-decoration: underline;
+}
+
 .infotext .important {
-	color: red;
+	color: black;
+	font-weight: bold;
 }
 
 .slide_handler {
