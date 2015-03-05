@@ -67,6 +67,10 @@ body:hover > .hoverinfo {
     border-radius: 25px;
 }
 
+.infotext .important {
+	color: red;
+}
+
 .slide_handler {
 
 	background-color: #111111;

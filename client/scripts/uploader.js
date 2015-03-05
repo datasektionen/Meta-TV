@@ -121,6 +121,13 @@ var send_local_img = function(obj, report){
 	var file = $(".file")[0].files[0]
 	var reader = new FileReader()
 
+	var alkfrittalternativ = confirm("Lade du upp en bild med \"reklam\" för alkohol? Du glömde väl i så fall inte att göra reklam för ett alkfritt alternativ? " + 
+		'\n' + '\n' + "Ha en trevlig kväll!")
+
+	if(alkfrittalternativ == false) {
+		return
+	}
+
 	if(file.type.split("/")[0] != "image") {
 		Session.set("link_input_error", "(ಥ~ಥ)This file type is not suported!")
 		return
