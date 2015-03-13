@@ -4,13 +4,16 @@ a:visited {color:#e2007f;}
 a:hover {text-decoration: underline;} 
 a:active {color:#3b5998;}
 
-html{
+html {
 	height: 100%;
 }
 
-body {
+.wrapper {
 	background-image: url("http://www.datasektionen.se/images/background.png");
-	color: black;
+	width: 100%;
+}
+
+.main {
 	height: 100%;
 	width: 960px;
 	font-family: Georgia, Times, 'Times New Roman', serif;

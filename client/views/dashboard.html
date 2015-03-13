@@ -1,64 +1,66 @@
 
 <template name="dashboard">
-	<div class="main">
-		<div class="links">
-			{{#if currentUser}}
-			Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
-			{{else}}
-			<a href="{{loginurl}}">KTH Login</a>
-			{{/if}}
-			View Channel: 
-				<a href="/slideshow/1">1</a>
-				<a href="/slideshow/2">2</a>
-				<a href="/slideshow/3">3</a>
-				<a href="/slideshow/4">4</a>
-				<a href="/slideshow/5">5</a>
-			<a href="/overview">Overview</a>
-			<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
-		</div>
+	<div class="wrapper">
+		<div class="main">
+			<div class="links">
+				{{#if currentUser}}
+				Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
+				{{else}}
+				<a href="{{loginurl}}">KTH Login</a>
+				{{/if}}
+				View Channel: 
+					<a href="/slideshow/1">1</a>
+					<a href="/slideshow/2">2</a>
+					<a href="/slideshow/3">3</a>
+					<a href="/slideshow/4">4</a>
+					<a href="/slideshow/5">5</a>
+				<a href="/overview">Overview</a>
+				<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
+			</div>
 
-		<div class="main_header">
-			<h1>META-TV</h1>
-		</div>
+			<div class="main_header">
+				<h1>META-TV</h1>
+			</div>
 
-		<div class="infotext">
-			This is the control panel for the META-TV. To get started log in to your KTH-account in the top right. You will then be able to upload content to the TV by using the form at the bottom of this page. 
-			<br><br>
-			<h3> Tags</h3>
-			<p>Tags can be used to filter the content during events or other special occasions. Simply tag your content with the tag, if you only want it to be shown only when you're filtering the content for the tag check the box. Then simply filter for the tag to only show your content.</p>
-			<h3>Markdown</h3>
-			<p>The META-TV allows for usage of markdown for formating text. A basic guide can be found <a href="http://en.wikipedia.org/wiki/Markdown"> here </a>.</p>
+			<div class="infotext">
+				This is the control panel for the META-TV. To get started log in to your KTH-account in the top right. You will then be able to upload content to the TV by using the form at the bottom of this page. 
+				<br><br>
+				<h3> Tags</h3>
+				<p>Tags can be used to filter the content during events or other special occasions. Simply tag your content with the tag, if you only want it to be shown only when you're filtering the content for the tag check the box. Then simply filter for the tag to only show your content.</p>
+				<h3>Markdown</h3>
+				<p>The META-TV allows for usage of markdown for formating text. A basic guide can be found <a href="http://en.wikipedia.org/wiki/Markdown"> here </a>.</p>
 
-			<h3>Channels</h3>
-			<p>Channels are used to separate what content are displayed on what screen. Channel 1 is played on the leftmost screen.</p>
+				<h3>Channels</h3>
+				<p>Channels are used to separate what content are displayed on what screen. Channel 1 is played on the leftmost screen.</p>
 
-			<h3>Basic rules</h3>
-			<p class="important">No harassments. Nothing extremely inappropriate. If you upload a picture with an alchohol offer, make sure to also upload an alcohol free one!<!--Inga trakasserier. Inget extremt olämpligt. Och lägger du upp en bild med alkoholerbjudande, tänkt på att lägga upp ett erbjudande med alkfritt också!-->
+				<h3>Basic rules</h3>
+				<p class="important">No harassments. Nothing extremely inappropriate. If you upload a picture with an alchohol offer, make sure to also upload an alcohol free one!<!--Inga trakasserier. Inget extremt olämpligt. Och lägger du upp en bild med alkoholerbjudande, tänkt på att lägga upp ett erbjudande med alkfritt också!-->
 
-			</p>
+				</p>
 
-		</div>
+			</div>
 
-		<div class="slide_handler">
-			<h2 id="h2_slides">Slides</h2>
-			<h2 id="h2_history"><a href="/history">History</a></h2>
-			<br>
-			{{> slides}}
-		</div>
+			<div class="slide_handler">
+				<h2 id="h2_slides">Slides</h2>
+				<h2 id="h2_history"><a href="/history">History</a></h2>
+				<br>
+				{{> slides}}
+			</div>
 
-		<div class="adder">
-			<h2 id="h2_add">Add</h2>
-			{{> uploader}}
-		</div>
+			<div class="adder">
+				<h2 id="h2_add">Add</h2>
+				{{> uploader}}
+			</div>
 
 
-		<div class="tagfilter">
-			<h2>Filter by tags</h2>
-			{{> tagfiltering}}
-		</div>
+			<div class="tagfilter">
+				<h2>Filter by tags</h2>
+				{{> tagfiltering}}
+			</div>
 
-		<div class="fot">
-			{{> footer}}
+			<div class="fot">
+				{{> footer}}
+			</div>
 		</div>
 	</div>
 </template>
