@@ -58,6 +58,6 @@ syncStream.on('tick', function(message) {
 	timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime) / 2;
 
 	setTimeout(function() {
-		update(message[channel])
+		update(message[_screen])
 	}, timeToSwitch);
 });

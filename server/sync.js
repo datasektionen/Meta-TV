@@ -23,15 +23,17 @@ syncStream.on("flip", function (message) {
 	}
 })
 
-var timeout = 30 // s
+var timeout = 30 * 1000 // ms
 
-var counter = 0;
-var sync_interval;
+var counter = 0
+var sync_interval
+const NUM_SCREENS = 15
+const SWITCH_DELAY = 5 * 1000 // ms
 
 function start_interval() {
 	sync_interval = Meteor.setInterval(function() {
 	    syncStream.emit('tick', next());
-	}, timeout * 1000);
+	}, timeout);
 }
 
 function reset_interval() {
@@ -49,12 +51,10 @@ function next() {
 		tagsobjs.forEach(function(tag) {
 			tags.push(tag.tag)
 		})
-		console.log(tags)
+
 		if(tags.length != 0) {
-			console.log("haztags")
 			cursor = slideshow.find({tags:{$in:tags}}).fetch()
 		} else {
-			console.log("notagz")
 			cursor = slideshow.find({
 				onlywhenfiltering: {
 					$ne: true
@@ -62,28 +62,30 @@ function next() {
 			}).fetch()
 		}
 
-		var grouping = [];
-
-		for (var i in cursor) {
-			var ch = cursor[i].channel ? cursor[i].channel : 0
-			if (grouping.length < ch || grouping[ch] == undefined) {
-				grouping[ch] = [cursor[i]]
-			} else {
-				grouping[ch].push(cursor[i]);
-			}
-		}
+		var slide = cursor[counter % cursor.length]
 
 		var retval = {
 			switchtime: new Date().getTime() + 5000
 		}
 
-		for (var i = 0; i < grouping.length; i++) {
-			if (grouping[i]) {
-				retval[i] = grouping[i][counter % grouping[i].length]._id
-			}
-			
-		}
+		if (slide.pages.length > 1) {
+			/* 
+			Several pages. Show page 1 on screen 1 etc.
+			*/
+			for (var i = 0; i < NUM_SCREENS; i++)
+				retval[i] = "" // Fill empty screens
 
+			for (var i in slide.pages) {
+				var page = slide.pages[i]
+				retval[page.screen] = page._id.toHexString()
+			}
+
+		} else {
+			// Single page. Repeat on each screen.
+			for (var i = 0; i < NUM_SCREENS; i++)
+				retval[i] = slide.pages[0]._id.toHexString()
+		}
+	
 		return retval
 	}
 
