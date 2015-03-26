@@ -1,0 +1,35 @@
+<template name="page">
+
+
+	<div >
+
+		<imagehandler>
+		{{#if equals type "youtube"}}
+			<img src="http://img.youtube.com/vi/{{link}}/0.jpg">
+		{{/if}}
+		{{#if equals type "external img"}}
+			<img src="{{link}}">
+		{{/if}}
+		{{#if equals type "local img"}}
+			<img src="{{link}}">
+		{{/if}}
+		{{#if canhazedit}}
+			<textarea class="update_markdown" cols="30" rows="10">{{body}}</textarea>
+			<button class="update">Update</button>
+		{{else}}
+			{{#if equals type "html"}}
+				<div class="box">
+					{{{body}}}
+				</div>
+			{{else}}
+				{{#if equals type "markdown"}}
+					<div class="box">
+						{{#markdown}}{{body}}{{/markdown}}
+					</div>
+				{{/if}}
+			{{/if}}
+		{{/if}}
+		</imagehandler>
+
+	</div>
+</template>

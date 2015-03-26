@@ -4,7 +4,7 @@ a:visited {color:#e2007f;}
 a:hover {text-decoration: underline;} 
 a:active {color:#3b5998;}
 
-html {
+html, body {
 	height: 100%;
 }
 
@@ -182,4 +182,9 @@ tr.spaceUnder > td
 	height: 100%;
 	width:100%;
 	background-color: #333;
+}
+
+.slides-wrapper {
+	overflow: hidden;
+	height: 100%;
 }

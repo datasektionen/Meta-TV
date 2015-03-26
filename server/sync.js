@@ -16,7 +16,7 @@ syncStream.permissions.read(function(eventName) {
 syncStream.on("flip", function (message) {
 	if (this.userId) {
 		reset_interval()
-		var n = next()
+		var n = next(0)
 		syncStream.emit('tick', n)
 		console.log(n)
 		console.log(this.userId + " flipped slide")
@@ -32,7 +32,7 @@ const SWITCH_DELAY = 5 * 1000 // ms
 
 function start_interval() {
 	sync_interval = Meteor.setInterval(function() {
-	    syncStream.emit('tick', next());
+	    syncStream.emit('tick', next(SWITCH_DELAY));
 	}, timeout);
 }
 
@@ -43,7 +43,7 @@ function reset_interval() {
 
 start_interval()
 
-function next() {
+function next(switch_delay) {
 		counter++;
 		var tags = []
 		var cursor;
@@ -65,7 +65,7 @@ function next() {
 		var slide = cursor[counter % cursor.length]
 
 		var retval = {
-			switchtime: new Date().getTime() + 5000
+			switchtime: new Date().getTime() + switch_delay
 		}
 
 		if (slide.pages.length > 1) {
