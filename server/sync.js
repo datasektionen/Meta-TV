@@ -49,12 +49,9 @@ function next() {
 		tagsobjs.forEach(function(tag) {
 			tags.push(tag.tag)
 		})
-		console.log(tags)
 		if(tags.length != 0) {
-			console.log("haztags")
 			cursor = slideshow.find({tags:{$in:tags}}).fetch()
 		} else {
-			console.log("notagz")
 			cursor = slideshow.find({
 				onlywhenfiltering: {
 					$ne: true
