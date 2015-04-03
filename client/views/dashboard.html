@@ -52,8 +52,12 @@
 			</div>
 
 			<div class="adder">
-				<h2 id="h2_add">Add</h2>
+				{{> addSlides}}
+
+			</div>
+			<div class="adder">
 				{{> uploader}}
+
 			</div>
 
 
@@ -98,3 +102,38 @@
 		Created by Andreas Linn and Daniil Pintjuk. Modified by Marcus Heine. Maintained by Ior. (2014)
 	</footer>
 </template>
+
+<template name="addSlides">
+	<h2 id="h2_add">Add Slide</h2>
+
+	<table>
+		<tr class="spaceUnder">
+			<td>Slide Name</td>
+			<td><input name="name" type="text" id="txtName" /></td>
+		</tr>
+		<tr class="spaceUnder">
+			<td>Expire</td>
+			<td><input class="expire" style="width:175px" type="datetime-local" id="expire"></td>
+		</tr>
+		<tr class="spaceUnder">
+			<td>Tags</td>
+			<td>
+				{{#if defoult_tag}}
+				<input class="tags" style="vertical-align: left" type="text" value="{{defoult_tag}}" id="tags">
+				{{else}}
+				<input class="tags" style="vertical-align: left" type="text" value="random" id="tags">
+				{{/if}}
+			</td>
+		</tr>
+		<tr class="spaceUnder">
+			<td>Only show when filter by tags<br> (Good for recurring event slides)</td>
+			<td><input class="hashtagonlyfilter" type="checkbox"></td>
+		</tr>
+		<tr class="spaceUnder">
+			<td></td>
+			<td>
+				<button value="Create" class="createSlide" >Pelle</button>
+			</td>
+		</tr>
+	</table>
+</template> 

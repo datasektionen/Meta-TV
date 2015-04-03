@@ -14,6 +14,40 @@ Template.dashboard.helpers({
 Template.dashboard.events({
 	"click .logout": function() {
 		Meteor.logout()
+	},
+
+	"click .createSlide": function(event) {
+
+		var obj = {
+			name: $("#txtName").val(),
+			tags:$("#tags").val().split(" "),
+			createdBy: Meteor.user().username,
+			onlywhenfiltering: $(".hashtagonlyfilter").is(":checked")
+		}
+
+		var date = new Date(Date.parse($("#expire").val()))
+
+		if(date != "Invalid Date") {
+			obj.expire = date
+		}
+
+		var report = function(success, identifier){
+			if(success){
+				var obj_cp = {_id: identifier}
+				shallow_copy(obj_cp, obj)
+				history_log.insert({
+					action: "Added slide",
+					by: obj_cp.createdBy,
+					time: Date.now(),
+					obj: obj_cp,
+					tags: obj_cp.tags
+				})
+			}
+		}
+
+		var _id = slideshow.insert(obj)
+		report(true, _id)
+		
 	}
 })
 

@@ -3,7 +3,7 @@
 	<div class="slides-wrapper">
 	{{#each slides}}
 		{{#each pages}}
-			<div class="slide" data-id="{{_id.toHexString}}" style="display:none">
+			<div class="slide" data-id="{{_id}}" style="display:none">
 			{{#if equals type "html"}}
 				<div class="html_body">
 					{{{body}}}

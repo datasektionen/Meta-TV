@@ -23,17 +23,17 @@ syncStream.on("flip", function (message) {
 	}
 })
 
-var timeout = 30 * 1000 // ms
+const TIMEOUT = 30 * 1000 // ms
+const NUM_SCREENS = 15
+const SWITCH_DELAY = 5 * 1000 // ms
 
 var counter = 0
 var sync_interval
-const NUM_SCREENS = 15
-const SWITCH_DELAY = 5 * 1000 // ms
 
 function start_interval() {
 	sync_interval = Meteor.setInterval(function() {
 	    syncStream.emit('tick', next(SWITCH_DELAY));
-	}, timeout);
+	}, TIMEOUT);
 }
 
 function reset_interval() {
@@ -68,7 +68,11 @@ function next(switch_delay) {
 		switchtime: new Date().getTime() + switch_delay
 	}
 
-	if (slide.pages.length > 1) {
+	if (!slide.pages) {
+
+		// What do we do here? TODO
+
+	} else if (slide.pages.length > 1) {
 		/* 
 		Several pages. Show page 1 on screen 1 etc.
 		*/
@@ -77,13 +81,13 @@ function next(switch_delay) {
 
 		for (var i in slide.pages) {
 			var page = slide.pages[i]
-			retval[page.screen] = page._id.toHexString()
+			retval[page.screen] = page._id
 		}
 
 	} else {
 		// Single page. Repeat on each screen.
 		for (var i = 0; i < NUM_SCREENS; i++)
-			retval[i] = slide.pages[0]._id.toHexString()
+			retval[i] = slide.pages[0]._id
 	}
 
 	return retval

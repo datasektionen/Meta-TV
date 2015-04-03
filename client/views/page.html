@@ -39,12 +39,18 @@
 			<tr>
 				<td>Screen</td>
 				<td>
-					
-					<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" data-page-id="{{_id.toHexString}}"/></td>
+					{{#if currentUser}}
+					<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" />
+					{{/if}}
+				</td>
 			</tr>
 			<tr>
 				<td>Link</td>
 				<td>{{link}}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button class="remove">Remove</button></td>
 			</tr>
 		</table>
 

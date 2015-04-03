@@ -3,6 +3,10 @@
 
 		<table>
 			<tr>
+				<td>Name</td>
+				<td>{{name}}</td>
+			</tr>
+			<tr>
 				<td>id</td>
 				<td>{{_id}}</td>
 			</tr>
@@ -53,9 +57,13 @@
 			</tr>
 		</table>
 
-		{{#each pages}}
-			{{> page}}
-		{{/each}}
+		{{#if pages}}
+			{{#each pages}}
+				{{> page}}
+			{{/each}}
+		{{else}}
+			<em>No pages! create at least one</em>
+		{{/if}}
 
 	</article>
 	<hr>

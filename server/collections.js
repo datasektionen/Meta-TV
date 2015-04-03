@@ -44,3 +44,28 @@ history.allow({
 		return false
 	}
 })
+
+Meteor.methods({
+	setScreen: function(pageId, screenId) {
+		if (! Meteor.userId()) {
+      		throw new Meteor.Error("not-authorized");
+    	}
+
+		slideshow.update({"pages._id": pageId},
+			{$set: {"pages.$.screen": screenId}})
+	},
+
+	insertSlide: function(slideId, obj) {
+		console.log(obj)
+		console.log(slideId)
+
+		slideshow.update({_id: slideId}, {$push:{pages:obj}})
+	},
+
+	removePage: function(pageId) {
+		console.log(pageId)
+
+		slideshow.update({"pages._id": pageId},
+			{$pull: {"pages": {_id: pageId}}})
+	}
+})
