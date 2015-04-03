@@ -21,7 +21,7 @@ Template.uploader.helpers({
 	},
 	isMarkdown: function() {
 		return Session.get("type") == "markdown"
-	},
+	}, 
 	isHTML: function(){
 		return Session.get("type") == "html"
 	},

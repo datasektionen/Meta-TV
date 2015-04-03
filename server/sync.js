@@ -44,49 +44,49 @@ function reset_interval() {
 start_interval()
 
 function next(switch_delay) {
-		counter++;
-		var tags = []
-		var cursor;
-		var tagsobjs = tagmode.find({}).fetch()
-		tagsobjs.forEach(function(tag) {
-			tags.push(tag.tag)
-		})
-
-		if(tags.length != 0) {
-			cursor = slideshow.find({tags:{$in:tags}}).fetch()
-		} else {
-			cursor = slideshow.find({
-				onlywhenfiltering: {
-					$ne: true
-				}
-			}).fetch()
-		}
-
-		var slide = cursor[counter % cursor.length]
-
-		var retval = {
-			switchtime: new Date().getTime() + switch_delay
-		}
-
-		if (slide.pages.length > 1) {
-			/* 
-			Several pages. Show page 1 on screen 1 etc.
-			*/
-			for (var i = 0; i < NUM_SCREENS; i++)
-				retval[i] = "" // Fill empty screens
-
-			for (var i in slide.pages) {
-				var page = slide.pages[i]
-				retval[page.screen] = page._id.toHexString()
-			}
-
-		} else {
-			// Single page. Repeat on each screen.
-			for (var i = 0; i < NUM_SCREENS; i++)
-				retval[i] = slide.pages[0]._id.toHexString()
-		}
+	counter++;
+	var tags = []
+	var cursor;
+	var tagsobjs = tagmode.find({}).fetch()
+	tagsobjs.forEach(function(tag) {
+		tags.push(tag.tag)
+	})
 	
-		return retval
+	if(tags.length != 0) {
+		cursor = slideshow.find({tags:{$in:tags}}).fetch()
+	} else {
+		cursor = slideshow.find({
+			onlywhenfiltering: {
+				$ne: true
+			}
+		}).fetch()
 	}
+
+	var slide = cursor[counter % cursor.length]
+
+	var retval = {
+		switchtime: new Date().getTime() + switch_delay
+	}
+
+	if (slide.pages.length > 1) {
+		/* 
+		Several pages. Show page 1 on screen 1 etc.
+		*/
+		for (var i = 0; i < NUM_SCREENS; i++)
+			retval[i] = "" // Fill empty screens
+
+		for (var i in slide.pages) {
+			var page = slide.pages[i]
+			retval[page.screen] = page._id.toHexString()
+		}
+
+	} else {
+		// Single page. Repeat on each screen.
+		for (var i = 0; i < NUM_SCREENS; i++)
+			retval[i] = slide.pages[0]._id.toHexString()
+	}
+
+	return retval
+}
 
 
