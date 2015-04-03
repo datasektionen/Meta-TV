@@ -1,7 +1,7 @@
 <template name="page">
 
 
-	<div >
+	<div class="clearfloat" >
 
 		<imagehandler>
 		{{#if equals type "youtube"}}
@@ -31,5 +31,24 @@
 		{{/if}}
 		</imagehandler>
 
+		<table>
+			<tr>
+				<td>Type</td>
+				<td>{{type}}</td>
+			</tr>
+			<tr>
+				<td>Screen</td>
+				<td>
+					
+					<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" data-page-id="{{_id.toHexString}}"/></td>
+			</tr>
+			<tr>
+				<td>Link</td>
+				<td>{{link}}</td>
+			</tr>
+		</table>
+
+
+		
 	</div>
 </template>

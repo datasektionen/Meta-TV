@@ -188,3 +188,8 @@ tr.spaceUnder > td
 	overflow: hidden;
 	height: 100%;
 }
+
+.clearfloat {
+	overflow: hidden;
+	width: 100%;
+}
