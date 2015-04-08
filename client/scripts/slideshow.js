@@ -17,14 +17,11 @@ Template.slideshow.helpers({
 	}
 })
 
-
-/* On space, flip slide for all listeners */
-$( window ).bind("keyup", function(evt) {
-	if(evt.keyCode == 32) {
-		syncStream.emit("flip", "");
+Template.slideshow.events({
+	"click .slides-wrapper": function (event) {
+		syncStream.emit("flip", "")
 	}
 })
-
 
 function update(newId) {
 	if (current) {
