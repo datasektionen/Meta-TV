@@ -1,6 +1,17 @@
 <template name="uploader">
 	{{#if currentUser}}
+	<h2>Add page</h2>
 		<table>
+			<tr class="spaceUnder">
+				<td>Parent slide</td>
+				<td style="text-align: left">
+					<select class="parentSlide">
+						{{#each slides}}
+							<option value="{{_id}}">{{name}}</option>
+						{{/each}}
+					</select>
+				</td>
+			</tr>
 			<tr class="spaceUnder">
 				<td>Type</td>
 				<td style="text-align: left">
@@ -17,7 +28,7 @@
 			</tr>
 
 			<tr class="spaceUnder">
-				<td>Channel</td>
+				<td>Screen</td>
 				<td style="text-align: left">
 					
 					<select class="channel">
@@ -35,6 +46,7 @@
 						<optgroup label="Jumbotrons">
 							<option value="10">Jumbotron One</option>
 							<option value="11">Jumbotron Two</option>
+							<option value="12">Blimp</option>
 						</optgroup>
 					</select>
 				</td>
@@ -93,30 +105,10 @@
 					{{/if}}
 				{{/if}}
 			{{/if}}
-			<tr class="spaceUnder">
-				<td>Expire (mm/dd/yyyy hh:mm)</td>
-				<td style="text-align: left">
-					<input class="expire" style="width:175px" type="datetime-local">
-				</td>
-			</tr>
-			<tr class="spaceUnder">
-				<td>Tags<br> (separated by white space)</td>
-				<td style="text-align: left">
-				{{#if defoult_tag}}
-					<input class="tags" style="vertical-align: left" type="text" value="{{defoult_tag}}">
-				{{else}}
-					<input class="tags" style="vertical-align: left" type="text" value="random">
-				{{/if}}
-				</td>
-			</tr>
-			<tr class="spaceUnder">
-				<td>Only show when filter by tags<br> (Good for recurring event slides)</td>
-				<td><input class="hashtagonlyfilter" type="checkbox"></td>
-			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<button class="send">Send</button>
+					<button class="send">Upload</button>
 				</td>
 			</tr>
 		</table>

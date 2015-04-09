@@ -1,0 +1,60 @@
+<template name="page">
+
+
+	<div class="clearfloat" >
+
+		<imagehandler>
+		{{#if equals type "youtube"}}
+			<img src="http://img.youtube.com/vi/{{link}}/0.jpg">
+		{{/if}}
+		{{#if equals type "external img"}}
+			<img src="{{link}}">
+		{{/if}}
+		{{#if equals type "local img"}}
+			<img src="{{link}}">
+		{{/if}}
+		{{#if canhazedit}}
+			<textarea class="update_markdown" cols="30" rows="10">{{body}}</textarea>
+			<button class="update">Update</button>
+		{{else}}
+			{{#if equals type "html"}}
+				<div class="box">
+					{{{body}}}
+				</div>
+			{{else}}
+				{{#if equals type "markdown"}}
+					<div class="box">
+						{{#markdown}}{{body}}{{/markdown}}
+					</div>
+				{{/if}}
+			{{/if}}
+		{{/if}}
+		</imagehandler>
+
+		<table>
+			<tr>
+				<td>Type</td>
+				<td>{{type}}</td>
+			</tr>
+			<tr>
+				<td>Screen</td>
+				<td>
+					{{#if currentUser}}
+					<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" />
+					{{/if}}
+				</td>
+			</tr>
+			<tr>
+				<td>Link</td>
+				<td>{{link}}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button class="remove">Remove</button></td>
+			</tr>
+		</table>
+
+
+		
+	</div>
+</template>

@@ -23,7 +23,7 @@ Router.route("/history", function() {
 Router.route("/slideshow", function() {
 	this.render("slideshow", {
 		data: function() {
-			channel = 0;
+			_screen = 0;
 			return {
 				slides: slideshow.find({})
 			}
@@ -31,13 +31,13 @@ Router.route("/slideshow", function() {
 	})
 })
 
-Router.route("/slideshow/:channel", function() {
+Router.route("/slideshow/:screeen", function() {
 	this.render("slideshow", {
 		data: function() {
 
-			channel = this.params.channel
+			_screen = this.params.screeen
 			return {
-				slides: slideshow.find({channel:this.params.channel})
+				slides: slideshow.find({})
 			}
 		}
 	})
