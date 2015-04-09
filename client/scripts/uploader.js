@@ -28,7 +28,10 @@ Template.uploader.helpers({
 	},
 	internal: function() {
 		return Session.get("type") == "local img"
-	}
+	},
+	uploading: function() {
+		return Session.get("is_loading") && Session.get("type") == "local img"
+	},
 })
 
 Template.slide.helpers({
@@ -94,6 +97,8 @@ var send_local_img = function(obj, slide){
 		return
 	}
 
+	Session.set("is_loading", true)
+
 	reader.onload = function(event) {
 		var sc_file = {
 			name: file.name + (new Date).getTime(),
@@ -105,6 +110,7 @@ var send_local_img = function(obj, slide){
 			obj.link = "/uploaded/" + sc_file.name
 			var _id = Meteor.call("insertSlide", slide, obj)
 			$(".file").val("")
+			Session.set("is_loading", false)
 		})
 	}
 	reader.onerror = function(e) {

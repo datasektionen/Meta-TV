@@ -52,7 +52,6 @@
 				</td>
 			</tr>
 
-
 			{{#if isHTML}}
 				<tr class="spaceUnder">
 					<td>HTML</td>
@@ -108,7 +107,11 @@
 			<tr>
 				<td></td>
 				<td>
-					<button class="send">Upload</button>
+					{{#if uploading}}
+						Uploading, please wait...
+					{{else}}
+						<button class="send">Upload</button>
+					{{/if}}
 				</td>
 			</tr>
 		</table>
