@@ -116,7 +116,7 @@
 			<td><input name="name" type="text" id="txtName" /></td>
 		</tr>
 		<tr class="spaceUnder">
-			<td>Expire</td>
+			<td>Expire*</td>
 			<td><input class="expire" style="width:175px" type="datetime-local" id="expire"></td>
 		</tr>
 		<tr class="spaceUnder">
@@ -140,6 +140,7 @@
 			</td>
 		</tr>
 	</table>
+	<p>* You have to enter a correct time AND date. Otherwise it will be set to never. Blame HTML5 4.10.7.1.8</p>
 	{{else}}
 	<p>You need to log in to add slides</p>
 	{{/if}}
