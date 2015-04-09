@@ -1,18 +1,7 @@
-var send_external_img = function(obj, report, slide){
-	testImage($(".link").val(), function(url, result){
-		if(result=="success"){
-			obj.link = url
-			Meteor.call("insertSlide", slide, obj)
-			$(".link").val("")
-			report(true)
-		}else if (result=="error"){
-			var _id = Session.set("link_input_error", "(╯°Д°)╯ This is not an URL to a supported image format!!!")
-			report(false, _id)
-		}else if (result=="timeout"){
-			var _id = Session.set("internal_filetype_error", "ʕ๑◞◟๑ʔ Time out?!!")
-			report(false, _id)
-		}
-	})
+var send_external_img = function(obj, slide){
+	obj.link = $(".link").val()
+	Meteor.call("insertSlide", slide, obj)
+	$(".link").val("")
 }
 
 Template.uploader.helpers({
@@ -65,27 +54,12 @@ Template.uploader.events({
 
 		var slide = $(".parentSlide").val();
 
-		/*var report = function(success, identifier){
-			if(success){
-				var obj_cp = {_id: identifier}
-				shallow_copy(obj_cp, obj)
-				history_log.insert({
-					action: "Added slide",
-					by: obj_cp.createdBy,
-					time: Date.now(),
-					obj: obj_cp,
-					tags: obj_cp.tags
-				})
-			}
-		}*/
-		var report = function (a,b) {}
-
 		switch (obj.type) {
 			case "external img":
-				send_external_img(obj, report, slide)
+				send_external_img(obj, slide)
 				break
 			case "local img":
-				send_local_img(obj, report, slide)
+				send_local_img(obj, slide)
 				break
 			case "video":
 			case "youtube":
@@ -93,29 +67,25 @@ Template.uploader.events({
 				obj.link=$(".link").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
 				$(".link").val("")
-				report(true, _id)
 				break
 			case "markdown":
 				obj.body=$(".markdown").val()
 				obj.link=$(".link").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
-				report(true, _id)
 				break
 			case "html":
 				obj.body=$(".html").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
-				report(true, _id)
 				break
 			case "website":
 				obj.link=$(".link").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
-				report(true, _id)
 			break
 		}
 	}
 })
 
-var send_local_img = function(obj, report, slide){
+var send_local_img = function(obj, slide){
 	var file = $(".file")[0].files[0]
 	var reader = new FileReader()
 
@@ -132,43 +102,13 @@ var send_local_img = function(obj, report, slide){
 			size: file.size
 		}
 		Meteor.call("file-upload", sc_file, reader.result, function(a) {
-			testImage("/uploaded/" + sc_file.name, function(url, result){
-				if(result == "success"){
-					obj.link = url
-					var _id = Meteor.call("insertSlide", slide, obj)
-					$(".file").val("")
-					report(true, _id)
-				} else {
-					Session.set("internal_filetype_error", "Do not want!!")
-				}
-			})
+			obj.link = "/uploaded/" + sc_file.name
+			var _id = Meteor.call("insertSlide", slide, obj)
+			$(".file").val("")
 		})
 	}
 	reader.onerror = function(e) {
 		Session.set("internal_filetype_error", "You file error!" + e)
 	}
 	reader.readAsBinaryString(file)
-}
-
-function testImage(url, callback, timeout) {
-		timeout = timeout || 5000
-		var timedOut = false, timer
-		var img = new Image()
-		img.onerror = img.onabort = function() {
-			if (!timedOut) {
-				clearTimeout(timer)
-				callback(url, "error")
-			}
-		}
-		img.onload = function() {
-			if (!timedOut) {
-				clearTimeout(timer)
-				callback(url, "success")
-			}
-		}
-		img.src = url
-		timer = setTimeout(function() {
-				timedOut = true
-				callback(url, "timeout")
-		}, timeout)
 }
