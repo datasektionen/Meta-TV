@@ -4,7 +4,6 @@ var Future = Npm.require('fibers/future')
 Accounts.registerLoginHandler("kth", function(loginRequest) {
 	var future = new Future
 	var url = "http://login.datasektionen.se/verify/" + loginRequest.token + ".json"
-	console.log("calling", url)
 	Meteor.http.call("GET", url, function(err, data) {
 		if(err) {
 			console.error(err)
@@ -23,7 +22,6 @@ Accounts.registerLoginHandler("kth", function(loginRequest) {
 			})
 		} else {
 			url = "http://www.csc.kth.se/hacks/new/xfinger/results.php?freetext=" + usomething
-			console.log("calling", url)
 			Meteor.http.call("GET", url, function(err, data) {
 				if(err) {
 					console.error(err)

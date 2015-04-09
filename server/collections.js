@@ -56,15 +56,10 @@ Meteor.methods({
 	},
 
 	insertSlide: function(slideId, obj) {
-		console.log(obj)
-		console.log(slideId)
-
 		slideshow.update({_id: slideId}, {$push:{pages:obj}})
 	},
 
 	removePage: function(pageId) {
-		console.log(pageId)
-
 		slideshow.update({"pages._id": pageId},
 			{$pull: {"pages": {_id: pageId}}})
 	}

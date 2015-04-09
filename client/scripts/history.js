@@ -14,7 +14,6 @@ Template.history.events({
 				tags:this.obj.tags
 			})
 		} else if(this.action=="Added slide"){
-			console.log("removing silde")
 			history_log.insert({
 				action:"Removed slide",
 				by:Meteor.user().username,
