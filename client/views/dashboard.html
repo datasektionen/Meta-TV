@@ -88,6 +88,8 @@
 	{{#if currentUser}}
 	<input class="adders" type="text">
 	<button>Add</button>
+	{{else}}
+	<p>You need to log in to filter by tags</p>
 	{{/if}}
 </template>
 
@@ -107,7 +109,7 @@
 
 <template name="addSlides">
 	<h2 id="h2_add">Add Slide</h2>
-
+	{{#if currentUser}}
 	<table>
 		<tr class="spaceUnder">
 			<td>Slide Name</td>
@@ -138,4 +140,7 @@
 			</td>
 		</tr>
 	</table>
+	{{else}}
+	<p>You need to log in to add slides</p>
+	{{/if}}
 </template> 
