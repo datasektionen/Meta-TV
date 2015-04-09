@@ -1,18 +1,24 @@
 Meteor.startup(function () {
 	// Sample data
 	if (slideshow.find().count() == 0) {
-		slideshow.insert({		// Should be removed on first cleanup
-			type: "external img",
-			link: "http://placekitten.com/1920/1080",
-			expire: new Date(Date.parse("2012-05-12")),
-			createdBy: "anlinn@kth.se",
-			tags: ["2"]
-		})
-		slideshow.insert({
-			"type":"website",
-			"tags":["sl", "random"],
-			"createdBy":"blu@kth.se",
-			"link":"http://limbero.com/projects/metasl/"
+		console.log("Inserting sample data")
+		slideshow.insert({  
+			"_id":"aLTtLyH5Yo7iPMLKB",
+			"name":"test",
+			"tags":[  
+				"random"
+			],
+			"createdBy": "anlinn",
+			"onlywhenfiltering": false,
+			"pages":[
+				{
+					"_id":"be9ab7857129d0709824d21d",
+					"type":"external img",
+					"createdBy":"anlinn",
+					"screen":"1",
+					"link":"http://placekitten.com/1200/800"
+				}
+			]
 		})
 	}
 })
