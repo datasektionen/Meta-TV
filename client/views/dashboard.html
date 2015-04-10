@@ -1,10 +1,9 @@
 
 <template name="dashboard">
-	<div class="wrapper">
-		<div class="main">
+	<div class="main">
 			<div class="links">
 				{{#if currentUser}}
-				Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
+					Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
 				{{else}}
 				<a href="{{loginurl}}">KTH Login</a>
 				{{/if}}
@@ -23,61 +22,62 @@
 			</div>
 
 			<div class="infotext">
-				This is the control panel for the META-TV. To get started log in to your KTH-account in the top right. You will then be able to upload content to the TV by using the form at the bottom of this page.
-				<br><br>
+				<p>
+					This is the control panel for the META-TV. To get started log in to your KTH-account in the top right. You will then be able to upload content to the TV by using the form at the bottom of this page.
+				</p>
 				<h3>Slides/Pages</h3>
-				When uploading something new you first create a slide, you can then add one or multiple pages to the slides, the pages will be shown simultaneously across the screens on the screens you specify.
+				<p>
+					When uploading something new you first create a slide, you can then add one or multiple pages to the slides, the pages will be shown simultaneously across the screens on the screens you specify.
+				</p>
 				<h3>Tags</h3>
-				<p>Tags can be used to filter the content during events or other special occasions. Simply tag your content with the tag, if you only want it to be shown only when you're filtering the content for the tag check the box. Then simply filter for the tag to only show your content.</p>
+				<p>
+					Tags can be used to filter the content during events or other special occasions. Simply tag your content with the tag, if you only want it to be shown only when you're filtering the content for the tag check the box. Then simply filter for the tag to only show your content.
+				</p>
 				<h3>Markdown</h3>
-				<p>The META-TV allows for usage of markdown for formating text. A basic guide can be found <a href="http://en.wikipedia.org/wiki/Markdown"> here </a>.</p>
-
+				<p>
+					The META-TV allows for usage of markdown for formating text. A basic guide can be found <a href="http://en.wikipedia.org/wiki/Markdown"> here </a>.
+				</p>
 				<h3>Channels</h3>
-				<p>Channels are used to separate what content are displayed on what screen. Channel 1 is played on the leftmost screen.</p>
-
+				<p>
+					Channels are used to separate what content are displayed on what screen. Channel 1 is played on the leftmost screen.
+				</p>
 				<h3>Basic rules</h3>
 				<p class="important">
 					<ul>
 						<li>No harassments.</li>
 						<li>Nothing extremely inappropriate.</li>
-						<li>If you upload a picture with an alchohol offer, make sure to also upload an alcohol free one!</li>
+						<li>Slides containg commercial for alcoholic beverages should always contain alcohol free alternatives.</li>
 					</ul>
 				</p>
-
 			</div>
 
 			<div class="slide_handler">
 				<h2 id="h2_slides">Slides</h2>
-				<h2 id="h2_history"><a href="/history">History</a></h2>
-				<br>
+				<h2 id="h2_history">
+					<a href="/history">History</a>
+				</h2>
 				{{> slides}}
 			</div>
-
-			<div class="adder">
-				{{> addSlides}}
-
-			</div>
-			<div class="adder">
-				{{> uploader}}
-
-			</div>
-
-
-			<div class="tagfilter">
-				<h2>Filter by tags</h2>
-				{{> tagfiltering}}
 			<div class="new_slide">
+				<div class="adder">
+					{{> addSlides}}
+				</div>
+				<div class="adder">
+					{{> uploader}}
+				</div>
+				<div class="tagfilter">
+					{{> tagfiltering}}
 				</div>
 			</div>
 
 			<div class="fot">
 				{{> footer}}
 			</div>
-		</div>
 	</div>
 </template>
 
 <template name="tagfiltering">
+	<h2>Filter by tags</h2>
 	Will reset automagically at 05:00 every day.
 	{{#each tagmode}}
 	<div class="tag">
@@ -142,7 +142,7 @@
 			</td>
 		</tr>
 	</table>
-	<p>* You have to enter a correct time AND date. Otherwise it will be set to never. Blame HTML5 4.10.7.1.8</p>
+	<!-- <p>* You have to enter a correct time AND date. Otherwise it will be set to never. Blame HTML5 4.10.7.1.8</p> -->
 	{{else}}
 	<p>You need to log in to add slides</p>
 	{{/if}}
