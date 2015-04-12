@@ -6,9 +6,6 @@ Meteor.subscribe("tagmode")
 
 syncStream = new Meteor.Stream('sync');
 
-var cursor = [], counter = 0;
-var num_flips_without_refresh = 5;
-
 var current;
 
 Template.slideshow.helpers({
