@@ -25,6 +25,15 @@ Template.slideshow.events({
 
 function update(newId) {
 	if (current) {
+
+		// Do not reload self
+		if (current.data("id") == newId) {
+			/* If there is only one slide then we
+			 * want this check so that we do not
+			 * needlessly flash the screen */
+			return;
+		}
+
 		current.hide()
 		try {
 			var v = $("video", current).get(0)
