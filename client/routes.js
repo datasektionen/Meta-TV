@@ -35,7 +35,7 @@ Router.route("/slideshow/:screeen", function() {
 	this.render("slideshow", {
 		data: function() {
 
-			_screen = this.params.screeen
+			_screen = this.params.screeen;
 			return {
 				slides: slideshow.find({})
 			}
@@ -44,7 +44,11 @@ Router.route("/slideshow/:screeen", function() {
 })
 
 Router.route("/overview", function() {
-	this.render("overview")
+	this.render("overview", {
+		data: function() {
+			_screen = "0"
+		}
+	})
 })
 
 // Old way

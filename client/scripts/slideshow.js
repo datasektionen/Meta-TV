@@ -20,6 +20,21 @@ Template.slideshow.events({
 	}
 })
 
+
+function _change(newId) {
+	current = $("[data-id=" + newId + "]")
+	current.show()
+
+	try {
+		var v = $("video", current).get(0)
+		v.load()
+		setTimeout(function() {
+			v.play()
+		}, 400);
+
+	} catch(e) {}
+}
+
 function update(newId) {
 	if (current) {
 
@@ -38,18 +53,13 @@ function update(newId) {
 		} catch(e) {}
 	}
 
-	current = $("[data-id=" + newId + "]")
-	current.show()
+	if (!newId || newId == "") {
+		// This screen should be blank
+		current = null
+		return
+	}
 
-	try {
-		var v = $("video", current).get(0)
-		v.load()
-		setTimeout(function() {
-			v.play()
-		}, 400);
-
-	} catch(e) {}
-
+	return _change(newId)
 }
 
 window.update = update
@@ -59,6 +69,11 @@ syncStream.on('tick', function(message) {
 	var syncedTime = Tracker.nonreactive(TimeSync.serverTime);
 	var timeToSwitch = message.switchtime - syncedTime
 	//timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime) / 2;
+
+	if (timeToSwitch > 5.5 * 1000) {
+		// Shit's bonkers
+		timeToSwitch = 11 // ms
+	}
 
 	setTimeout(function() {
 		update(message[_screen])
