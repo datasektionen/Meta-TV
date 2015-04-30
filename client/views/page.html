@@ -1,5 +1,4 @@
 <template name="page">
-
 	<div class="clearfloat vert_flexbox" style="order: {{screen}};">
 		<imagehandler>
 		{{#if equals type "youtube"}}
@@ -39,5 +38,6 @@
 			<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" />
 			<button class="remove">Remove</button>
 		</div>
+		{{/if}}
 	</div>
 </template>
