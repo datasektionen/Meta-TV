@@ -1,34 +1,35 @@
 <template name="slide">
-	<article>
-		
-		<table class="slideinfo">
-			<tr>
-				<td class="left"><h3 class="name"> {{name}}</h3></td>
-				<td class="center">Expire: <date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date></td>
-				<td class="right">{{#if currentUser}}<button class="remove">Remove</button>{{/if}}</td>
-			</tr>
-			<!--
-			<tr>
-				<td>id</td>
-				<td>{{_id}}</td>
-			</tr>
-			-->
-			<tr>
-				<td class="left">Created by: {{createdBy}}</td>
-				<td class="center">
-					Tags:
-					<!-- this is cousing some kind of error,
-							Exception in queued task: badSequenceError
-							see console.log -->
-					{{#each tags}}
-					{{this}},
-					{{/each}}
-				</td>
-				<td class="right">
-					Only show when filter by tags: {{onlywhenfiltering}}
-				</td>
-			</tr>
-		</table>
+	<article class="slide_display">
+		<div class="slideinfo">
+			<table class="slideinfo">
+				<tr>
+					<td class="left"><h3 class="name"> {{name}}</h3></td>
+					<td class="center">Expire: <date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date></td>
+					<td class="right">{{#if currentUser}}<button class="remove">Remove</button>{{/if}}</td>
+				</tr>
+				<!--
+				<tr>
+					<td>id</td>
+					<td>{{_id}}</td>
+				</tr>
+				-->
+				<tr>
+					<td class="left">Created by: {{createdBy}}</td>
+					<td class="center">
+						Tags:
+						<!-- this is cousing some kind of error,
+								Exception in queued task: badSequenceError
+								see console.log -->
+						{{#each tags}}
+						{{this}},
+						{{/each}}
+					</td>
+					<td class="right">
+						Only show when filter by tags: {{onlywhenfiltering}}
+					</td>
+				</tr>
+			</table>
+		</div>
 		<div class="page_flexbox">
 				{{#if pages}}
 					{{#each pages}}
@@ -40,5 +41,4 @@
 				</div>
 		</div>
 	</article>
-	<hr>
 </template>

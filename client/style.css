@@ -18,13 +18,15 @@ html, body {
     height: 100%;
 }
 body {
-    background-image: url("http://www.datasektionen.se/images/background.png");
-    
+    background-color: #141312;    
 }
 
-.infotext, .slide_handler {
+.center_wrapper {
+    background-image: url("http://www.datasektionen.se/images/background.png");
     width: 960px;
     margin: auto;
+    margin-top: 2em;
+    border-radius: 1em;
 }
 
 .main {
@@ -33,7 +35,7 @@ body {
     /*width: 960px;*/
     font-family: Vollkorn, Georgia, Times, 'Times New Roman', serif;
     margin: auto;
-    color: #333;
+    color: #141312;
     padding-top: 5px;
     padding-right: 20px;
     padding-bottom: 10px;
@@ -42,16 +44,18 @@ body {
 }
 
 button {
-    background: #1580ac;
+    background: #b85f17;
+    color: #1f3749;
     padding: 4px 8px;
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 80%;
+    font-size: 100%;
     line-height: 1.5;
-    border: 1px solid #464f75;
+    border: none;
     border-radius: 4px;
-    color: #fff;
 }
+
+
 
 body:hover > .hoverinfo {
     opacity: 1;
@@ -68,7 +72,8 @@ p {
 
 .main_header {
     text-align: center;
-    margin-top: 40px;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .infotext {
@@ -78,7 +83,6 @@ p {
     padding-right: 20px;
     padding-bottom: 5px;
     padding-left: 20px;
-    border-bottom: 1px solid grey;
     border-top: 1px solid grey;
 }
 
@@ -159,44 +163,57 @@ iframe {
 }
 
 .error {
-	color: red;
+    color: red;
 }
 
 .links {
-	position: absolute;
-	top: 10px;
-	right: 15px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
 }
 
 .box {
-	width: 14em;
-	overflow: hidden;
-	max-height: 14em;
-	display: inline-block;
+    width: 14em;
+    overflow: hidden;
+    max-height: 14em;
+    display: inline-block;
 }
 
 .box > * {
-	transform: scale(0.3);
-	transform-origin: 0 0;
+    transform: scale(0.3);
+    transform-origin: 0 0;
 }
 
 .overview-bg {
-	height: 100%;
-	width: 100%;
-	background-color: #333;
+    height: 100%;
+    width: 100%;
+    background-color: #333;
 }
 
 .slides-wrapper {
-	overflow: hidden;
-	height: 100%;
+    overflow: hidden;
+    height: 100%;
+}
+
+.slide_display {
+    margin-left: 0em;
+    margin-bottom: 5em;
 }
 
 .clearfloat {
-	overflow: hidden;
-	width: 100%;
+    overflow: hidden;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-table.slideinfo {
+.slideinfo {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.slideinfo > table {
     width: 100%;
 }
 
@@ -205,6 +222,7 @@ table.slideinfo {
     justify-content: flex-start;
     align-items: stretch;
     flex-direction: row;
+    width: 850px;
 }
 
 .vert_flexbox {
@@ -215,4 +233,39 @@ table.slideinfo {
 .hori_flexbox {
     display: flex;
     flex-direction: row;
+}
+
+imagehandler > img {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em;
+    height: 6em;
+    margin-bottom: 0.5em;
+}
+
+imagehandler > iframe {
+    width:10em; 
+    height:5.2em;
+}
+
+imagehandler > .weblink{
+    font-size: 70%
+}
+
+.page_editor {
+    justify-content:space-between; 
+    width:10em;
+}
+
+.page_editor > input {
+    width: 2em;
+}
+
+.page_editor > button {
+    font-size: 12px;
+}
+
+.send {
+    font-size: 13px;
 }

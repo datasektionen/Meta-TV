@@ -11,9 +11,9 @@
 			<img src="{{link}}">
 		{{/if}}
 		{{#if equals type "website"}}
-				<iframe src="{{link}}" style="width:14em; height:6.7em;" seamless="seamless" scrolling="no">
+				<iframe src="{{link}}" seamless="seamless" scrolling="no">
 				</iframe>
-				{{link}}
+				<div class="weblink">{{link}}</div>
 		{{/if}}
 		{{#if canhazedit}}
 			<textarea class="update_markdown" cols="30" rows="10">{{body}}</textarea>
@@ -34,7 +34,7 @@
 		</imagehandler>
 		
 		{{#if currentUser}}
-		<div class="hori_flexbox" style="justify-content:space-between; width:14em;">
+		<div class="hori_flexbox page_editor">
 			<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" />
 			<button class="remove">Remove</button>
 		</div>
