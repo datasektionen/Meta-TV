@@ -1,8 +1,6 @@
 <template name="page">
 
-
-	<div class="clearfloat" >
-
+	<div class="clearfloat vert_flexbox" style="order: {{screen}};">
 		<imagehandler>
 		{{#if equals type "youtube"}}
 			<img src="http://img.youtube.com/vi/{{link}}/0.jpg">
@@ -12,6 +10,11 @@
 		{{/if}}
 		{{#if equals type "local img"}}
 			<img src="{{link}}">
+		{{/if}}
+		{{#if equals type "website"}}
+				<iframe src="{{link}}" style="width:14em; height:6.7em;" seamless="seamless" scrolling="no">
+				</iframe>
+				{{link}}
 		{{/if}}
 		{{#if canhazedit}}
 			<textarea class="update_markdown" cols="30" rows="10">{{body}}</textarea>
@@ -30,31 +33,11 @@
 			{{/if}}
 		{{/if}}
 		</imagehandler>
-
-		<table>
-			<tr>
-				<td>Type</td>
-				<td>{{type}}</td>
-			</tr>
-			<tr>
-				<td>Screen</td>
-				<td>
-					{{#if currentUser}}
-					<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" />
-					{{/if}}
-				</td>
-			</tr>
-			<tr>
-				<td>Link</td>
-				<td>{{link}}</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button class="remove">Remove</button></td>
-			</tr>
-		</table>
-
-
 		
+		{{#if currentUser}}
+		<div class="hori_flexbox" style="justify-content:space-between; width:14em;">
+			<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" />
+			<button class="remove">Remove</button>
+		</div>
 	</div>
 </template>

@@ -1,48 +1,22 @@
 <template name="slide">
 	<article>
-
-		<table>
+		
+		<table class="slideinfo">
 			<tr>
-				<td>Name</td>
-				<td>{{name}}</td>
+				<td class="left"><h3 class="name"> {{name}}</h3></td>
+				<td class="center">Expire: <date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date></td>
+				<td class="right">{{#if currentUser}}<button class="remove">Remove</button>{{/if}}</td>
 			</tr>
+			<!--
 			<tr>
 				<td>id</td>
 				<td>{{_id}}</td>
 			</tr>
+			-->
 			<tr>
-				<td>Type</td>
-				<td>{{type}}</td>
-			</tr>
-			<tr>
-				<td>Expire</td>
-				<td>
-					<date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date>
-				</td>
-			</tr>
-			<tr>
-				<td>Created by</td>
-				<td>
-					<date>{{createdBy}}</date>
-				</td>
-			</tr>
-			{{#if currentUser}}
-				<tr>
-					<td>Actions</td>
-					<td>
-						<button class="remove">Remove</button>
-						{{#if equals type "markdown"}}
-							<button class="edit">Edit</button>
-						{{/if}}
-						{{#if equals type "html"}}
-							<button class="edit">Edit</button>
-						{{/if}}
-					</td>
-				</tr>
-			{{/if}}
-			<tr>
-				<td>Tags:</td>
-				<td>
+				<td class="left">Created by: {{createdBy}}</td>
+				<td class="center">
+					Tags:
 					<!-- this is cousing some kind of error,
 							Exception in queued task: badSequenceError
 							see console.log -->
@@ -50,21 +24,21 @@
 					{{this}},
 					{{/each}}
 				</td>
-			</tr>
-			<tr>
-			<td>Only show when filter by tags</td>
-			<td>{{onlywhenfiltering}}</td>
+				<td class="right">
+					Only show when filter by tags: {{onlywhenfiltering}}
+				</td>
 			</tr>
 		</table>
-
-		{{#if pages}}
-			{{#each pages}}
-				{{> page}}
-			{{/each}}
-		{{else}}
-			<em>No pages! create at least one</em>
-		{{/if}}
-
+		<div class="page_flexbox">
+				{{#if pages}}
+					{{#each pages}}
+						{{> page}}
+					{{/each}}
+				{{/if}}
+				<div style="Order:1000;">
+					{{>uploader}}
+				</div>
+		</div>
 	</article>
 	<hr>
 </template>

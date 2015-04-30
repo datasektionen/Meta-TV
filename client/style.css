@@ -58,7 +58,8 @@ body:hover > .hoverinfo {
 }
 
 h3 {
-    margin-bottom: 0.1em;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 p {
@@ -89,12 +90,12 @@ p {
 .slide_handler {
     margin-top: 15px;
     padding-top: 20px;
-    padding-right: 20px;
+    padding-right: 0px;
     padding-bottom: 5px;
     padding-left: 20px;
 }
 
-#h2_slides {
+#h1_slides {
     float:left;
 }
 
@@ -149,11 +150,6 @@ iframe {
     padding-left: 20px;
 }
 
-
-tr.spaceUnder > td {
-  padding-bottom: 0.75em;
-}
-
 .fot {
     clear: both;
     text-align: center;
@@ -198,4 +194,25 @@ tr.spaceUnder > td {
 .clearfloat {
 	overflow: hidden;
 	width: 100%;
+}
+
+table.slideinfo {
+    width: 100%;
+}
+
+.page_flexbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: row;
+}
+
+.vert_flexbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.hori_flexbox {
+    display: flex;
+    flex-direction: row;
 }

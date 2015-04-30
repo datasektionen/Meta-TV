@@ -1,17 +1,11 @@
 <template name="uploader">
 	{{#if currentUser}}
-	<h2>Add page</h2>
+	<h3>Add page</h3>
 		<table>
-			<tr class="spaceUnder">
-				<td>Parent slide</td>
-				<td style="text-align: left">
-					<select class="parentSlide">
-						{{#each slides}}
-							<option value="{{_id}}">{{name}}</option>
-						{{/each}}
-					</select>
-				</td>
-			</tr>
+			<select class="parentSlide" style="display:none;">
+				<option value="{{_id}}">{{name}}</option>
+			</select>
+
 			<tr class="spaceUnder">
 				<td>Type</td>
 				<td style="text-align: left">
