@@ -1,7 +1,7 @@
-var send_external_img = function(obj, slide){
-	obj.link = $(".link").val()
+var send_external_img = function(obj, slide, id){
+	obj.link = $("." + id + "link").val()
 	Meteor.call("insertSlide", slide, obj)
-	$(".link").val("")
+	$("." + id + "link").val("")
 }
 
 Template.uploader.helpers({
@@ -59,7 +59,7 @@ Template.uploader.events({
 
 		switch (obj.type) {
 			case "external img":
-				send_external_img(obj, slide)
+				send_external_img(obj, slide, this._id)
 				break
 			case "local img":
 				send_local_img(obj, slide)
