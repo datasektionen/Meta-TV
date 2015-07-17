@@ -1,26 +1,28 @@
 
 <template name="dashboard">
 	<div class="main">
-			<div class="links">
-				{{#if currentUser}}
-					Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
-				{{else}}
-				<a href="{{loginurl}}">KTH Login</a>
-				{{/if}}
-				View Channel:
-					<a href="/slideshow/1">1</a>
-					<a href="/slideshow/2">2</a>
-					<a href="/slideshow/3">3</a>
-					<a href="/slideshow/4">4</a>
-					<a href="/slideshow/5">5</a>
-				<a href="/overview">Overview</a>
-				<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
-			</div>
+		<div class="links">
+			{{#if currentUser}}
+				Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
+			{{else}}
+			<a href="{{loginurl}}">KTH Login</a>
+			{{/if}}
+			View Channel:
+				<a href="/slideshow/1">1</a>
+				<a href="/slideshow/2">2</a>
+				<a href="/slideshow/3">3</a>
+				<a href="/slideshow/4">4</a>
+				<a href="/slideshow/5">5</a>
+			<a href="/overview">Overview</a>
+			<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
+		</div>
 
+		<div class="center_wrapper">
+			
 			<div class="main_header">
 				<h1>META-TV</h1>
 			</div>
-
+		
 			<div class="infotext">
 				<p>
 					This is the control panel for the META-TV. To get started log in to your KTH-account in the top right. You will then be able to upload content to the TV by using the form at the bottom of this page.
@@ -52,18 +54,17 @@
 			</div>
 
 			<div class="slide_handler">
-				<h2 id="h2_slides">Slides</h2>
+				<h1 id="h1_slides">Slides</h1>
+				<!--
 				<h2 id="h2_history">
 					<a href="/history">History</a>
 				</h2>
+				-->
 				{{> slides}}
 			</div>
 			<div class="new_slide">
 				<div class="adder">
 					{{> addSlides}}
-				</div>
-				<div class="adder">
-					{{> uploader}}
 				</div>
 				<div class="tagfilter">
 					{{> tagfiltering}}
@@ -73,6 +74,7 @@
 			<div class="fot">
 				{{> footer}}
 			</div>
+		</div>
 	</div>
 </template>
 

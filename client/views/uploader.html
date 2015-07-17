@@ -1,21 +1,12 @@
 <template name="uploader">
 	{{#if currentUser}}
-	<h2>Add page</h2>
+	<h3>Add page</h3>
 		<table>
-			<tr class="spaceUnder">
-				<td>Parent slide</td>
-				<td style="text-align: left">
-					<select class="parentSlide">
-						{{#each slides}}
-							<option value="{{_id}}">{{name}}</option>
-						{{/each}}
-					</select>
-				</td>
-			</tr>
+
 			<tr class="spaceUnder">
 				<td>Type</td>
 				<td style="text-align: left">
-					<select class="type">
+					<select class="{{_id}}type type_group">
 						<option value="external img">Link to image</option>
 						<option value="local img">Upload image</option>
 						<option value="youtube">Youtube</option>
@@ -31,7 +22,7 @@
 				<td>Screen</td>
 				<td style="text-align: left">
 					
-					<select class="channel">
+					<select class="{{_id}}channel channel_group">
 						<optgroup label="Screens">
 							<option value="1">First Screen</option>
 							<option value="2">Second Screen</option>
@@ -55,30 +46,30 @@
 			{{#if isHTML}}
 				<tr class="spaceUnder">
 					<td>HTML</td>
-					<textarea class="html" cols="23" rows="4" ></textarea>
+					<textarea class="{{_id}}html" cols="23" rows="4" ></textarea>
 				</tr>
 			{{else}}
 				{{#if isMarkdown}}
 					<tr class="spaceUnder">
 						<td>Bg image url</td>
-						<input class="link" type="text">
+						<input class="{{_id}}link" type="text">
 					</tr><tr>
 						<td>Markdown</td>
-						<textarea class="markdown" cols="23" rows="4" ></textarea>
+						<textarea class="{{_id}}markdown" cols="23" rows="4" ></textarea>
 					</tr>
 				{{else}}
 					{{#if isYoutube}}
 						<tr class="spaceUnder">
 							<td>Video id</td>
 							<td>
-							<input class="link" type="text">
+							<input class="{{_id}}link" type="text">
 							</td>
 						</tr>
 					{{else}}
 						{{#if internal}}
 							<tr class="spaceUnder">
 								<td>File</td>
-								<td> <input class="file" type="file"/> </td>
+								<td> <input class="{{id}}file" type="file"/> </td>
 								<td class="error"> {{internal_filetype_error}} </td>
 							</tr>
 						{{else}}
@@ -87,7 +78,7 @@
 								<tr class="spaceUnder">
 									<td>Video-file link</td>
 									<td>
-									<input class="link" type="text">
+									<input class="{{_id}}link" type="text">
 									</td>
 								</tr>
 							{{else}}
@@ -95,7 +86,7 @@
 								<tr class="spaceUnder">
 									<td>Link</td>
 									<td style="vertical-align: left">
-										<input class="link" type="text">
+										<input class="{{_id}}link" type="text">
 									</td>
 									<td class="error">{{link_input_error}}</td>
 								</tr>

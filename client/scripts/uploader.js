@@ -1,24 +1,24 @@
-var send_external_img = function(obj, slide){
-	obj.link = $(".link").val()
+var send_external_img = function(obj, slide, id){
+	obj.link = $("." + id + "link").val()
 	Meteor.call("insertSlide", slide, obj)
-	$(".link").val("")
+	$("." + id + "link").val("")
 }
 
 Template.uploader.helpers({
 	isYoutube: function() {
-		return Session.get("type") == "youtube"
+		return Session.get(this._id + "type") == "youtube"
 	},
 	isMarkdown: function() {
-		return Session.get("type") == "markdown"
+		return Session.get(this._id + "type") == "markdown"
 	}, 
 	isHTML: function(){
-		return Session.get("type") == "html"
+		return Session.get(this._id + "type") == "html"
 	},
 	isWebsite: function() {
-		return Session.get("type") == "website"
+		return Session.get(this._id + "type") == "website"
 	},
 	isVideo: function() {
-		return Session.get("type") == "video"
+		return Session.get(this._id + "type") == "video"
 	},
 	internal_filetype_error: function() {
 		return Session.get("internal_filetype_error") || ""
@@ -27,7 +27,7 @@ Template.uploader.helpers({
 		return Session.get("link_input_error") || ""
 	},
 	internal: function() {
-		return Session.get("type") == "local img"
+		return Session.get(this._id + "type") == "local img"
 	},
 	uploading: function() {
 		return Session.get("is_loading") && Session.get("type") == "local img"
@@ -41,8 +41,8 @@ Template.slide.helpers({
 })
 
 Template.uploader.events({
-	"change .type": function() {
-		Session.set("type", $(".type").val())
+	"change .type_group": function() {
+		Session.set(this._id + "type", $("." + this._id + "type").val())
 	},
 	"click .send": function() {
 		Session.set("internal_filetype_error", null)
@@ -50,16 +50,16 @@ Template.uploader.events({
 
 		var obj = {
 			_id: new Mongo.ObjectID().toHexString(),
-			type: $(".type").val(),
+			type: $("." + this._id + "type").val(),
 			createdBy: Meteor.user().username,
-			"screen": $(".channel").val()
+			"screen": $("." + this._id + "channel").val()
 		}
 
-		var slide = $(".parentSlide").val();
+		var slide = this._id;//$(".parentSlide").val();
 
 		switch (obj.type) {
 			case "external img":
-				send_external_img(obj, slide)
+				send_external_img(obj, slide, this._id)
 				break
 			case "local img":
 				send_local_img(obj, slide)
@@ -67,21 +67,21 @@ Template.uploader.events({
 			case "video":
 			case "youtube":
 				// TODO: add video id validation, and error handling
-				obj.link=$(".link").val()
+				obj.link=$("." + this._id + "link").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
-				$(".link").val("")
+				$("." + this._id + "link").val("")
 				break
 			case "markdown":
-				obj.body=$(".markdown").val()
-				obj.link=$(".link").val()
+				obj.body=$("." + this._id + "markdown").val()
+				obj.link=$("." + this._id + "link").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
 				break
 			case "html":
-				obj.body=$(".html").val()
+				obj.body=$("." + this._id + "html").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
 				break
 			case "website":
-				obj.link=$(".link").val()
+				obj.link=$("." + this._id + "link").val()
 				var _id = Meteor.call("insertSlide", slide, obj)
 			break
 		}
