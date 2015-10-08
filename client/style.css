@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Vollkorn);
+@import url(https://fonts.googleapis.com/css?family=Lato);
 
 a:link {
     color:#e2007f;
@@ -32,8 +32,7 @@ body {
 .main {
     width: 100%;
     height: 100%;
-    /*width: 960px;*/
-    font-family: Vollkorn, Georgia, Times, 'Times New Roman', serif;
+    font-family: Lato, Arial;
     margin: auto;
     color: #141312;
     padding-top: 5px;
