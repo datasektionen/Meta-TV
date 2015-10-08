@@ -4,7 +4,7 @@
 			<table class="slideinfo">
 				<tr>
 					<td class="left"><h3 class="name"> {{name}}</h3></td>
-					<td class="center">Expire: <date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date></td>
+					<td class="center">Expires: <date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date></td>
 					<td class="right">{{#if currentUser}}<button class="remove">Remove</button>{{/if}}</td>
 				</tr>
 				<!--
@@ -25,7 +25,7 @@
 						{{/each}}
 					</td>
 					<td class="right">
-						Only show when filter by tags: {{onlywhenfiltering}}
+						Only show when filtering by tags: {{onlywhenfiltering}}
 					</td>
 				</tr>
 			</table>
