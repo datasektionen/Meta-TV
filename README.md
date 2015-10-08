@@ -1,11 +1,11 @@
 META TV
 =======
 
-Hacky application for displaying news and stuff running on the monitors where we eat lunch.
+Hacky application for displaying stuff on the wall-mounted screens in META. Used for travel times, event information, news, etc.
 
 Setup
 
-	installera meteor (https://www.meteor.com/)
+	Installera meteor (https://www.meteor.com/)
 
 	git clone https://github.com/sootn/Meta-TV.git
 	cd Meta-TV/
@@ -14,5 +14,5 @@ Setup
 	
 Log
 ---
-To view log open http://localhost:3000/history.
+To view the log, open http://localhost:3000/history.
 Every action can be reverted.
