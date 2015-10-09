@@ -73,14 +73,6 @@
 	width: 25%;
 }
 
-imagehandler > img {
-	float: left;
-	margin-left: auto;
-	margin-right: auto;
-	width: 14em;
-	height: 8em;
-}
-
 .content img {
 	margin: auto
 }

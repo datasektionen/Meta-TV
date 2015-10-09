@@ -1,69 +1,70 @@
 
 <template name="dashboard">
 	<div class="main">
-			<div class="links">
-				{{#if currentUser}}
-					Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
-				{{else}}
-				<a href="{{loginurl}}">KTH Login</a>
-				{{/if}}
-				View Channel:
-					<a href="/slideshow/1">1</a>
-					<a href="/slideshow/2">2</a>
-					<a href="/slideshow/3">3</a>
-					<a href="/slideshow/4">4</a>
-					<a href="/slideshow/5">5</a>
-				<a href="/overview">Overview</a>
-				<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
-			</div>
+		<div class="links">
+			{{#if currentUser}}
+				Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
+			{{else}}
+			<a href="{{loginurl}}">KTH Login</a>
+			{{/if}}
+			View Channel:
+				<a href="/slideshow/1">1</a>
+				<a href="/slideshow/2">2</a>
+				<a href="/slideshow/3">3</a>
+				<a href="/slideshow/4">4</a>
+				<a href="/slideshow/5">5</a>
+			<a href="/overview">Overview</a>
+			<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
+		</div>
 
+		<div class="center_wrapper">
+			
 			<div class="main_header">
 				<h1>META-TV</h1>
 			</div>
-
+		
 			<div class="infotext">
 				<p>
-					This is the control panel for the META-TV. To get started log in to your KTH-account in the top right. You will then be able to upload content to the TV by using the form at the bottom of this page.
+					This is the control panel for META-TV. To get started, log in to your KTH-account in the top right. You will then be able to upload content to the TV:s by using the form at the bottom of this page.
 				</p>
 				<h3>Slides/Pages</h3>
 				<p>
-					When uploading something new you first create a slide, you can then add one or multiple pages to the slides, the pages will be shown simultaneously across the screens on the screens you specify.
+					When uploading something new, you first create a slide. You can then add one or multiple pages to the slides, the pages will be shown simultaneously across the screens on the screens you specify.
 				</p>
 				<h3>Tags</h3>
 				<p>
-					Tags can be used to filter the content during events or other special occasions. Simply tag your content with the tag, if you only want it to be shown only when you're filtering the content for the tag check the box. Then simply filter for the tag to only show your content.
+					Tags can be used to filter content during events and other special occasions. Simply tag your content with the tag. Then it will be shown only when you're filtering the content for that specific tag by checking its box. When filtering for a tag only content with the tag will be shown.
 				</p>
 				<h3>Markdown</h3>
 				<p>
-					The META-TV allows for usage of markdown for formating text. A basic guide can be found <a href="http://en.wikipedia.org/wiki/Markdown"> here </a>.
+					META-TV allows for usage of Markdown for formatting text. A basic guide can be found <a href="http://en.wikipedia.org/wiki/Markdown">here</a>.
 				</p>
 				<h3>Channels</h3>
 				<p>
-					Channels are used to separate what content are displayed on what screen. Channel 1 is played on the leftmost screen.
+					Channels are used to separate what content are displayed on which screen. The channels are shown in order from left to right.
 				</p>
 				<h3>Basic rules</h3>
 				<p class="important">
 					<ul>
 						<li>No harassments.</li>
 						<li>Nothing extremely inappropriate.</li>
-						<li>Slides containg commercial for alcoholic beverages should always contain alcohol free alternatives.</li>
+						<li>Slides containing commercials for alcoholic beverages must always contain alcohol-free alternatives.</li>
 					</ul>
 				</p>
 			</div>
 
 			<div class="slide_handler">
-				<h2 id="h2_slides">Slides</h2>
+				<h1 id="h1_slides">Slides</h1>
+				<!--
 				<h2 id="h2_history">
 					<a href="/history">History</a>
 				</h2>
+				-->
 				{{> slides}}
 			</div>
 			<div class="new_slide">
 				<div class="adder">
 					{{> addSlides}}
-				</div>
-				<div class="adder">
-					{{> uploader}}
 				</div>
 				<div class="tagfilter">
 					{{> tagfiltering}}
@@ -73,6 +74,7 @@
 			<div class="fot">
 				{{> footer}}
 			</div>
+		</div>
 	</div>
 </template>
 
@@ -91,7 +93,7 @@
 	<input class="adders" type="text">
 	<button>Add</button>
 	{{else}}
-	<p>You need to log in to filter by tags</p>
+	<p>You need to log in to filter by tags.</p>
 	{{/if}}
 </template>
 
@@ -105,7 +107,7 @@
 
 <template name="footer">
 	<footer>
-		Created by Andreas Linn and Daniil Pintjuk. Modified by Marcus Heine. Maintained by Ior. (2014)
+		Created by Andreas Linn and Daniil Pintjuk. Modified by Marcus Heine. Maintained by IOR. (2015)
 	</footer>
 </template>
 
@@ -132,7 +134,7 @@
 			</td>
 		</tr>
 		<tr class="spaceUnder">
-			<td>Only show when filter by tags<br> (Good for recurring event slides)</td>
+			<td>Only show when filtering by tag<br> (Good for recurring event slides)</td>
 			<td><input class="hashtagonlyfilter" type="checkbox"></td>
 		</tr>
 		<tr class="spaceUnder">
@@ -144,6 +146,6 @@
 	</table>
 	<!-- <p>* You have to enter a correct time AND date. Otherwise it will be set to never. Blame HTML5 4.10.7.1.8</p> -->
 	{{else}}
-	<p>You need to log in to add slides</p>
+	<p>You need to log in to add slides.</p>
 	{{/if}}
 </template> 
