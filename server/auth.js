@@ -28,11 +28,19 @@ Accounts.registerLoginHandler("kth", function(loginRequest) {
 					future.return(undefined)
 					return
 				}
-				var username = data.content.match(/mailMe\('(\w+)/)[1]
-				var userId = Meteor.users.insert({
-					username: username,
-					usomething: usomething
-				})
+				if(data.content.match(/Inget resultat/)) {
+					var userId = Meteor.users.insert({
+						username: usomething,
+						usomething: usomething
+					});
+					console.log("xfinger did not find the user, created usomething users insted", usomething);
+				} else {
+					var username = data.content.match(/mailMe\('(\w+)/)[1]
+					var userId = Meteor.users.insert({
+						username: username,
+						usomething: usomething
+					})
+				}
 				console.log("created", userId)
 				future.return({
 					userId: userId,
