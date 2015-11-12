@@ -1,52 +1,15 @@
 <template name="slideshow">
-
 	<div class="slides-wrapper">
 	{{#each slides}}
-		{{#each pages}}
-			<div class="slide" data-id="{{_id}}" style="display:none">
-			{{#if equals type "html"}}
-				<div class="html_body">
-					{{{body}}}
-				</div>
+		{{#each pages}}	
+			{{#if equals ../pages.length 1}}
+				{{>slidepage this}}
 			{{else}}
-				{{#if equals type "markdown"}}
-					<div class="down_marked_content">
-						{{#markdown}}{{body}}{{/markdown}}
-					</div>
-					{{#if link}}
-						<div class="content"> <img src="{{link}}"> </div>
-					{{/if}}
-				{{else}}
-					<div class="content">
-					{{#if equals type "youtube"}}
-						<iframe width="100%" height="100%"
-						src="//www.youtube.com/embed/{{link}}?autoplay=1&showinfo=0&controls=0&loop=1&modestbranding=1"
-						frameborder="0" allowfullscreen seamless="seamless" scrolling="no">
-						</iframe>
-					{{else}}
-						{{#if equals type "website"}}
-							<iframe src="{{link}}" style="width: 100vw; height: 100vh;" seamless="seamless" scrolling="no">
-					
-							</iframe>
-
-						{{else}}
-							{{#if equals type "video"}}
-								<video style="width: 100vw; height: 100vh;" loop>
-									<source src="{{link}}" />
-								</video>
-
-							{{else}}
-								<img src="{{link}}">
-							{{/if}}
-						{{/if}}
-					{{/if}}
-					</div>
+				{{#if equals screen ../../_screen}}
+					{{>slidepage this}}
 				{{/if}}
 			{{/if}}
-		</div>
 		{{/each}}
 	{{/each}}
-
 	</div>
-
 </template>

@@ -37,7 +37,8 @@ Router.route("/slideshow/:screeen", function() {
 
 			_screen = this.params.screeen;
 			return {
-				slides: slideshow.find({})
+				slides: slideshow.find({}),
+				_screen: this.params.screeen
 			}
 		}
 	})
