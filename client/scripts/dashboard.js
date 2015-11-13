@@ -1,5 +1,5 @@
-Template.dashboard.helpers({
-	loginurl: function() {
+
+function getLoginUrl() {
 		var callback = ""
 		callback += location.protocol + "//"
 		callback += location.hostname
@@ -9,7 +9,50 @@ Template.dashboard.helpers({
 		callback += "/login/"
 		return "http://login.datasektionen.se/login?callback=" + callback
 	}
+
+
+Template.dashboard.helpers({
+	loginurl: getLoginUrl
 })
+Template.dashboard.rendered = function() {
+    if(!this._rendered) {
+      this._rendered = true;
+			window.tbaas_conf = {
+					system_name: "Meta-TV",
+					target_id: "methone_header",
+					primary_color: "#BA68C8",
+					secondary_color: "#F3E5F5",
+					fuzzyfile: "/Fuzzyfile",
+					fuzzy_only: false,
+					topbar_items: [
+						{
+							str: "Overview",
+							href: "/overview"
+						},
+						{
+							str: "CH1",
+							href: "/slideshow/1"
+						},
+						{
+							str: "CH2",
+							href: "/slideshow/2"
+						},
+						{
+							str: "CH3",
+							href: "/slideshow/3"
+						},
+						{
+							str: "Report an issue",
+							href: "https://github.com/datasektionen/Meta-TV/issues"
+						}
+					]
+				};
+				$.getScript('http://methone.froyo.datasektionen.se/bar.js', function() {
+					Methone.setLoginButtonText(null);
+
+				});
+    }
+}
 
 Template.dashboard.events({
 	"click .logout": function() {
@@ -47,7 +90,7 @@ Template.dashboard.events({
 
 		var _id = slideshow.insert(obj)
 		report(true, _id)
-		
+
 	}
 })
 
