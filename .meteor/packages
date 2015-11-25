@@ -14,3 +14,5 @@ lepozepo:streams
 mizzao:timesync
 
 standard-minifiers
+materialize:materialize
+fourseven:scss

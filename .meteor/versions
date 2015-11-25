@@ -22,6 +22,7 @@ ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
 fastclick@1.0.7
+fourseven:scss@3.2.0
 geojson-utils@1.0.4
 html-tools@1.0.5
 htmljs@1.0.5
@@ -42,6 +43,7 @@ livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
 markdown@1.0.5
+materialize:materialize@0.97.3
 meteor@1.1.10
 meteor-platform@1.2.3
 minifiers@1.1.7
