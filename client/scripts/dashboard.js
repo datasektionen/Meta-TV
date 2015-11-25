@@ -137,9 +137,9 @@ Template.tagfiltering.events({
 	},
 	"click button": function() {
 		tagmode.insert({
-			tag: $(".adders").val(),
+			tag: $(".taginput").val(),
 			createdBy: Meteor.user().username // Yes it is checked on the server
 		})
-		$(".adders").val("")
+		$(".taginput").val("")
 	}
 })
