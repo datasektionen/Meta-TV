@@ -10,7 +10,7 @@ Template.uploader.helpers({
 	},
 	isMarkdown: function() {
 		return Session.get(this._id + "type") == "markdown"
-	}, 
+	},
 	isHTML: function(){
 		return Session.get(this._id + "type") == "html"
 	},

@@ -51,7 +51,7 @@ function next(switch_delay) {
 	tagsobjs.forEach(function(tag) {
 		tags.push(tag.tag)
 	})
-	
+
 	if(tags.length != 0) {
 		cursor = slideshow.find({tags:{$in:tags}}).fetch()
 	} else {
@@ -73,7 +73,7 @@ function next(switch_delay) {
 		// What do we do here? TODO
 
 	} else if (slide.pages.length > 1) {
-		/* 
+		/*
 		Several pages. Show page 1 on screen 1 etc.
 		*/
 		for (var i = 0; i < NUM_SCREENS; i++)
@@ -92,5 +92,3 @@ function next(switch_delay) {
 
 	return retval
 }
-
-
