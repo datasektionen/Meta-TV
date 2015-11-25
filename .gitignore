@@ -1,2 +1,6 @@
 uploaded/*
 .demeteorized
+
+# sass
+.sass-cache
+*.css.map
