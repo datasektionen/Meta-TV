@@ -71,7 +71,9 @@ Template.dashboard.events({
 		var date = new Date(Date.parse($("#expire").val()))
 
 		if(date != "Invalid Date") {
-			obj.expire = date
+			var prettyDate = moment(date).fromNow();
+			console.log(prettyDate)
+			obj.expire = prettyDate
 		}
 
 		var report = function(success, identifier){
