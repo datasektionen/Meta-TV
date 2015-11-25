@@ -1,0 +1,26 @@
+<template name="filters">
+	<div class="filter-by-tags col s12 m12 l6">
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title">Filter by tags</span>
+				<div class="row">
+					<div class="input-field col s12 m9">
+						<input id="filterbytags" type="text" name="filterbytags" class="taginput">
+						<label class="active" for="filterbytags">Tags</label>
+					</div>
+					<div class="input-field col s12 m3">
+						<button class="btn">Add tag</button>
+					</div>
+				</div>
+				<div class="tags">
+					{{#each tagmode}}
+					<div class="chip remover">
+					    {{tag}}
+					    <span class="remover">×</span>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -74,24 +74,6 @@
 	</div>
 </template>
 
-<template name="tagfiltering">
-	<h2>Filter by tags</h2>
-	Will reset automagically at 05:00 every day.
-	{{#each tagmode}}
-	<div class="tag">
-		{{tag}}
-		{{#if currentUser}}
-		<button class="remover">x</button>
-		{{/if}}
-	</div>
-	{{/each}}
-	{{#if currentUser}}
-	<input class="adders" type="text">
-	<button>Add</button>
-	{{else}}
-	<p>You need to log in to filter by tags.</p>
-	{{/if}}
-</template>
 
 <template name="slides">
 	<div class="slides">
