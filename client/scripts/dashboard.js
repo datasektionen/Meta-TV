@@ -60,7 +60,6 @@ Template.dashboard.events({
 	},
 
 	"click .createSlide": function(event) {
-
 		var obj = {
 			name: $("#txtName").val(),
 			tags:$("#tags").val().split(" "),
@@ -76,8 +75,8 @@ Template.dashboard.events({
 			obj.expire = prettyDate
 		}
 
-		var report = function(success, identifier){
-			if(success){
+		var report = function(success, identifier) {
+			if(success) {
 				var obj_cp = {_id: identifier}
 				shallow_copy(obj_cp, obj)
 				history_log.insert({
