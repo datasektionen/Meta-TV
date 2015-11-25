@@ -41,8 +41,8 @@ Template.slide.helpers({
 })
 
 Template.uploader.events({
-	"change .type_group": function() {
-		Session.set(this._id + "type", $("." + this._id + "type").val())
+	"change .type_group.initialized": function() {
+		Session.set(this._id + "type", $("." + this._id + "type.initialized").val())
 	},
 	"click .send": function() {
 		Session.set("internal_filetype_error", null)
@@ -50,9 +50,9 @@ Template.uploader.events({
 
 		var obj = {
 			_id: new Mongo.ObjectID().toHexString(),
-			type: $("." + this._id + "type").val(),
+			type: $("." + this._id + "type.initialized").val(),
 			createdBy: Meteor.user().username,
-			"screen": $("." + this._id + "channel").val()
+			"screen": $("." + this._id + "channel.initialized").val()
 		}
 
 		var slide = this._id;//$(".parentSlide").val();
