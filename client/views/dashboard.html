@@ -1,48 +1,51 @@
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Meta-TV</title>
+</head>
+
 <body>
 	<div id="methone_header">
 	</div>
 </body>
-<template name="dashboard">
 
+<template name="dashboard">
+	<div class="links">
+		{{#if currentUser}}
+			Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
+		{{else}}
+		<a href="{{loginurl}}">KTH Login</a>
+		{{/if}}
+		View Channel:
+			<a href="/slideshow/1">1</a>
+			<a href="/slideshow/2">2</a>
+			<a href="/slideshow/3">3</a>
+		<a href="/overview">Overview</a>
+		<a href="https://github.com/datasektionen/Meta-TV/issues">Report a bug</a>
+	</div>
+
+	<div class="main_header">
+		<h1>Meta-TV</h1>
+		<p>Admin panel for the televisions in Meta</p>
+		<p>
+			{{#if currentUser}}
+				Logged in as  {{currentUser.username}} <a class="logout" href="#">Log out</a>
+			{{else}}
+			<a href="{{loginurl}}">Log in</a>
+			{{/if}}
+		</p>
+	</div>
 
 	<div class="main">
 
+		{{> infotext }}
 
-		<div class="center_wrapper">
-
-			<div class="main_header">
-				<h1>META-TV</h1>
-				{{#if currentUser}}
-					Welcome {{currentUser.username}}! <a class="logout" href="#">Logout</a>
-				{{else}}
-				<a href="{{loginurl}}">KTH Login</a>
-				{{/if}}
-			</div>
-
-			<div class="slide_handler">
-				<h1 id="h1_slides">Slides</h1>
-				<!--
-				<h2 id="h2_history">
-					<a href="/history">History</a>
-				</h2>
-				-->
-				{{> slides}}
-			</div>
-			<div class="new_slide">
-				<div class="adder">
-					{{> addSlides}}
-				</div>
-				<div class="tagfilter">
-					{{> tagfiltering}}
-				</div>
-			</div>
-
-			<div class="fot">
-				{{> footer}}
+		<div class="row">
+			<div class="col s12">
+				{{> addslides}}
+				{{> filters}}
 			</div>
 		</div>
-	</div>
-</template>
 
 		<div class="slides">
 			{{#each slides}}
