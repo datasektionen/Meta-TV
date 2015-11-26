@@ -1,0 +1,36 @@
+{
+  "@type": "fuzzyfile",
+
+  "fuzzes": [
+    {
+      "name": "Meta-TV",
+      "str": "meta-tv",
+      "color": "#009688",
+      "href": "http://tv.froyo.datasektionen.se/"
+    },
+    {
+      "name": "Channel 1 - Meta-TV",
+      "str": "channel 1 metatv",
+      "color": "#009688",
+      "href": "http://tv.froyo.datasektionen.se/slideshow/1"
+    },
+    {
+      "name": "Channel 2 - Meta-TV",
+      "str": "channel 2 metatv",
+      "color": "#009688",
+      "href": "http://tv.froyo.datasektionen.se/slideshow/2"
+    },
+    {
+      "name": "Channel 3 - Meta-TV",
+      "str": "channel 3 metatv",
+      "color": "#009688",
+      "href": "http://tv.froyo.datasektionen.se/slideshow/3"
+    },
+    {
+      "name": "Overview - Meta-TV",
+      "str": "overview metatv",
+      "color": "#009688",
+      "href": "http://tv.froyo.datasektionen.se/overview"
+    }
+  ]
+}

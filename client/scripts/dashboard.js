@@ -20,7 +20,7 @@ Template.dashboard.rendered = function() {
 			window.tbaas_conf = {
 					system_name: "Meta-TV",
 					target_id: "m_header",
-					primary_color: "#BA68C8",
+					primary_color: "#009688",
 					secondary_color: "#F3E5F5",
 					fuzzyfile: "/Fuzzyfile",
 					fuzzy_only: false,
