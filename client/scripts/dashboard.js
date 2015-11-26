@@ -131,7 +131,7 @@ Template.slide.events({
 })
 
 
-Template.tagfiltering.events({
+Template.filters.events({
 	"click .remover": function() {
 		tagmode.remove({_id: this._id})
 	},
