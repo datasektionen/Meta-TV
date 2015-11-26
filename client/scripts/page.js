@@ -1,5 +1,3 @@
-
-
 Template.page.events({
 	"change .screenselector": function(event) {
 		var $target = $(event.target);

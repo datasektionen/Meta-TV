@@ -1,43 +1,58 @@
 <template name="page">
-	<div class="clearfloat vert_flexbox" style="order: {{screen}};">
-		<imagehandler>
-		{{#if equals type "youtube"}}
-			<img src="http://img.youtube.com/vi/{{link}}/0.jpg">
-		{{/if}}
-		{{#if equals type "external img"}}
-			<img src="{{link}}">
-		{{/if}}
-		{{#if equals type "local img"}}
-			<img src="{{link}}">
-		{{/if}}
-		{{#if equals type "website"}}
-				<iframe src="{{link}}" seamless="seamless" scrolling="no">
-				</iframe>
-				<div class="weblink">{{link}}</div>
-		{{/if}}
-		{{#if canhazedit}}
-			<textarea class="update_markdown" cols="30" rows="10">{{body}}</textarea>
-			<button class="update">Update</button>
-		{{else}}
-			{{#if equals type "html"}}
-				<div class="box">
-					{{{body}}}
+	<div class="col s12 m6 l3">
+		<div class="card">
+			{{#if equals type "youtube"}}
+				<img src="http://img.youtube.com/vi/{{link}}/0.jpg">
+			{{/if}}
+			{{#if equals type "external img"}}
+				<div class="card-image">
+					<img src="{{link}}">
 				</div>
-			{{else}}
-				{{#if equals type "markdown"}}
-					<div class="box">
-						{{#markdown}}{{body}}{{/markdown}}
+			{{/if}}
+			{{#if equals type "local img"}}
+				<div class="card-image">
+					<img src="{{link}}">
+				</div>
+			{{/if}}
+			{{#if equals type "website"}}
+				<div class="card-image">
+					<iframe src="{{link}}" seamless="seamless" scrolling="no"></iframe>
+					<div class="card-content">
+						{{link}}
 					</div>
+				</div>
+
+			{{/if}}
+			{{#if canhazedit}}
+				<textarea class="update_markdown" cols="30" rows="10">{{body}}</textarea>
+				<button class="update">Update</button>
+			{{else}}
+				{{#if equals type "html"}}
+					<div class="box">
+						{{{body}}}
+					</div>
+				{{else}}
+					{{#if equals type "markdown"}}
+						<div class="box">
+							{{#markdown}}{{body}}{{/markdown}}
+						</div>
+					{{/if}}
 				{{/if}}
 			{{/if}}
-		{{/if}}
-		</imagehandler>
-		
-		{{#if currentUser}}
-		<div class="hori_flexbox page_editor">
-			<input class="screenselector" type="number" min=1 max=14 value="{{screen}}" />
-			<button class="remove">Remove</button>
+
+			{{#if currentUser}}
+			<div class="card-content">
+				<div class="row">
+					<div class="input-field col s12">
+						<input class="screenselector" type="number" min=1 max=3 value="{{screen}}" />
+						<label class="active">Screen</label>
+					</div>
+					<div class="input-field col s12">
+						<button class="remove btn full-width">Remove page</button>
+					</div>
+				</div>
+			</div>
+			{{/if}}
 		</div>
-		{{/if}}
 	</div>
 </template>

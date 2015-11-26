@@ -48,7 +48,7 @@ history.allow({
 Meteor.methods({
 	setScreen: function(pageId, screenId) {
 		if (! Meteor.userId()) {
-      		throw new Meteor.Error("not-authorized");
+			throw new Meteor.Error("not-authorized");
     	}
 
 		slideshow.update({"pages._id": pageId},

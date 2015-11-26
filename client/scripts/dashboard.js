@@ -60,7 +60,6 @@ Template.dashboard.events({
 	},
 
 	"click .createSlide": function(event) {
-
 		var obj = {
 			name: $("#txtName").val(),
 			tags:$("#tags").val().split(" "),
@@ -71,11 +70,13 @@ Template.dashboard.events({
 		var date = new Date(Date.parse($("#expire").val()))
 
 		if(date != "Invalid Date") {
-			obj.expire = date
+			var prettyDate = moment(date).fromNow();
+			console.log(prettyDate)
+			obj.expire = prettyDate
 		}
 
-		var report = function(success, identifier){
-			if(success){
+		var report = function(success, identifier) {
+			if(success) {
 				var obj_cp = {_id: identifier}
 				shallow_copy(obj_cp, obj)
 				history_log.insert({
@@ -130,15 +131,15 @@ Template.slide.events({
 })
 
 
-Template.tagfiltering.events({
+Template.filters.events({
 	"click .remover": function() {
 		tagmode.remove({_id: this._id})
 	},
 	"click button": function() {
 		tagmode.insert({
-			tag: $(".adders").val(),
+			tag: $(".taginput").val(),
 			createdBy: Meteor.user().username // Yes it is checked on the server
 		})
-		$(".adders").val("")
+		$(".taginput").val("")
 	}
 })

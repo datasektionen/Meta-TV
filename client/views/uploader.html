@@ -1,110 +1,90 @@
+<!-- uploads a page -->
 <template name="uploader">
-	{{#if currentUser}}
-	<h3>Add page</h3>
-		<table>
+	<div class="add-page col s12 m6 l3">
+	<div class="card">
+		<div class="card-content">
+			<span class="card-title">Add page</span>
+			
+			<div class="input-field col s12">
+				<select class="{{_id}}type type_group">
+					<option value="external img" selected>Link to image</option>
+					<option value="local img">Upload image</option>
+					<option value="website">Link to website</option>
+					<option value="html">HTML</option>
+					<!-- <option value="youtube">YouTube</option> -->
+					<!-- <option value="markdown">Markdown</option> -->
+					<!-- <option value="video">HTML5 Video</option> -->
+				</select>
+			</div>
 
-			<tr class="spaceUnder">
-				<td>Type</td>
-				<td style="text-align: left">
-					<select class="{{_id}}type type_group">
-						<option value="external img">Link to image</option>
-						<option value="local img">Upload image</option>
-						<option value="youtube">YouTube</option>
-						<option value="markdown">Markdown</option>
-						<option value="html">HTML</option>
-						<option value="website">Website</option>
-						<option value="video">HTML5 Video</option>
-					</select>
-				</td>
-			</tr>
+			<div class="input-field col s12">
+				<select class="{{_id}}channel channel_group">
+					<option value="1" selected>Screen 1</option>
+					<option value="2">Screen 2</option>
+					<option value="3">Screen 3</option>
+				</select>
+			</div>
 
-			<tr class="spaceUnder">
-				<td>Screen</td>
-				<td style="text-align: left">
-					
-					<select class="{{_id}}channel channel_group">
-						<optgroup label="Screens">
-							<option value="1">Screen 1</option>
-							<option value="2">Screen 2</option>
-							<option value="3">Screen 3</option>
-							<option value="4">Screen 4</option>
-							<option value="5">Screen 5</option>
-							<option value="6">Screen 6</option>
-							<option value="7">Screen 7</option>
-							<option value="8">Screen 8</option>
-							<option value="9">Screen 9</option>
-						</optgroup>
-						<optgroup label="Jumbotrons">
-							<option value="10">Jumbotron One</option>
-							<option value="11">Jumbotron Two</option>
-							<option value="12">Blimp</option>
-						</optgroup>
-					</select>
-				</td>
-			</tr>
+			<script type="text/javascript">
+				$(".{{_id}}type").material_select();
+				$(".{{_id}}channel").material_select();
+			</script>
 
 			{{#if isHTML}}
-				<tr class="spaceUnder">
-					<td>HTML</td>
-					<textarea class="{{_id}}html" cols="23" rows="4" ></textarea>
-				</tr>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="html-textarea" class="{{_id}}html materialize-textarea"></textarea>
+						<label for="html-textarea" class="active">HTML</label>
+					</div>
+				</div>
+			{{else}}{{#if isMarkdown}}
+				<div class="input-field col s12">
+					<input class="{{_id}}link active" type="text">
+					<!-- <label>Background image url</label> -->
+				</div>
+				<div class="input-field col s12">
+					<textarea class="{{_id}}markdown materialize-textarea" cols="23" rows="4" ></textarea>
+					<!-- <label class="active">Markdown</label> -->
+				</div>
+			{{else}}{{#if isYoutube}}
+				<input class="{{_id}}link" type="text">
+				<label>Video ID</label>
+			{{else}}{{#if internal}}
+				<form action="#">
+					<div class="file-field input-field col s12">
+						<div class="btn">
+							<span>File</span>
+							<input class="{{id}}file" type="file">
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text">
+						</div>
+					</div>
+				</form>
+				<p class="error"> {{internal_filetype_error}}</p>
+			{{else}}{{#if isVideo}}
+				<input class="{{_id}}link" type="text">
+				<label>Video-file link</label>
 			{{else}}
-				{{#if isMarkdown}}
-					<tr class="spaceUnder">
-						<td>Bg image url</td>
-						<input class="{{_id}}link" type="text">
-					</tr><tr>
-						<td>Markdown</td>
-						<textarea class="{{_id}}markdown" cols="23" rows="4" ></textarea>
-					</tr>
-				{{else}}
-					{{#if isYoutube}}
-						<tr class="spaceUnder">
-							<td>Video id</td>
-							<td>
-							<input class="{{_id}}link" type="text">
-							</td>
-						</tr>
-					{{else}}
-						{{#if internal}}
-							<tr class="spaceUnder">
-								<td>File</td>
-								<td> <input class="{{id}}file" type="file"/> </td>
-								<td class="error"> {{internal_filetype_error}} </td>
-							</tr>
-						{{else}}
+				<div class="input-field col s12">
+					<input class="{{_id}}link" type="text">
+					<label>Link</label>
+				</div>
+				<p class="error">{{link_input_error}}</p>
+			{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
 
-							{{#if isVideo}}
-								<tr class="spaceUnder">
-									<td>Video-file link</td>
-									<td>
-									<input class="{{_id}}link" type="text">
-									</td>
-								</tr>
-							{{else}}
-									
-								<tr class="spaceUnder">
-									<td>Link</td>
-									<td style="vertical-align: left">
-										<input class="{{_id}}link" type="text">
-									</td>
-									<td class="error">{{link_input_error}}</td>
-								</tr>
-							{{/if}}
-						{{/if}}
-					{{/if}}
-				{{/if}}
-			{{/if}}
-			<tr>
-				<td></td>
-				<td>
+			<div class="card-action">
+				{{#if currentUser}}
 					{{#if uploading}}
-						Uploading, please wait…
+						<p>Uploading, please wait…</p>
 					{{else}}
-						<button class="send">Upload</button>
+						<button class="send btn full-width">Add page</button>
 					{{/if}}
-				</td>
-			</tr>
-		</table>
-	{{/if}}
+				{{else}}
+					<p class="error">Please log in to add pages</p>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+	</div>
 </template>
