@@ -22,7 +22,7 @@ Template.dashboard.rendered = function() {
 					target_id: "m_header",
 					primary_color: "#009688",
 					secondary_color: "#F3E5F5",
-					fuzzyfile: "/Fuzzyfile",
+					fuzzyfile: "",
 					fuzzy_only: false,
 					topbar_items: [
 						{
