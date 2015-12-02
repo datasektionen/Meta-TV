@@ -24,6 +24,7 @@ Template.dashboard.rendered = function() {
 					secondary_color: "#F3E5F5",
 					fuzzyfile: "",
 					fuzzy_only: false,
+					delta_invert: true,
 					topbar_items: [
 						{
 							str: "Overview",
