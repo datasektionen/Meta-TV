@@ -47,7 +47,7 @@ Template.dashboard.rendered = function() {
 						}
 					]
 				};
-				$.getScript('http://methone.froyo.datasektionen.se/bar.js', function() {
+				$.getScript('https://methone.froyo.datasektionen.se/bar.js', function() {
 					Methone.setLoginButtonText(null);
 
 				});
