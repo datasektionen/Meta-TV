@@ -109,6 +109,11 @@ iframe {
     width: 100%;
     overflow: hidden;
     border: none;
+    & + .card-action {
+        padding-top: 10px !important;
+        padding-bottom: 0 !important;
+        border-top: none !important;
+    }
 }
 
 .slide .add-page {
