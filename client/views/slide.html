@@ -24,7 +24,7 @@
 							<button class="remove btn card-info red lighten-2">Remove slide</button>
 					{{/if}}
 					<span class="card-info">
-						<b>Expires</b> <date>{{#if expire}} {{expire}} {{else}} Never {{/if}}</date>
+						<b>Expires</b> <date>{{#if expire}} {{prettydate expire}} {{else}} Never {{/if}}</date>
 					</span>
 					<span class="card-info">
 						<b>Created by</b> {{createdBy}}

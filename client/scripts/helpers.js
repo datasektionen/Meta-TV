@@ -20,3 +20,8 @@ Handlebars.registerHelper("members", function (a) {
 	}
 	return res
 });
+
+Handlebars.registerHelper("prettydate", function (date) {
+	var prettyDate = moment(date).fromNow();
+	return prettyDate
+});
