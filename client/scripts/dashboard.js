@@ -7,7 +7,7 @@ function getLoginUrl() {
 			callback += ":" + location.port
 		}
 		callback += "/login/"
-		return "http://login.datasektionen.se/login?callback=" + callback
+		return "http://login2.datasektionen.se/login?callback=" + callback
 	}
 
 
