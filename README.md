@@ -9,6 +9,7 @@ Setup
 
 	git clone https://github.com/datasektionen/Meta-TV.git
 	cd Meta-TV/
+	set enviroment variable LOGIN2_KEY to a valid api key for login2.
 	meteor
 	open http://localhost:3000
 
