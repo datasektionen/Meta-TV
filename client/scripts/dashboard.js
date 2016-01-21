@@ -7,7 +7,7 @@ function getLoginUrl() {
 			callback += ":" + location.port
 		}
 		callback += "/login/"
-		return "http://login.datasektionen.se/login?callback=" + callback
+		return "http://login2.datasektionen.se/login?callback=" + callback
 	}
 
 
@@ -71,9 +71,8 @@ Template.dashboard.events({
 		var date = new Date(Date.parse($("#expire").val()))
 
 		if(date != "Invalid Date") {
-			var prettyDate = moment(date).fromNow();
-			console.log(prettyDate)
-			obj.expire = prettyDate
+			//If you want to change how the date is visually displayed see slide.html
+			obj.expire = date
 		}
 
 		var report = function(success, identifier) {
