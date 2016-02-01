@@ -89,7 +89,7 @@ Template.uploader.events({
 })
 
 var send_local_img = function(obj, slide){
-	var file = $(".file")[0].files[0]
+	var file = $("."+ slide + "file")[0].files[0]
 	var reader = new FileReader()
 
 	if(file.type.split("/")[0] != "image") {
