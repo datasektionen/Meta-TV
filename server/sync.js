@@ -84,6 +84,8 @@ function next(switch_delay) {
 			retval[page.screen] = page._id
 		}
 
+	} else if (slide.pages.length === 0) {
+		//TODO: what do we do here?
 	} else {
 		// Single page. Repeat on each screen.
 		for (var i = 0; i < NUM_SCREENS; i++)
