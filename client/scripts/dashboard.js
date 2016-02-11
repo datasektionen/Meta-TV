@@ -126,7 +126,8 @@ Template.slide.events({
 			note:"obj represents the state of the slide before update",
 			obj:obj_cp
 		})
-		slideshow.update({_id:this._id}, {$set: {body: $(".update_markdown").val()}})
+		var tagstring = $("#tags" + this._id).val().trim()
+		slideshow.update({_id:this._id}, {$set: {expire: new Date(Date.parse($("#expire" + this._id).val())), tags: tagstring.split(" ")}})
 		Session.set("hazEdit", null)
 	}
 })

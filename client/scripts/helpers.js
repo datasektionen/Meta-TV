@@ -25,3 +25,12 @@ Handlebars.registerHelper("prettydate", function (date) {
 	var prettyDate = moment(date).fromNow();
 	return prettyDate
 });
+
+Handlebars.registerHelper("dateinput", function (date) {
+	if (date) {
+		var shortdate = date.toJSON().slice(0,10);
+		return shortdate
+	} else {
+		return ""
+	}
+});
