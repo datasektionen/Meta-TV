@@ -68,7 +68,7 @@ function next(switch_delay) {
 		switchtime: new Date().getTime() + switch_delay
 	}
 
-	if (!slide.pages) {
+	if (slide && !slide.pages) {
 
 		// What do we do here? TODO
 
