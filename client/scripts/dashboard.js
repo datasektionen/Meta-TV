@@ -91,6 +91,7 @@ Template.dashboard.events({
 
 		var _id = slideshow.insert(obj)
 		report(true, _id)
+		Router.go("/#" + _id)
 
 	}
 })
