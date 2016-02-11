@@ -91,7 +91,7 @@ Template.dashboard.events({
 
 		var _id = slideshow.insert(obj)
 		report(true, _id)
-		Router.go("/#" + _id)
+		Router.go("/#" + _id) //Redirects to the newly created slide.
 
 	}
 })
