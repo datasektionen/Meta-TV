@@ -127,7 +127,12 @@ Template.slide.events({
 			obj:obj_cp
 		})
 		var tagstring = $("#tags" + this._id).val().trim()
-		slideshow.update({_id:this._id}, {$set: {expire: new Date(Date.parse($("#expire" + this._id).val())), tags: tagstring.split(" ")}})
+		var date =  new Date(Date.parse($("#expire" + this._id).val()))
+		if(date != "Invalid Date") {
+			slideshow.update({_id:this._id}, {$set: {expire: date, tags: tagstring.split(" ")}})
+		} else {
+			slideshow.update({_id:this._id}, {$set: {expire: undefined, tags: tagstring.split(" ")}})
+		}
 		Session.set("hazEdit", null)
 	}
 })
