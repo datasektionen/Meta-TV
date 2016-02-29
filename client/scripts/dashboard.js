@@ -91,6 +91,7 @@ Template.dashboard.events({
 
 		var _id = slideshow.insert(obj)
 		report(true, _id)
+		Router.go("/#" + _id) //Redirects to the newly created slide.
 
 	}
 })
@@ -125,7 +126,13 @@ Template.slide.events({
 			note:"obj represents the state of the slide before update",
 			obj:obj_cp
 		})
-		slideshow.update({_id:this._id}, {$set: {body: $(".update_markdown").val()}})
+		var tagstring = $("#tags" + this._id).val().trim()
+		var date =  new Date(Date.parse($("#expire" + this._id).val()))
+		if(date != "Invalid Date") {
+			slideshow.update({_id:this._id}, {$set: {expire: date, tags: tagstring.split(" ")}})
+		} else {
+			slideshow.update({_id:this._id}, {$set: {expire: undefined, tags: tagstring.split(" ")}})
+		}
 		Session.set("hazEdit", null)
 	}
 })

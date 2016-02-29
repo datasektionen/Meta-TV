@@ -1,5 +1,5 @@
 <template name="slide">
-	<div class="row">
+	<div class="row" id="{{_id}}">
 		<div class="slide col s12">
 			<div class="card">
 				<div class="card-content">
@@ -21,7 +21,11 @@
 				</div>
 				<div class="card-action">
 					{{#if currentUser}}
-							<button class="remove btn card-info red lighten-2">Remove slide</button>
+						<button class="remove btn card-info red lighten-2">Remove slide</button>
+						<button class="edit btn card-info orange lighten-2 modal-trigger{{_id}}" data-target="modal{{_id}}">Edit slide</button>
+					{{else}}
+						<button class="remove btn card-info red lighten-2 disabled">Remove slide</button>
+						<button class="edit btn card-info orange lighten-2 disabled">Edit slide</button>
 					{{/if}}
 					<span class="card-info">
 						<b>Expires</b> <date>{{#if expire}} {{prettydate expire}} {{else}} Never {{/if}}</date>
@@ -37,6 +41,32 @@
 					</span>
 				</div>
 			</div>
+			<div id="modal{{_id}}" class="modal">
+			    <div class="modal-content">
+			      	<span class="card-title">{{name}}</span>
+			      	<div class="row">
+						<div class="input-field col s12 m6">
+							<input value="{{dateinput expire}}" id="expire{{_id}}" type="date" name="expire">
+							<label class="active" for="expire">Expiration date</label>
+						</div>
+						<div class="input-field col s12 m6">
+							<input id="tags{{_id}}" class="tags" type="text" name="tags" value="{{#each tags}}{{this}} {{/each}}">
+							<label class="active" for="tags">Tags</label>
+						</div>
+					</diV>
+			    </div>
+			    <div class="row">
+			    	<div class="slide col s12 card-action">
+			    		<button class="update btn card-info green lighten-2 modal-close">Update</button>
+			    		<button class="editcancel btn card-info red lighten-2 modal-close">Close</button>
+			    	</div>
+			    </div>
+			</div>
+			<script>
+				$(document).ready(function() {
+				  	$('.modal-trigger{{_id}}').leanModal();
+				});
+			</script>
 		</div>
 	</div>
 </template>
