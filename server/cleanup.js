@@ -1,4 +1,15 @@
 function cleanUp() {
+	//Find all that is about to expire and add them to the history.
+	slideshow.find({expire: {$lt: new Date()}}).forEach(function(obj) {
+		history.insert({
+			action:"Expired slide",
+			by:"GLaDOS",
+			time:Date.now(),
+			obj:obj
+		})
+	})
+
+	//Now remove the ones that expired.
 	slideshow.remove({expire: {$lt: new Date()}})
 
 	// If between midnight and one clocn
@@ -8,7 +19,7 @@ function cleanUp() {
 	var end = new Date()
 	end.setHours(6, 0, 0, 0)
 	if(cleanuphour < now && now < end) {
-		console.log("Resetting tags")
+		console.log("Reseting tags")
 		tagmode.remove({})
 	}
 }
