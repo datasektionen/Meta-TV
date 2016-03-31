@@ -7,15 +7,13 @@ Template.page.events({
 	},
 
 	"click .removepage":function(event) {
-		var obj_cp = {}
-		shallow_copy(obj_cp, this)
 		history_log.insert({
 			action: "Removed page",
 			by: Meteor.user().username,
 			time: Date.now(),
 			parentid: this._id,
 			name: this.name,
-			obj: obj_cp,
+			obj: this,
 		})
 		Meteor.call("removePage", this._id)
 	}
