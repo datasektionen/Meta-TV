@@ -13,7 +13,8 @@ accounts-base
 lepozepo:streams
 mizzao:timesync
 
-standard-minifiers
 materialize:materialize
 fourseven:scss
 momentjs:moment
+standard-minifier-css
+standard-minifier-js
