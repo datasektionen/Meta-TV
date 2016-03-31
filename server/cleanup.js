@@ -19,7 +19,7 @@ function cleanUp() {
 	var end = new Date()
 	end.setHours(6, 0, 0, 0)
 	if(cleanuphour < now && now < end) {
-		console.log("Reseting tags")
+		console.log("Resetting tags")
 		tagmode.remove({})
 	}
 }
