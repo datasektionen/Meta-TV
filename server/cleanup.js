@@ -1,4 +1,15 @@
 function cleanUp() {
+	//Find all that is about to expire and add them to the history.
+	slideshow.find({expire: {$lt: new Date()}}).forEach(function(obj) {
+		history.insert({
+			action:"Expired slide",
+			by:"GLaDOS",
+			time:Date.now(),
+			obj:obj
+		})
+	})
+
+	//Now remove the ones that expired.
 	slideshow.remove({expire: {$lt: new Date()}})
 
 	// If between midnight and one clocn

@@ -52,8 +52,20 @@ Template.uploader.events({
 			_id: new Mongo.ObjectID().toHexString(),
 			type: $("." + this._id + "type.initialized").val(),
 			createdBy: Meteor.user().username,
+			parentid: this._id,
+			name: this.name,
 			"screen": $("." + this._id + "channel.initialized").val()
 		}
+
+		//History event for creating a page.
+		var obj_cp = {}
+		shallow_copy(obj_cp, obj)
+		history_log.insert({
+			action:"Added page",
+			by:Meteor.user().username,
+			time:Date.now(),
+			obj:obj_cp,
+		})
 
 		var slide = this._id;//$(".parentSlide").val();
 

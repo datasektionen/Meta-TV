@@ -43,6 +43,10 @@ Template.dashboard.rendered = function() {
 							href: "/slideshow/3"
 						},
 						{
+							str: "History",
+							href: "/history"
+						},
+						{
 							str: "Report an issue",
 							href: "https://github.com/datasektionen/Meta-TV/issues"
 						}
@@ -84,7 +88,6 @@ Template.dashboard.events({
 					by: obj_cp.createdBy,
 					time: Date.now(),
 					obj: obj_cp,
-					tags: obj_cp.tags
 				})
 			}
 		}
@@ -120,7 +123,7 @@ Template.slide.events({
 		var obj_cp = {}
 		shallow_copy(obj_cp, this)
 		history_log.insert({
-			action:"Updated slide",
+			action:"Updated tags/expiry",
 			by:Meteor.user().username,
 			time:Date.now(),
 			note:"obj represents the state of the slide before update",
