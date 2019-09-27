@@ -30,9 +30,9 @@
 		<p>Admin panel for the televisions in Meta</p>
 		<p>
 			{{#if currentUser}}
-				Logged in as  {{currentUser.username}} <a class="logout" href="#">Log out</a>
+			Logged in as  {{currentUser.username}} <br><input type="button" class="logout btn orange" onclick="location.href='#';" value="Log out" />
 			{{else}}
-			<a href="{{loginurl}}">Log in</a>
+			<input type="button" class="createSlide btn" onclick="location.href='{{loginurl}}';" value="Login" />
 			{{/if}}
 		</p>
 	</div>
