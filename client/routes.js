@@ -2,7 +2,7 @@ Router.route("/", function() {
 	this.render("dashboard", {
 		data: function() {
 			return {
-				slides: slideshow.find({}),
+				slides: slideshow.find({}).fetch().reverse(),
 				history: history_log.find({}, {sort: {time:-1}}),
 				tagmode: tagmode.find({})
 			}
