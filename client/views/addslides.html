@@ -24,7 +24,12 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
+						{{#if currentUser}}
 						<button value="Create" class="createSlide btn">Create slide</button>
+						{{else}}
+						<button value="Create" class="createSlide btn disabled">Create slide</button>
+						<p class="error">Please log in to create a slide</p>
+						{{/if}}
 					</div>
 				</div>
 			</div>
