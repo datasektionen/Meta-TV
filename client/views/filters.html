@@ -9,7 +9,12 @@
 						<label class="active" for="filterbytags">Tags</label>
 					</div>
 					<div class="input-field col s12 m3">
+						{{#if currentUser}}
 						<button class="btn">Add tag</button>
+						{{else}}
+						<button class="btn disabled">Add tag</button>
+						<p class="error">Please log in to add filters</p>
+						{{/if}}
 					</div>
 				</div>
 				<div class="tags">
