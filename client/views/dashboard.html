@@ -30,9 +30,9 @@
 		<p>Admin panel for the televisions in META</p>
 		<p>
 			{{#if currentUser}}
-			Logged in as  {{currentUser.username}} <br><input type="button" class="logout btn orange" onclick="location.href='#'" value="Log out" />
+			Logged in as  {{currentUser.username}} <br><input type="button" class="login btn orange" onclick="location.href='#'" value="Log out" />
 			{{else}}
-			<input type="button" class="createSlide btn" onclick="location.href='{{loginurl}}'" value="Login" />
+			<input type="button" class="btn login" onclick="location.href='{{loginurl}}'" value="Login" />
 			{{/if}}
 		</p>
 	</div>

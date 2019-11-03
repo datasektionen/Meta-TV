@@ -217,6 +217,12 @@ iframe {
     }
 }
 
+.btn.login {
+    @include mobile {
+        width: 30%;
+    }
+}
+
 .slideinfo > table {
     width: 100%;
 }
