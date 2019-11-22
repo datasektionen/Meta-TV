@@ -233,6 +233,12 @@ iframe {
     }
 }
 
+.btn.logout {
+    @include mobile {
+        width: 30%;
+    }
+}
+
 .slideinfo > table {
     width: 100%;
 }
