@@ -5,16 +5,13 @@ var send_external_img = function(obj, slide, id){
 }
 
 function getLoginUrl() {
-	console.log("ADHWHADAIDW")
-		var callback = ""
-		callback += location.protocol + "//"
-		callback += location.hostname
-		if(location.port) {
-			callback += ":" + location.port
-		}
-		callback += "/login/"
-		return "http://login2.datasektionen.se/login?callback=" + callback
+	callback = `{location.protocol}//{location.hostname}`
+	if(location.port) {
+		callback += `:{location.port}`
 	}
+	callback += "/login/"
+	return "http://login.datasektionen.se/login?callback=" + callback
+}
 
 Template.uploader.helpers({
 	isYoutube: function() {
