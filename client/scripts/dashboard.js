@@ -123,7 +123,7 @@ Template.slide.events({
 		var obj_cp = {}
 		shallow_copy(obj_cp, this)
 		history_log.insert({
-			action:"Updated tags/expiry",
+			action:"Updated name/tags/expiry",
 			by:Meteor.user().username,
 			time:Date.now(),
 			note:"obj represents the state of the slide before update",
