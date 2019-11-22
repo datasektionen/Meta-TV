@@ -4,6 +4,18 @@ var send_external_img = function(obj, slide, id){
 	$("." + id + "link").val("")
 }
 
+function getLoginUrl() {
+	console.log("ADHWHADAIDW")
+		var callback = ""
+		callback += location.protocol + "//"
+		callback += location.hostname
+		if(location.port) {
+			callback += ":" + location.port
+		}
+		callback += "/login/"
+		return "http://login2.datasektionen.se/login?callback=" + callback
+	}
+
 Template.uploader.helpers({
 	isYoutube: function() {
 		return Session.get(this._id + "type") == "youtube"
@@ -32,12 +44,21 @@ Template.uploader.helpers({
 	uploading: function() {
 		return Session.get("is_loading") && Session.get("type") == "local img"
 	},
+	loginurl: getLoginUrl,
 })
 
 Template.slide.helpers({
 	canhazedit: function() {
 		return Session.get("hazEdit") == this._id
 	}
+})
+
+Template.addslides.helpers({
+	loginurl: getLoginUrl
+})
+
+Template.filters.helpers({
+	loginurl: getLoginUrl
 })
 
 Template.uploader.events({
