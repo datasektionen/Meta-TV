@@ -131,10 +131,15 @@ Template.slide.events({
 		})
 		var tagstring = $("#tags" + this._id).val().trim()
 		var date =  new Date(Date.parse($("#expire" + this._id).val()))
+		//Get new name
+		var name = $("#name" + this._id).val()
+		//Set new name to old if empty
+		if (name === "") name = obj_cp.name
+
 		if(date != "Invalid Date") {
-			slideshow.update({_id:this._id}, {$set: {expire: date, tags: tagstring.split(" ")}})
+			slideshow.update({_id:this._id}, {$set: {name: name, expire: date, tags: tagstring.split(" ")}})
 		} else {
-			slideshow.update({_id:this._id}, {$set: {expire: undefined, tags: tagstring.split(" ")}})
+			slideshow.update({_id:this._id}, {$set: {name: name, expire: undefined, tags: tagstring.split(" ")}})
 		}
 		Session.set("hazEdit", null)
 	}
