@@ -4,7 +4,7 @@
 	<div class="card">
 		<div class="card-content">
 			<span class="card-title">Add page</span>
-			
+
 			<div class="input-field col s12">
 				<select class="{{_id}}type type_group">
 					<option value="external img" selected>Link to image</option>
@@ -81,7 +81,7 @@
 						<button class="send btn full-width">Add page</button>
 					{{/if}}
 				{{else}}
-					<p class="error">Please log in to add pages</p>
+					<p class="error">Please <a href="{{loginurl}}">log in</a> to add pages</p>
 				{{/if}}
 			</div>
 		</div>
