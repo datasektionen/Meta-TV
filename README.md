@@ -1,4 +1,4 @@
-Meta-TV
+META-TV
 ======
 
 Hacky application for displaying stuff on the wall-mounted screens in META. Used for travel times, event information, news, etc.
