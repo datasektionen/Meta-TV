@@ -132,7 +132,7 @@ Template.slide.events({
 		var tagstring = $("#tags" + this._id).val().trim()
 		var date =  new Date(Date.parse($("#expire" + this._id).val()))
 		//Get new name
-		var name = $("#name" + this._id).val()
+		var name = $("#name" + this._id).val().trim()
 		//Set new name to old if empty
 		if (name === "") name = obj_cp.name
 
