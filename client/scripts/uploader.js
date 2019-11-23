@@ -5,9 +5,9 @@ var send_external_img = function(obj, slide, id){
 }
 
 function getLoginUrl() {
-	callback = `{location.protocol}//{location.hostname}`
+	callback = `${location.protocol}//${location.hostname}`
 	if(location.port) {
-		callback += `:{location.port}`
+		callback += `:${location.port}`
 	}
 	callback += "/login/"
 	return "http://login.datasektionen.se/login?callback=" + callback
