@@ -5,7 +5,11 @@
 				<span class="card-title">Filter by tags</span>
 				<div class="row">
 					<div class="input-field col s12 m9">
+						{{#if currentUser}}
 						<input id="filterbytags" type="text" name="filterbytags" class="taginput">
+						{{else}}
+						<input id="filterbytags" type="text" name="filterbytags" class="taginput" disabled>
+						{{/if}}
 						<label class="active" for="filterbytags">Tags</label>
 					</div>
 					<div class="input-field col s12 m3">

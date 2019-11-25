@@ -5,20 +5,32 @@
 				<span class="card-title">Add slide</span>
 				<div class="row">
 					<div class="input-field col s12">
+						{{#if currentUser}}
 						<input id="txtName" type="text" name="name">
+						{{else}}
+						<input id="txtName" type="text" name="name" disabled>
+						{{/if}}
 						<label class="active" for="txtName">Name</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="input-field col s12 m6">
+						{{#if currentUser}}
 						<input id="expire" type="date" name="expire">
+						{{else}}
+						<input id="expire" type="date" name="expire" disabled>
+						{{/if}}
 						<label class="active" for="expire">Expiration date</label>
 					</div>
 				<!-- </div> -->
 				<!-- <div class="row"> -->
 					<div class="input-field col s12 m6">
+						{{#if currentUser}}
 						<input id="tags" class="tags" type="text" name="tags">
+						{{else}}
+						<input id="tags" class="tags" type="text" name="tags" disabled>
+						{{/if}}
 						<label class="active" for="tags">Tags</label>
 					</div>
 				</div>
