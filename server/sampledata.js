@@ -19,6 +19,24 @@ Meteor.startup(function () {
 					"link":"http://placekitten.com/1200/800"
 				}
 			]
+		});
+		slideshow.insert({  
+			"_id":"87209570294",
+			"name":"test2",
+			"tags":[  
+				"random"
+			],
+			"createdBy": "hermanka",
+			"onlywhenfiltering": false,
+			"pages":[
+				{
+					"_id":"45245234532452345",
+					"type":"website",
+					"createdBy":"hermanka",
+					"screen":"1",
+					"link":"https://example.net"
+				}
+			]
 		})
 	}
 })
