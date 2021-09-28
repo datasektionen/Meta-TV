@@ -20,13 +20,6 @@ Template.slideshow.events({
 	}
 })
 
-Template.slideshow.onCreated(() => {
-	$(document).on('keydown', (event) => {
-		if (event.key == " ") {
-			syncStream.emit("flip", "");
-		}
-	});
-});
 
 function _change(newId) {
 	current = $("[data-id=" + newId + "]")
