@@ -10,7 +10,7 @@ function getLoginUrl() {
 		callback += ":" + location.port
 	}
 	callback += "/login/"
-	return "https://login.datasektionen.se/login?callback=" + callback
+	return "http://login.datasektionen.se/login?callback=" + callback
 }
 
 Template.uploader.helpers({
