@@ -9,7 +9,7 @@ Setup
 
 	git clone https://github.com/datasektionen/Meta-TV.git
 	cd Meta-TV/
-	set enviroment variable LOGIN2_KEY to a valid api key for login2.
+	set enviroment variable LOGIN_KEY to a valid api key for login.
 	meteor
 	open http://localhost:3000
 
