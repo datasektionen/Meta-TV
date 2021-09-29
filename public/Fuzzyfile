@@ -1,36 +1,36 @@
 {
-  "@type": "fuzzyfile",
+	"@type": "fuzzyfile",
 
-  "fuzzes": [
-    {
-      "name": "META-TV",
-      "str": "meta-tv",
-      "color": "#009688",
-      "href": "http://tv.froyo.datasektionen.se/"
-    },
-    {
-      "name": "Channel 1 - META-TV",
-      "str": "channel 1 metatv",
-      "color": "#009688",
-      "href": "http://tv.froyo.datasektionen.se/slideshow/1"
-    },
-    {
-      "name": "Channel 2 - META-TV",
-      "str": "channel 2 metatv",
-      "color": "#009688",
-      "href": "http://tv.froyo.datasektionen.se/slideshow/2"
-    },
-    {
-      "name": "Channel 3 - META-TV",
-      "str": "channel 3 metatv",
-      "color": "#009688",
-      "href": "http://tv.froyo.datasektionen.se/slideshow/3"
-    },
-    {
-      "name": "Overview - META-TV",
-      "str": "overview metatv",
-      "color": "#009688",
-      "href": "http://tv.froyo.datasektionen.se/overview"
-    }
-  ]
+	"fuzzes": [
+		{
+			"name": "META-TV",
+			"str": "meta-tv",
+			"color": "#009688",
+			"href": "http://tv.froyo.datasektionen.se/"
+		},
+		{
+			"name": "Channel 1 - META-TV",
+			"str": "channel 1 metatv",
+			"color": "#009688",
+			"href": "http://tv.froyo.datasektionen.se/slideshow/1"
+		},
+		{
+			"name": "Channel 2 - META-TV",
+			"str": "channel 2 metatv",
+			"color": "#009688",
+			"href": "http://tv.froyo.datasektionen.se/slideshow/2"
+		},
+		{
+			"name": "Channel 3 - META-TV",
+			"str": "channel 3 metatv",
+			"color": "#009688",
+			"href": "http://tv.froyo.datasektionen.se/slideshow/3"
+		},
+		{
+			"name": "Overview - META-TV",
+			"str": "overview metatv",
+			"color": "#009688",
+			"href": "http://tv.froyo.datasektionen.se/overview"
+		}
+	]
 }

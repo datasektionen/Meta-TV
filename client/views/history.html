@@ -1,39 +1,39 @@
 <template name="history">
-    <div class="center-align">
-        <h1> History </h1>
-        <p> 
-            History for removing and adding slides/pages. A page revert does not do anything if the slide it belonged to no longer exists.
-        </p>
-    </div>
-    <div class="row">
-        <ul class="collapsible popout col s10 push-s1" data-collapsible="accordion">
-            {{#each history}}
-                <li>
-                    <div class="collapsible-header">
-                        {{obj.name}}: <b>{{action}}</b> by {{by}} {{prettydate time}}
-                    </div>
-                    <div class="collapsible-body card">
-                        <ul class="card-content">
-                            <li>time: {{prettydate time}}</li>
-                            {{#each members obj}}
-                                <li>{{key}} : {{value}}</li>
-                            {{/each}}
-                            <li> 
-                                {{#if currentUser}}
-                                    <button class="revert btn card-info red lighten-2">Revert</button>
-                                {{/if}}
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
-    </div>
-    <script>
-        $(document).ready(function(){
-          $('.collapsible').collapsible({
-            accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-          });
-        });
-    </script>
+	<div class="center-align">
+		<h1> History </h1>
+		<p> 
+			History for removing and adding slides/pages. A page revert does not do anything if the slide it belonged to no longer exists.
+		</p>
+	</div>
+	<div class="row">
+		<ul class="collapsible popout col s10 push-s1" data-collapsible="accordion">
+			{{#each history}}
+				<li>
+					<div class="collapsible-header">
+						{{obj.name}}: <b>{{action}}</b> by {{by}} {{prettydate time}}
+					</div>
+					<div class="collapsible-body card">
+						<ul class="card-content">
+							<li>time: {{prettydate time}}</li>
+							{{#each members obj}}
+								<li>{{key}} : {{value}}</li>
+							{{/each}}
+							<li> 
+								{{#if currentUser}}
+									<button class="revert btn card-info red lighten-2">Revert</button>
+								{{/if}}
+							</li>
+						</ul>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+	<script>
+		$(document).ready(function(){
+			$('.collapsible').collapsible({
+			accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+			});
+		});
+	</script>
 </template>

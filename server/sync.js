@@ -5,7 +5,7 @@
 syncStream = new Meteor.Stream('sync');
 
 syncStream.permissions.write(function(eventName) {
-		return false;
+	return false;
 });
 
 syncStream.permissions.read(function(eventName) {
