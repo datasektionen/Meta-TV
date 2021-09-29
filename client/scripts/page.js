@@ -1,9 +1,9 @@
 Template.page.events({
 	"change .screenselector": function(event) {
 		var $target = $(event.target);
-		var selected_screen = $target.val()
+		var selected_screen = $target.val();
 
-		Meteor.call("setScreen", this._id, selected_screen)
+		Meteor.call("setScreen", this._id, selected_screen);
 	},
 
 	"click .removepage":function(event) {
@@ -14,7 +14,7 @@ Template.page.events({
 			parentid: this._id,
 			name: this.name,
 			obj: this,
-		})
-		Meteor.call("removePage", this._id)
+		});
+		Meteor.call("removePage", this._id);
 	}
-})
+});

@@ -10,13 +10,13 @@ var current;
 
 Template.slideshow.helpers({
 	current: function() {
-		return Session.get("current")
+		return Session.get("current");
 	}
 })
 
 Template.slideshow.events({
 	"click .slides-wrapper": function (event) {
-		syncStream.emit("flip", "")
+		syncStream.emit("flip", "");
 	}
 })
 
@@ -29,14 +29,14 @@ Template.slideshow.onCreated(function () {
 });
 
 function _change(newId) {
-	current = $("[data-id=" + newId + "]")
-	current.show()
+	current = $("[data-id=" + newId + "]");
+	current.show();
 
 	try {
 		var v = $("video", current).get(0)
-		v.load()
+		v.load();
 		setTimeout(function() {
-			v.play()
+			v.play();
 		}, 400);
 
 	} catch(e) {}
@@ -53,36 +53,36 @@ function update(newId) {
 			return;
 		}
 
-		current.hide()
+		current.hide();
 		try {
-			var v = $("video", current).get(0)
-			v.pause()
+			var v = $("video", current).get(0);
+			v.pause();
 		} catch(e) {}
 	}
 
 	if (!newId || newId == "") {
 		// This screen should be blank
-		current = null
-		return
+		current = null;
+		return;
 	}
 
-	return _change(newId)
+	return _change(newId);
 }
 
-window.update = update
+window.update = update;
 
 syncStream.on('tick', function(message) {
 
 	var syncedTime = Tracker.nonreactive(TimeSync.serverTime);
-	var timeToSwitch = message.switchtime - syncedTime
+	var timeToSwitch = message.switchtime - syncedTime;
 	//timeToSwitch -= Tracker.nonreactive(TimeSync.roundTripTime) / 2;
 
 	if (timeToSwitch > 5.5 * 1000) {
 		// Shit's bonkers
-		timeToSwitch = 11 // ms
+		timeToSwitch = 11; // ms
 	}
 
 	setTimeout(function() {
-		update(message[_screen])
+		update(message[_screen]);
 	}, timeToSwitch);
 });
