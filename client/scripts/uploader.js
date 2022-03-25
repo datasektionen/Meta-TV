@@ -51,12 +51,7 @@ Template.uploader.helpers({
 	uploading: function() {
 		return Session.get("is_loading") && Session.get("type") == "local img";
 	},
-	loginurl: getLoginUrl,
-
-	badDimensions: function () {
-		return Session.get(this._id + "badDimension") == "true";
-		// return false;
-	}
+	loginurl: getLoginUrl
 });
 
 Template.slide.helpers({
