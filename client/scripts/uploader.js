@@ -4,6 +4,7 @@ var is_correct_dimensions = function(url) {
 	p = $(img).ready(function () {
 		return { width: img.width, height: img.height }
 	})
+	var _ = p[0]['width'] // p[0] seems to need to be used at least once for it to give the right value in the case of a local image
 	return p[0]['width'] == 1920 && p[0]['height'] == 1080
 }
 
