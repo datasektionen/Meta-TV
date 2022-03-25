@@ -70,7 +70,7 @@ Template.dashboard.events({
 			tags:$("#tags").val().split(" "),
 			createdBy: Meteor.user().username,
 			onlywhenfiltering: $(".hashtagonlyfilter").is(":checked")
-		};
+		}
 
 		var date = new Date(Date.parse($("#expire").val()));
 

@@ -16,6 +16,7 @@ Meteor.startup(function () {
 					"type":"external img",
 					"createdBy":"anlinn",
 					"screen":"1",
+					"badDimensions":true,
 					"link":"http://placekitten.com/1200/800"
 				}
 			]

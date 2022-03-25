@@ -1,7 +1,16 @@
+var is_correct_dimensions = function(url) {
+	var img = new Image()
+	img.src = url
+	p = $(img).ready(function () {
+		return { width: img.width, height: img.height }
+	})
+	return p[0]['width'] == 1920 && p[0]['height'] == 1080
+}
+
 var send_external_img = function(obj, slide, id){
 	obj.link = $("." + id + "link").val();
+	obj.badDimensions = !is_correct_dimensions(obj.link);
 	Meteor.call("insertSlide", slide, obj);
-	$("." + id + "link").val("");
 };
 
 function getLoginUrl() {
@@ -42,12 +51,17 @@ Template.uploader.helpers({
 		return Session.get("is_loading") && Session.get("type") == "local img";
 	},
 	loginurl: getLoginUrl,
+
+	badDimensions: function () {
+		return Session.get(this._id + "badDimension") == "true";
+		// return false;
+	}
 });
 
 Template.slide.helpers({
 	canhazedit: function() {
 		return Session.get("hazEdit") == this._id;
-	}
+	},
 });
 
 Template.addslides.helpers({
@@ -70,6 +84,7 @@ Template.uploader.events({
 			_id: new Mongo.ObjectID().toHexString(),
 			type: $("." + this._id + "type.initialized").val(),
 			createdBy: Meteor.user().username,
+			badDimensions: false,
 			parentid: this._id,
 			name: this.name,
 			"screen": $("." + this._id + "channel.initialized").val()
@@ -123,7 +138,7 @@ var send_local_img = function(obj, slide){
 	var reader = new FileReader()
 
 	if(file.type.split("/")[0] != "image") {
-		Session.set("link_input_error", "(ಥ~ಥ)This file type is not suported!")
+		Session.set("link_input_error", "(ಥ~ಥ)This file type is not supported!")
 		return
 	}
 
@@ -138,6 +153,7 @@ var send_local_img = function(obj, slide){
 		}
 		Meteor.call("file-upload", sc_file, reader.result, function(a) {
 			obj.link = "/uploaded/" + sc_file.name
+			obj.badDimensions = !is_correct_dimensions(obj.link)
 			var _id = Meteor.call("insertSlide", slide, obj)
 			$(".file").val("")
 			Session.set("is_loading", false)

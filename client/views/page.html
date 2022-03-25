@@ -7,11 +7,21 @@
 			{{#if equals type "external img"}}
 				<div class="card-image">
 					<img src="{{link}}">
+					{{#if equals badDimensions true}}
+						<div class="image-error">
+							Image is not 1920x1080. It might not display as intended
+						</div>
+					{{/if}}
 				</div>
 			{{/if}}
 			{{#if equals type "local img"}}
 				<div class="card-image">
 					<img src="{{link}}">
+					{{#if equals badDimensions true}}
+						<div class="image-error">
+							Image is not 1920x1080. It might not display as intended
+						</div>
+					{{/if}}
 				</div>
 			{{/if}}
 			{{#if equals type "website"}}
