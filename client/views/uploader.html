@@ -37,15 +37,7 @@
 						<label for="html-textarea" class="active">HTML</label>
 					</div>
 				</div>
-			{{else}}{{#if isMarkdown}}
-				<div class="input-field col s12">
-					<input class="{{_id}}link active" type="text">
-					<!-- <label>Background image url</label> -->
-				</div>
-				<div class="input-field col s12">
-					<textarea class="{{_id}}markdown materialize-textarea" cols="23" rows="4" ></textarea>
-					<!-- <label class="active">Markdown</label> -->
-				</div>
+			
 			{{else}}{{#if isYoutube}}
 				<input class="{{_id}}link" type="text">
 				<label>Video ID</label>
@@ -71,7 +63,7 @@
 					<label>Link</label>
 				</div>
 				<p class="error">{{link_input_error}}</p>
-			{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
+			{{/if}}{{/if}}{{/if}}{{/if}}
 
 			<div class="card-action">
 				{{#if currentUser}}

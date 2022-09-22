@@ -16,7 +16,7 @@
 			{{/if}}
 			{{#if equals type "website"}}
 				<div class="card-image">
-					<iframe src="{{link}}" seamless="seamless" scrolling="no"></iframe>
+					<iframe src="{{link}}" seamless="seamless" scrolling="no" sandbox></iframe>
 					<div class="card-action">
 						<a href="{{link}}">Visit page</a>
 					</div>
@@ -28,15 +28,10 @@
 				<button class="update">Update</button>
 			{{else}}
 				{{#if equals type "html"}}
-					<div class="box">
-						{{{body}}}
-					</div>
-				{{else}}
-					{{#if equals type "markdown"}}
-						<div class="box">
-							{{#markdown}}{{body}}{{/markdown}}
-						</div>
-					{{/if}}
+				<div class="box">
+						<iframe srcdoc="{{body}}" sandbox>
+					</iframe>
+				</div> 
 				{{/if}}
 			{{/if}}
 

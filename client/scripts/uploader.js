@@ -101,11 +101,6 @@ Template.uploader.events({
 				var _id = Meteor.call("insertSlide", slide, obj);
 				$("." + this._id + "link").val("");
 				break
-			case "markdown":
-				obj.body=$("." + this._id + "markdown").val();
-				obj.link=$("." + this._id + "link").val();
-				var _id = Meteor.call("insertSlide", slide, obj);
-				break;
 			case "html":
 				obj.body=$("." + this._id + "html").val();
 				var _id = Meteor.call("insertSlide", slide, obj);
