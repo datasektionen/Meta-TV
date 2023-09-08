@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    # See the following link for documentation:
+    # https://github.com/marketplace/actions/dokku
+    - name: Push to sips
+      uses: dokku/github-action@v1.4.0
+      with:
+        ssh_private_key: ${{ secrets.SIPS_GLOBAL_DEPLOY_KEY }}
+        git_remote_url: ssh://dokku@sips.datasektionen.se/tv
+        # force might feel risky, but there is no good reason why the server
+        # should ever not be a mirror of the deploy branch. And the errors we
+        # could get otherwise would probably be nasty to deal with
+        git_push_flags: --force
