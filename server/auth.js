@@ -1,5 +1,6 @@
 var Future = Npm.require('fibers/future')
 
+var banlist = (process.env.BANLIST || "").split(",")
 
 Accounts.registerLoginHandler("kth", function(loginRequest) {
 	var future = new Future
@@ -16,6 +17,13 @@ Accounts.registerLoginHandler("kth", function(loginRequest) {
 		})
 		var userId
 		if(user) {
+			for (var i = 0; i < banlist.length; i++) {
+				if (banlist[i] == user.username) {
+					console.log("Denied log in of banned user", user.username)
+					future.return(undefined)
+					return
+				}
+			}
 			future.return({
 				userId: user._id,
 				token: loginRequest.token
