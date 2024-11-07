@@ -80,14 +80,14 @@ Template.dashboard.events({
 			date.setDate(date.getDate() + 1);
 			obj.expire = date;
 		} else {
-			let nextFourAM = new Date();
-			nextFourAM.setHours(4, 0, 0, 0); // Set time to 04:00:00.000
+			let exp = new Date();
+			exp.setHours(4, 0, 0, 0); // Set time to 04:00:00.000
 		
 			// If 04:00 has already passed today, set it for tomorrow
-			if (new Date() >= nextFourAM) {
-				nextFourAM.setDate(nextFourAM.getDate() + 1);
+			if (new Date() >= exp) {
+				exp.setDate(exp.getDate() + 1);
 			}
-			obj.expire = nextFourAM;
+			obj.expire = exp;
 		}
 		// I wish I had a date :'(
 		var report = function(success, identifier) {
