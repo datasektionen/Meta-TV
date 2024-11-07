@@ -43,3 +43,4 @@ Accounts.registerLoginHandler("kth", function(loginRequest) {
 	})
 	return future.wait()
 })
+
