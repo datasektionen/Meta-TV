@@ -80,7 +80,7 @@ Template.dashboard.events({
 			date.setDate(date.getDate() + 1);
 			obj.expire = date;
 		} else {
-			let exp = new Date();
+            var exp = new Date();
 			exp.setHours(4, 0, 0, 0); // Set time to 04:00:00.000
 		
 			// If 04:00 has already passed today, set it for tomorrow
