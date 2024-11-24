@@ -1,0 +1,16 @@
+services:
+  meta-tv:
+    build: .
+    init: true
+    environment:
+      - MONGO_URL=mongodb://tv:tv@mongo:27017/
+      - ROOT_URL=http://localhost:3000
+      - PORT=3000
+    ports: ["3000:3000"]
+  mongo:
+    image: docker.io/mongo:3.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=tv
+      - MONGO_INITDB_ROOT_PASSWORD=tv
+      - MONGO_INITDB_DATABASE=tv
+    ports: ["27017:27017"]
