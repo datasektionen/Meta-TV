@@ -5,24 +5,50 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+env:
+  NOMAD_VERSION: 1.7.7
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Git checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      - name: Git checkout
+        uses: actions/checkout@v4
 
-    # See the following link for documentation:
-    # https://github.com/marketplace/actions/dokku
-    - name: Push to sips
-      uses: dokku/github-action@v1.4.0
-      with:
-        ssh_private_key: ${{ secrets.SIPS_GLOBAL_DEPLOY_KEY }}
-        git_remote_url: ssh://dokku@sips.datasektionen.se/tv
-        # force might feel risky, but there is no good reason why the server
-        # should ever not be a mirror of the deploy branch. And the errors we
-        # could get otherwise would probably be nasty to deal with
-        git_push_flags: --force
+      - name: Set environment variables
+        run: |
+          cat >> "$GITHUB_ENV" <<EOF
+          latest=ghcr.io/${{ github.repository }}:latest
+          current=ghcr.io/${{ github.repository }}:$(git rev-parse --short ${{ github.sha }})
+          EOF
+
+      - name: Download Nomad
+        run: |
+          curl -LO https://releases.hashicorp.com/nomad/${{ env.NOMAD_VERSION }}/nomad_${{ env.NOMAD_VERSION }}_linux_amd64.zip
+          unzip -d /usr/local/bin nomad_${{ env.NOMAD_VERSION }}_linux_amd64.zip nomad
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ${{ env.latest }},${{ env.current }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Deploy to nomad
+        env:
+          NOMAD_ADDR: ${{ vars.NOMAD_ADDR }}
+          NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
+        run: |
+          nomad run -var=image_tag=${{ env.current }} job.nomad.hcl
